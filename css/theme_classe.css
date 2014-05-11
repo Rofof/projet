@@ -1,0 +1,108 @@
+	
+	/*header & footer ------------------------------------>*/
+		/*background*/
+			/*standard*/
+			body .navbar-fixed-top .navbar-inner, body .navbar-fixed-top .nav .active > a,
+			body .navbar-bottom .navbar-inner, body .navbar-bottom .nav .active > a{
+				background-color: royalblue;	/* ------------------------------------------------ color 1*/
+				background: royalblue;		/* ---------------------------------------------------- color 1*/
+				-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.125);
+				-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.125);
+				box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.125);
+
+			}
+			/*survol*/
+			body .navbar-fixed-top .nav .active > a:hover,
+			body .navbar-bottom > a:hover{
+				background-color: white;	/* ---------------------------------------------------- color 2*/
+				background: white;	/* ------------------------------------------------------------ color 2*/
+				color : royalblue;	/* ------------------------------------------------------------ color 1*/
+			}
+
+		/*couleur du texte*/
+		body .navbar-fixed-top .nav .active > a,
+		body .navbar-bottom{
+			color : white;	/* -------------------------------------------------------------------- color 2*/
+		}
+	/*!header & footer --------------------------------->*/
+	/*---------------------------------------------------->*/
+	/*corps de page ------------------------------------>*/
+	
+		body {
+			background: url('../img/squairy_light.png');
+		}
+
+		body > .container .arrow {
+			border-bottom-color: royalblue;
+		}
+
+		body > .container .arrow .accordion-body{
+			border: 2px solid royalblue;
+		}
+
+		body > .container tbody {
+			background: white;
+		}
+
+		body > .container .tab-pane {
+			background: rgb(210, 219, 247);
+		}
+
+		body > .container .eleve #collapseWork .accordion-inner {
+			background: white;
+		}
+
+		body > .container .eleve .titre_eleve {
+			background: royalblue;
+			color: white;
+		}
+
+		body > .container .eleve #collapseExercices .accordion-inner {
+			background: royalblue;
+		}
+
+		body > .container .eleve #collapseCorrections .accordion-inner {
+			background: royalblue;
+		}
+
+		/*body > .container .eleve .title_categ{
+			color: white;
+		}*/
+
+		body > .container .eleve #collapseExercices .accordion-inner .accordion-group{
+			background: rgb(210, 219, 247);
+		}
+
+		body > .container .accordion-toggle .navbar-inner{
+			background: royalblue;	/* ------------------------------------------------------------ color 1*/
+		}
+
+		body > .container .brand {
+			color: white;	/* -------------------------------------------------------------------- color 2*/
+		}
+
+		body > .container .rightBar_ressource, body > .container .right_bar #navcontainer{
+			background: white;	/* ---------------------------------------------------------------- color 3*/
+			background-color: white;	/* -------------------------------------------------------- color 3*/
+		}
+
+		/*ICIIIIIIIIIIIIIIIIIIIIIIIIII*/
+		body > .container .sequences_detail_res{
+			background: royalblue;
+		}
+
+		body > .container .right_bar #navcontainer li:hover {
+			background-color: royalblue;	/* ---------------------------------------------------- color 2*/
+			background: royalblue;	/* ------------------------------------------------------------ color 2*/
+			color : white;	/* -------------------------------------------------------------------- color 1*/
+		}
+
+		body > .container .more_option {
+			background-color: royalblue;	/* ---------------------------------------------------- color 2*/
+			background: royalblue;	/* ------------------------------------------------------------ color 2*/
+			color : white;	/* -------------------------------------------------------------------- color 1*/
+		}
+
+
+	/*!corps de page -------------------------------->*/
+	/*---------------------------------------------------->*/
