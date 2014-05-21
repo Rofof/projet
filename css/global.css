@@ -1,0 +1,106 @@
+body,html {
+  height: 100%;
+}
+
+.NavMenu li a {
+  height: 30px !important;
+  padding: 15px 15px 5px 15px !important;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  margin: 0 auto -60px;
+}
+
+#wrap > .container {
+  padding-top: 70px;
+  padding-bottom:  60px;
+}
+
+#footer {
+  height: 60px;
+}
+
+.img-rounded-carousel .img-rounded {
+  height: 250px;
+  min-height: 250px;
+  max-height: 250px;
+}
+
+.responsive-image { max-width:50px; height:auto; }
+
+img.banner {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; 
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 225px;
+}
+
+table {
+  color: black;
+}
+
+.table-striped tr:hover{
+  cursor: pointer;
+}
+
+.rightBar_ressource:hover {
+  cursor: pointer;
+}
+
+.accordion {
+  margin-bottom: 10px;
+}
+
+#userpopover{
+  color: black;
+  width: 250px;
+  margin-bottom: 10px!important;
+}
+
+.accordion .accordion {
+  margin-bottom: 0px!important;
+}
+
+.ui-draggable {
+  height: 65px;
+  width: 65px;
+}
+
+#inputNewRes_img img {
+  height: 65px;
+  width: 65px;
+}
+
+.spinningwheel {
+  height: 50px;
+}
+
+.spinningwheeltext {
+  text-align: center;
+  color: gray;
+}
+
+.accordion-body.in {
+  overflow:visible;
+}
+
+.typeahead {
+  width: 90%;
+}
+
+.typeahead a{
+  word-wrap: break-word!important; 
+  white-space: normal!important;
+}
+
+.NavMenu .popover{
+  left: -220px !important;
+}
+
+.NavMenu .popover .arrow{
+  left: 87% !important;
+}

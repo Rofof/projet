@@ -2,77 +2,77 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Mon casier</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+    <title>Mon casier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 
     <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-  -->
+	-->
 
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
-  <link href="./css/bootstrap.css" rel="stylesheet">
-  <link href="./css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="./css/carousel.css" rel="stylesheet">
-  <link href="./css/right_bar.css" rel="stylesheet"/>
-  <link href="./css/theme_classe.css" rel="stylesheet"/>
-  
-  <style>
+	<link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
+	<link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./css/carousel.css" rel="stylesheet">
+    <link href="./css/right_bar.css" rel="stylesheet"/>
+    <link href="./css/theme_classe.css" rel="stylesheet"/>
+	
+	<style>
 
-  .img-rounded-carousel .img-rounded {
-   height: 500px;
-   min-height: 500px;
-   max-height: 500px;
- }
- 
- </style>
- 
- 
-</head>
-<body><!--script type='text/javascript' language='javascript' src='/B1D671CF-E532-4481-99AA-19F420D90332/netdefender/hui/ndhui.js?0=0&amp;0=0&amp;0=0'></script-->
+		.img-rounded-carousel .img-rounded {
+			height: 500px;
+			min-height: 500px;
+			max-height: 500px;
+		}
+	
+	</style>
+	
+	
+  </head>
+  <body><!--script type='text/javascript' language='javascript' src='/B1D671CF-E532-4481-99AA-19F420D90332/netdefender/hui/ndhui.js?0=0&amp;0=0&amp;0=0'></script-->
 
 	<div class="container" style="padding-top:60px;">
 
   		    <!-- NAVBAR
-          ================================================== -->
-          <div class="navbar-wrapper">
-            <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
-            <div class="container">
+    ================================================== -->
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
 
-              <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
-                <div class="navbar-inner">
-                 <div class="container">
-                  <button type="button" class="btn btn-navbar" data-toggle="collapse" href=".nav-collapse">
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                 </button>
-                 <div class="nav-collapse collapse">
-                   <ul class="nav">
-                    <li ><a href="./index.html"><i class="icon-home icon-white"></i></a></li>
+    		<div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner">
+      			<div class="container">
+      				<button type="button" class="btn btn-navbar" data-toggle="collapse" href=".nav-collapse">
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+      				</button>
+      				<div class="nav-collapse collapse">
+      					<ul class="nav">
+      						<li ><a href="./index.html"><i class="icon-home icon-white"></i></a></li>
 
-                    <li class="active" ><a href="./eleves.html">Mon espace</a></li>
+                                            <li class="active" ><a href="./eleves.html">Mon espace</a></li>
+                        					</ul>
+      					<form class="navbar-form pull-right" method='post'>
+                  <ul class="nav">
+                    
+                    <li class="disabled active"><a>John Marston (élève)</a></li><li class="active"><a id="logoff_button" onClick="disconnect();"><i class="icon-off icon-white"></i></a></li>
                   </ul>
-                  <form class="navbar-form pull-right" method='post'>
-                    <ul class="nav">
-                      
-                      <li class="disabled active"><a>John Marston (élève)</a></li><li class="active"><a id="logoff_button" onClick="disconnect();"><i class="icon-off icon-white"></i></a></li>
-                    </ul>
 
-                  </form>
-                </div><!--/.nav-collapse -->
-              </div>
-            </div>
-          </div>
-        </div> <!-- /.container -->
-      </div><!-- /.navbar-wrapper -->
+      					</form>
+      				</div><!--/.nav-collapse -->
+      			</div>
+    		  </div>
+        </div>
+      </div> <!-- /.container -->
+    </div><!-- /.navbar-wrapper -->
 
 
-      <script src="./lib/jquery.js"></script>
-      <script>
+    <script src="./lib/jquery.js"></script>
+    <script>
 
       var disconnect = function() {
 
@@ -87,9 +87,9 @@
            "resDesc": "",
            "resUrl": "",
            "resUrlThumbnail": ""*/
-         }; 
+        }; 
 
-         $.ajax({
+        $.ajax({
           url: myUrl_Post,
           type: "POST",
           dataType: "json",
@@ -97,20 +97,20 @@
           cache: false,
           timeout: 5000,
                     //crossDomain: true,
-                    xhrFields: {
-                      withCredentials : true
-                    },
+          xhrFields: {
+            withCredentials : true
+          },
 
-                    success: function(data) {
-                      console.log("disconnect success");
-                      window.location.href = "./signout.php";
-                    },
+          success: function(data) {
+            console.log("disconnect success");
+            window.location.href = "./signout.php";
+          },
 
-                    error: function() {
-                      console.log('signout POST process error');
-                      window.location.href = "./signout.php";
-                    }
-                  });
+          error: function() {
+            console.log('signout POST process error');
+            window.location.href = "./signout.php";
+          }
+        });
 
       } // end of disconnect
 
@@ -118,11 +118,11 @@
       $("#connectUser").click(function(){
 
         var enterUserEnvironment = function(next, params) {
-          if(next=="null") {
-            window.location.href = "./signin.php?"+params;
-          } else {
-            window.location.href = "./signin.php?"+params+"&next="+next;
-          }
+            if(next=="null") {
+              window.location.href = "./signin.php?"+params;
+            } else {
+              window.location.href = "./signin.php?"+params+"&next="+next;
+            }
         }; 
 
         var cfgWs = {
@@ -179,7 +179,7 @@
                   $('#modalSelectClasse').modal();
                   $('#classList').html(
                     new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                    );
+                  );
                   $('#selectClasseBtn').on('click', function(){
 
 
@@ -215,7 +215,7 @@
                   $('#modalSelectClasse').modal();
                   $('#classList').html(
                     new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                    );
+                  );
                   $('#selectClasseBtn').on('click', function(){
 
                     sessionStorage.noClasse = data.infoClasse[$('#classList').val()].noClasse;
@@ -245,110 +245,110 @@
             }
 
           }, error: function() {
-            console.log('PUT process error during sign-in');
-            window.location = "./signin.php";
+              console.log('PUT process error during sign-in');
+              window.location = "./signin.php";
           },
 
         });
 
-return false;
-
+        return false;
+        
       });//End click btn login
 
-</script>
+    </script>
 
-<div class="eleve">
-  
- <!-- <div class="row-fluid"> -->
- <div class="accordion item_ens" id="accordionEleve">
-  <div class="accordion-group">
+	    <div class="eleve">
+	    	
+		  	<!-- <div class="row-fluid"> -->
+		  		<div class="accordion item_ens" id="accordionEleve">
+				  <div class="accordion-group">
 
-   <div class="navbar accordion-heading accordion-toggle">
-    <div class="navbar-inner">
-     <a class="brand">Ma classe</a>
-   </div>
- </div>
+				  	<div class="navbar accordion-heading accordion-toggle">
+						<div class="navbar-inner">
+							<a class="brand">Ma classe</a>
+						</div>
+					</div>
 
- <div id="collapseWork" class="accordion-body collapse in">
-  <!--  -->
-  <div class="accordion-inner">
-   <div class="accordion-group">
+				    <div id="collapseWork" class="accordion-body collapse in">
+				      <!--  -->
+				      <div class="accordion-inner">
+				      	<div class="accordion-group">
 
-    <div class="accordion item_ens" id="accordionExercice">
-      <div class="accordion-group">
+				      		<div class="accordion item_ens" id="accordionExercice">
+				  				<div class="accordion-group">
 
-       <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
-        <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-         <a class="brand">Travail à faire</a>
-       </div>
-     </div>
+								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
+										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+											<a class="brand">Travail à faire</a>
+										</div>
+									</div>
 
-     <div id="collapseExercices" class="accordion-body collapse in">
-      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-       <div id="mesExercices">
-        <!-- interieur du collapse élèves -->
-        <div class="load">
-          <img src="./img/gif-load.GIF" />
-        </div>
-      </div>
-    </div>
-  </div>
+								    <div id="collapseExercices" class="accordion-body collapse in">
+								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+								      	<div id="mesExercices">
+								      		<!-- interieur du collapse élèves -->
+								        	<div class="load">
+						        				<img src="./img/gif-load.GIF" />
+						        			</div>
+								      	</div>
+								      </div>
+								    </div>
 
-</div>
-</div>
+								</div>
+							</div>
 						<!-- </div>
 				      </div>
 				      <div class="accordion-inner">
 				      	<div class="accordion-group"> -->
 				      		<div class="accordion item_ens" id="accordionCorrections">
-                    <div class="accordion-group">
+				  				<div class="accordion-group">
 
-                     <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
-                      <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                       <a class="brand">Corrections</a>
-                     </div>
-                   </div>
+								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
+										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+											<a class="brand">Corrections</a>
+										</div>
+									</div>
 
-                   <div id="collapseCorrections" class="accordion-body collapse">
-                    <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                     <div id="mesCorrections">
-                      <!-- interieur du collapse élèves -->
-                      <div class="load">
-                        <img src="./img/gif-load.GIF" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+								    <div id="collapseCorrections" class="accordion-body collapse">
+								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+								      	<div id="mesCorrections">
+								      		<!-- interieur du collapse élèves -->
+								        	<div class="load">
+						        				<img src="./img/gif-load.GIF" />
+						        			</div>
+								      	</div>
+								      </div>
+								    </div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-      </div>
-    </div>
-  </div>
-  <!-- </div> -->
-</div>	
+								</div>
+							</div>
+						</div>
+				      </div>
+				      <!--  -->
+				    </div>
+				  </div>
+				</div>
+			<!-- </div> -->
+		</div>	
+	
+	</div>
 
-</div>
-
-<!-- Modal de visualisation d'exercice -->
-<div id="exoModal" class="modal hide fade">
- <div class="modal-header">
-  <a class="close" data-dismiss='modal'>&times;</a>
-  <h3>Exo Modal</h3>
-</div>
-<div class="modal-body sizer">
-  <iframe id="svgIframe" width="480px" height="380px"></iframe>
-</div>
-<div class="modal-footer">
-  <a id="fullscreenExo" class="btn">
-   <i class="icon-resize-full"></i>
- </a>
- <a class="btn" data-dismiss='modal'>Fermer</a>
-</div>
-</div>
+  <!-- Modal de visualisation d'exercice -->
+  	<div id="exoModal" class="modal hide fade">
+    	<div class="modal-header">
+          <a class="close" data-dismiss='modal'>&times;</a>
+      		<h3>Exo Modal</h3>
+    	</div>
+    		<div class="modal-body sizer">
+      		<iframe id="svgIframe" width="480px" height="380px"></iframe>
+    		</div>
+  		<div class="modal-footer">
+  	    	<a id="fullscreenExo" class="btn">
+  	    		<i class="icon-resize-full"></i>
+  	    	</a>
+      		<a class="btn" data-dismiss='modal'>Fermer</a>
+    	</div>
+  	</div>
 
 	<!-- <div id="correctionModal" class="modal hide fade">
   		<div class="modal-header">
@@ -362,10 +362,10 @@ return false;
 		<div class="modal-footer">
     		<a class="btn" data-dismiss='modal'>Close</a>
   		</div>
-   </div> -->
-   
-   
-   <style type="text/css">
+	</div> -->
+	
+	
+    <style type="text/css">
 
       /* Sticky footer styles
       -------------------------------------------------- */
@@ -387,91 +387,91 @@ return false;
         height: 60px;
       }
 
-      </style>
+    </style>
 
-      <!-- FOOTER -->
-      <div id="footer" class="navbar-inverse navbar-bottom">
-       <div class="navbar-inner" style="-webkit-border-radius: inherit; -moz-border-radius: inherit; border-radius: inherit; height: 60px;">
-         <div class="container" style="padding-top: 10px;">
-          <p class="pull-left">
-            &copy; 2013 OATIC. &middot; 
-            <a href="Privacy">Privacy</a> 
-            &middot; 
-            <a href="Terms">Terms</a>
-          </p>
-          <p class="pull-right">
-            <a href="#"><i title="Aller en haut" class="icon-arrow-up icon-white"></i></a>
-          </p>
-        </div>
-      </div>
-    </div>
+   <!-- FOOTER -->
+	<div id="footer" class="navbar-inverse navbar-bottom">
+	  <div class="navbar-inner" style="-webkit-border-radius: inherit; -moz-border-radius: inherit; border-radius: inherit; height: 60px;">
+	    <div class="container" style="padding-top: 10px;">
+	       <p class="pull-left">
+	        	&copy; 2013 OATIC. &middot; 
+	        	<a href="Privacy">Privacy</a> 
+	        	&middot; 
+	        	<a href="Terms">Terms</a>
+	    	</p>
+	    	<p class="pull-right">
+				<a href="#"><i title="Aller en haut" class="icon-arrow-up icon-white"></i></a>
+			</p>
+	    </div>
+	  </div>
+	</div>
 
-  </div> <!-- /container -->
-  
+	</div> <!-- /container -->
+		
 
-  <script src="./lib/jquery.js"></script>
-  <script src="./lib/ejs_production.js"></script>
+    <script src="./lib/jquery.js"></script>
+    <script src="./lib/ejs_production.js"></script>
 
-  <script>
+	<script>
 
-  var cfgWs = {
-   prefix : 'http://mookitek.fr:8111'   	
- }
+	    var cfgWs = {
+			prefix : 'http://mookitek.fr:8111'   	
+	    }
 
- var ip = "37.187.46.97";
- var pseudo = "Johnny";
- var workDone = null;
+		var ip = "37.187.46.97";
+		var pseudo = "Johnny";
+		var workDone = null;
 
 
 
- var afficheInfoEleve = function () {
+		var afficheInfoEleve = function () {
 
-   if (sessionStorage.activated == '1') {
-    afficheAssignedSequence(pseudo, sessionStorage.pseudoProf, $('#mesExercices'));
-  }
-  else {
-    $('#mesExercices').html("Votre classe n'est pas activée.");
-  }
-  displayCorrectionModal();
+			if (sessionStorage.activated == '1') {
+				afficheAssignedSequence(pseudo, sessionStorage.pseudoProf, $('#mesExercices'));
+			}
+			else {
+				$('#mesExercices').html("Votre classe n'est pas activée.");
+			}
+	        displayCorrectionModal();
 
 		}; // end of afficheInfoEleve
 
 
 		var afficheAssignedSequence = function(pseudoEleve, pseudoProf, displaySequences) {
 
-     var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
+	        var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
 
-     $.ajax({
-       url: myUrl_Get,
-       type: "GET",
-       dataType: "json",
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
 	            //contentType: "application/json",
 	            //crossDomain: true,
-              xhrFields: {
-                withCredentials : true
-              },	            
-              success: function(data) {
-               
-                var input = {
-                 "data" : data
-               }
+          		xhrFields: {
+            		withCredentials : true
+          		},	            
+	            success: function(data) {
+	              
+	              	var input = {
+			    		"data" : data
+			    	}
 
-               var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
+	              	var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
 
 	              	// var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
 
-                 displaySequences.html(result);
+					displaySequences.html(result);
 
-                 $('.eleve_sequence_content').each(function() {
-                  afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
-                });
+					$('.eleve_sequence_content').each(function() {
+						afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
+					});
 
-               },
-               error: function() { 
-                 console.log('afficheAssignedSequence : GET process error ');
-                 window.location.href = "./index.html";
-               }
-             }); /* end of ajax call */
+	           	},
+	            error: function() { 
+	              console.log('afficheAssignedSequence : GET process error ');
+	              window.location.href = "./index.html";
+	            }
+	          }); /* end of ajax call */
 
 		}; // end of afficheAssignedSequence
 
@@ -482,66 +482,66 @@ return false;
 
 			console.log("afficheSequenceRessources : " + myUrl_Get);
 
-     $.ajax({
-       url: myUrl_Get,
-       type: "GET",
-       dataType: "json",
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
 	            //contentType: "application/json",
 	            //crossDomain: true,
-              xhrFields: {
-                withCredentials : true
-              },	            
-              success: function(data) {
+          		xhrFields: {
+            		withCredentials : true
+          		},	            
+	            success: function(data) {
 
-                var input = {
-                 "data" : data,
-                 "mode" : "eleve_detail",
-                 "display" : seqDetailDisplay
-               }
+	            	var input = {
+			    		"data" : data,
+			    		"mode" : "eleve_detail",
+			    		"display" : seqDetailDisplay
+			    	}
 
-               var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
+	              	var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
 
 	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
 	              	
-                 seqDetailDisplay.html(result);
+					seqDetailDisplay.html(result);
 
-               },
-               error: function() {
-                 console.log('afficheSequenceRessources : GET process error ');
-                 window.location.href = "./index.html";
-               }
-             }); /* end of ajax call */
+	           	},
+	            error: function() {
+	              console.log('afficheSequenceRessources : GET process error ');
+	              window.location.href = "./index.html";
+	            }
+	        }); /* end of ajax call */
 
 		}; // end of afficheSequenceRessources
 
 		var displayCorrectionModal = function() {
 
-     retrieveWorkDone(pseudo, sessionStorage.pseudoProf, 'TRAVAUX', function(data) {
-       workDone = data;
+	        retrieveWorkDone(pseudo, sessionStorage.pseudoProf, 'TRAVAUX', function(data) {
+	           	workDone = data;
 
-       displayCorrectionList(null, $('#mesCorrections'), 'eleve', workDone, null, null);
-       
-     });
+	           	displayCorrectionList(null, $('#mesCorrections'), 'eleve', workDone, null, null);
+	           	
+	        });
 
 		} // end of displayCorrectionModal
 
-   $(document).ready(function(){
+    	$(document).ready(function(){
 
-    console.log("la page eleve.html est prête !!!")
+    		console.log("la page eleve.html est prête !!!")
 
-    afficheInfoEleve();
+    		afficheInfoEleve();
 
 
     	}); // end of document ready event handler
 
 
-   </script>
+	</script>
 
-   <script src="./lib/bootstrap.js"></script>
-   <script src="./lib/holder.js"></script>
-   <script src="./js/correction/correction.js"></script>
-   
-   <script src="./js/ressources/definitions.js"></script>
-   <script src="./js/ressources/ressources.js"></script>
- </body>
- </html>
+	<script src="./lib/bootstrap.js"></script>
+	<script src="./lib/holder.js"></script>
+	<script src="./js/correction/correction.js"></script>
+	
+	<script src="./js/ressources/definitions.js"></script>
+	<script src="./js/ressources/ressources.js"></script>
+  </body>
+</html>
