@@ -1,0 +1,1155 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mon casier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+	-->
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
+
+	<link href="./css/global.css" rel="stylesheet">
+	<link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./css/carousel.css" rel="stylesheet">
+    <link href="./css/right_bar.css" rel="stylesheet"/>
+    <link href="./css/eleve.css" rel="stylesheet"/>
+    <link href="./css/theme_classe.css" rel="stylesheet"/>
+	
+	<link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/>
+  </head>
+  <body style="padding-top: 70px; overflow: hidden;">
+
+	<div class="container">
+
+  		    <!-- NAVBAR
+    ================================================== -->
+ <!--modale de selection de classe-->
+
+  <div id="modalSelectClasse" class="modal hide fade"   role="dialog" tabindex="-1" aria-labelledby="selectClasseModalLabel" aria-hidden="true">
+
+    <div class="modal-header">
+        <h3 id="selectClasseModalLabel">
+
+            Quelle classe souhaitez-vous intégrer ?
+
+        </h3>
+    </div>
+    <div id="SelectClasse" class="modal-body">
+        <form class="form-horizontal" name="form_addEvent">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label">
+
+                        Classe : 
+
+                    </label>
+                    <div class="controls">
+                        <select id="classList">
+                            <option value="0">
+
+                                 Espace créateur 
+
+                            </option>
+                            <option value="1">
+
+                                 classe2 
+
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="selectClasseBtn"> Valider </button>
+    </div>
+
+  </div>
+
+<!--fin modale de selection de classe-->
+
+<!--modalLogin-->
+
+
+<div id="modalLogin"class="modal hide fade">
+
+      <div class="modal-header">    
+          <h3>Connectez-vous :</h3>
+      </div>
+  
+  <div class="modal-body">
+    
+<div id="SelectClasse" class="modal-body">
+              
+                <form class="form-horizontal">
+                        <div class="control-group">
+                          <label class="control-label" for="pseudo">Votre pseudo : </label>
+                          <div class="controls">
+                            <input type="text" id="pseudo2" placeholder="Pseudo">
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label" for="pwd2">Votre mot de passe : </label>
+                          <div class="controls">
+                            <input type="password" id="pwd2" placeholder="Mot de passe">
+                          </div>
+                        </div>  
+                </form>
+</div>
+
+  </div>
+  <div class="modal-footer">
+
+    <div class="control-group">
+
+                    <div class="controls">     
+
+                      <button id="connectModalUser" type="submit" class="btn btn-large btn-primary">Valider</button>
+
+                    </div>
+
+                  </div>
+      </div>
+</div>
+
+<!--fin modalLogin-->
+
+
+
+  
+
+
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
+
+    		<div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner NavMenu">
+      			<div class="container">
+      				<button type="button" class="btn btn-navbar" data-toggle="collapse" href=".nav-collapse">
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+      				</button>
+      				<div class="nav-collapse collapse">
+      					<ul class="nav NavMenu">
+                  <li id="logo"></li>
+      						<li ><a class="NavMenuHover home" href="./index.html">                    
+                  </a></li>
+
+
+
+                                          <script>
+
+                        var nom = 'Marston' ;
+                        var prenom = 'John' ;
+                        var pseudo = 'Johnny' ;
+                        var typeUser = '1'; 
+
+                        </script>
+
+                          <li class="UserWorkSpace"><a class="NavMenuHover" href="./eleves.html">Mon casier</a></li>
+                        					</ul>
+
+      					<form class="navbar-form pull-right" method='post'>
+                  <ul class="nav NavMenu">
+                    
+                                        
+
+
+
+
+                        </a></li><li><a class="NavMenuHover" id="user_button" data-toggle="popover" rel="popover" data-placement="bottom" data-html="true" >
+                        <i class="icon-user icon-white" ></i></a></li>
+                  </ul>
+
+      					</form>
+      				</div><!--/.nav-collapse -->
+      			</div>
+    		  </div>
+        </div>
+      </div> <!-- /.container -->
+    </div><!-- /.navbar-wrapper -->
+
+<!--modale de gestion de compte:equivalent-->
+
+<div id='modalGestion'class='modal hide fade' style='width:400px;margin-left: auto;' >
+  <!-- <div class='modal-header'>    
+      <h3>Vos parametres de connexion :</h3>
+  </div> -->
+
+  <div id='gestionCmpte' >
+    <div  id = 'contenu' class='modal-body'>
+      <div id = 'donneesCompte' >
+        <div class="row-fluid">
+          <div class="span4" float="left">
+            <img src='./img/User.jpg' width='56px' height='80px'/>
+          </div>
+          <div class="span8">
+            <div>
+              <span style="font-weight:bold">John Marston</span>            </div>
+            <div>
+              projet S4_3            </div>
+            <div>
+              élève            </div>
+          </div>
+        </div>      
+      </div>
+    </div>
+
+    <div class='modal-footer'>
+      <div class='control-group'>
+          <div class='controls'>
+            <button id='changepsw' type='submit' class='btn btn-default' align='right' onclick='showInfoUser(pseudo, nom, prenom,typeUser )' >Mot de passe</button> 
+            <button id='disconnect'type='submit' class='btn btn-primary' align='left' onClick='disconnect();' >Déconnexion</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--fin modale de gestion de compte-->
+   
+
+    <script src="./lib/jquery.js"></script>
+  
+    <script>
+
+ //initialization popover en html
+ var initializePopOverUser = function () {
+
+	if((!navigator.userAgent.match(/iPhone/i))&&(!navigator.userAgent.match(/iPod/i))&&(!navigator.userAgent.match(/iPad/i))){
+                var contenuPopover = $('#donneesCompte').html();
+                contenuPopover+='<div><input class="btn" align="left" onclick="showInfoUser(pseudo, nom, prenom,typeUser)" type="button" name="mot_de_passe" value="Modifier le profil"/>';
+                contenuPopover+='<input style="float : right;" class="btn btn-primary" type="button" onClick="disconnect();" name="se_deconnecter" value="Déconnexion"/></div>';
+    // $('#user_button').attr('data-content', contenuPopover);
+
+                $("#user_button").popover({
+                        content: '<div id="userpopover">'+contenuPopover+'<div>'
+                });
+
+                $('html').on('click', function(e) {
+                        if (typeof $(e.target).data('original-title') == 'undefined' && $(e.target).parents('[data-toggle="popover"]').length === 0 && !$(e.target).parents().is('.popover.in')) {
+                                $('[data-original-title]').popover('hide');
+                        }
+                });
+
+         }
+        else {
+
+                $("#user_button").on('click', function(event) {
+
+                        $("#modalGestion").modal();
+
+                });
+         }
+ } // end of initializePopOverUser
+
+
+
+//bouton de changement de mot de passe
+
+$("#changepsw").click(function(){
+
+  $("#modalGestion").hide();
+  showInfoUser(pseudo, nom, prenom,typeUser );
+
+  return false;
+
+});
+
+//fonction pour se logger en HTML
+
+
+$("#connectUser").click(function(){
+ 
+  authentification();
+  return false;
+           
+});
+
+$("#connectModalUser").click(function(){
+
+  authentification();
+  return false;
+});
+
+//fonction de deconnexion sur android
+
+$("#disconnect").click(function(){
+
+  $("#changepsw").hide();
+  $("#modalGestion").hide();
+  disconnect();
+  return false;
+        
+});
+
+
+// fonction pour faire disparaitre de la modale de login
+
+var cacherLoginPopup = function(){
+
+  $("#modalLogin").hide();
+
+}
+ 
+
+//choix du systeme   
+
+
+
+
+     if($('#logo').css('background-image')=="none"){
+        $('.home').html('<i class="icon-home icon-white"></i>');
+      }else{
+        $('.home').html('Accueil');
+      }
+
+//fonction de deconnection
+
+var disconnect = function() {
+
+        var ip = "37.187.46.97";
+        var myUrl_Post = cfgWs.prefix+"/platoatic/logout";
+
+        console.log(">> createNewSequence");
+
+        var message = {
+         /*"resType": "1", 
+           "resTitle": "",
+           "resDesc": "",
+           "resUrl": "",
+           "resUrlThumbnail": ""*/
+        }; 
+
+        $.ajax({
+          url: myUrl_Post,
+          type: "POST",
+          dataType: "json",
+          data: message,
+          cache: false,
+          timeout: 5000,
+                    //crossDomain: true,
+          xhrFields: {
+            withCredentials : true
+          },
+
+          success: function(data) {
+            console.log("disconnect success");
+            window.location.href = "./signout.php";
+          },
+
+          error: function() {
+            console.log('signout POST process error');
+            window.location.href = "./signout.php";
+          }
+        });
+
+      } // end of disconnect
+
+
+//fonction d'authentification
+
+var authentification = function (){
+
+
+    var enterUserEnvironment = function(next, params) {
+
+            if(next=="null") {
+              window.location.href = "./signin.php?"+params;
+            } else {
+              window.location.href = "./signin.php?"+params+"&next="+next;
+            }
+        }; 
+
+        var cfgWs = {
+          prefix : 'http://mookitek.fr:8111'
+        }
+
+
+        var ip = "37.187.46.97";
+
+         
+
+              //var pseudo = $("input[id=pseudo]").val();
+				var pseudo = "Johnny";
+              //var pwd = $("input[id=pwd]").val();
+			  var pwd = "johnny"
+
+
+                 
+             
+        var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
+
+       
+        var message = {
+          username : pseudo,
+          password : pwd
+        }; 
+
+         $.ajax({
+         
+          url: myUrl_Post,
+          type: "POST",
+          dataType: "json",
+          data: message, //{objectData: message},
+          //contentType: "application/json",
+          cache: false,
+          timeout: 5000,
+          //crossDomain: true,
+          xhrFields: {
+            withCredentials : true
+          },
+          success: function(data) {
+
+            var params = null;
+            console.log(data.found);
+
+        
+            if (data.found == true) {
+
+              console.log("Bienvenue à <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
+              params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
+              
+              if (data.ids.type == 2) {
+                
+                console.log("Vous êtes enseignant.");
+                params += "&enseignant=true";
+                params += "&profil=" + data.ids.profileId;
+                next = "enseignant.html";
+
+                if (data.infoClasse.length == 1) {
+                  
+                  params += "&noClasse="+data.infoClasse[0].noClasse;
+                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
+                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
+                  params += "&activated="+data.infoClasse[0].activated;
+
+
+                enterUserEnvironment(next, params);
+                }
+                else if (data.infoClasse.length > 1) {
+                  
+                  cacherLoginPopup();
+
+                  $("#modalSelectClasse").modal();
+
+                  $('#classList').html(
+                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
+                  );
+                  $('#selectClasseBtn').on('click', function(){
+
+                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
+                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
+                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
+                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
+
+
+                    enterUserEnvironment(next, params);
+
+                    $("#modalSelectClasse").hide();
+                  });
+                  
+                }
+                else {
+                  console.log("inconsistent class list");
+                  enterUserEnvironment("null", params);
+                }
+
+              } else if (data.ids.type == 1) {
+                params += "&enseignant=false";
+                next = "eleves.html";
+
+                console.log("--------------------------------------------");
+                console.log(data.infoClasse);
+
+                if (data.infoClasse.length == 1) {
+
+                  params += "&noClasse="+data.infoClasse[0].noResp;
+                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
+                  params += "&pseudoProf="+data.infoClasse[0].identifiant;
+                  params += "&activated="+data.infoClasse[0].activated;
+
+                  
+                  enterUserEnvironment(next, params);
+                }
+                else if (data.infoClasse.length > 1) {
+                  
+                  cacherLoginPopup();
+                  $("#modalSelectClasse").modal();
+                  $('#classList').html(
+                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
+                  );
+                  $('#selectClasseBtn').on('click', function(){
+
+                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noResp;
+                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
+                    params += "&pseudoProf="+data.infoClasse[$('#classList').val()].identifiant;
+                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
+
+                   
+                    enterUserEnvironment(next, params);
+
+                    $("#modalSelectClasse").hide();
+                  });
+                }
+                else {
+                  console.log("inconsistent class list");
+                  enterUserEnvironment("null", params);
+                }
+
+              } else {
+                params += "&enseignant=false";
+              }
+              
+            } else {
+
+              console.log("Vous n'êtes pas enregistrés.");
+              window.location.href = "./signin.php";
+            }
+
+           
+
+          }, 
+
+          error: function() {
+
+              console.log('PUT process error during sign-in');
+              window.location = "./signin.php";
+          }
+
+       });
+
+}//fin fonction authentification
+
+var updateSessionUserInfo = function(nom, prenom) {
+
+  var params = "&nom=" + nom + "&prenom=" + prenom;
+  params += "&enseignant="+((typeUser == '2')?"true":"false");
+  params += "&pseudo=Johnny";
+  params += "&profil=";
+  params += "&noClasse=141";
+  params += "&libelleClasse=projet S4_3";
+  params += "&activated=1";
+  params += "&pseudoProf=rodolphe";
+
+  var url=document.URL.split('/')[document.URL.split('/').length-1];
+  params += "&next="+url;
+  window.location.href = "./signin.php?"+params;
+
+} // end of updateSessionUserInfo
+
+
+      //fix bug for ipad collapse
+      var isiPad = navigator.userAgent.match(/iPad/i);
+      if(isiPad){
+        var ipadCss = document.createElement('link');
+        ipadCss.type = "text/css";
+        ipadCss.rel = "stylesheet";
+        ipadCss.href = "/css/ipad.css";
+        document.head.appendChild(ipadCss);
+      }
+
+
+
+</script>
+
+	    <div class="eleve">
+	  		<!-- <div class="accordion item_ens" id="accordionEleve">
+			  <div class="accordion-group NavMenuInterne">
+
+			  	<div class="navbar accordion-heading accordion-toggle">
+					<div class="navbar-inner NavMenuInterne">
+						<a class="brand">Mon espace</a>
+					</div>
+				</div>
+
+			    <div id="collapseWork" class="accordion-body collapse in">
+			      <div class="accordion-inner">
+			      	<div class="accordion-group"> -->
+
+			      		<div class="eleve_seq">
+
+				      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionExercice">
+				  				<div class="accordion-group">
+
+								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
+										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+											<a class="brand">Travail à faire</a>
+										</div>
+									</div>
+
+								    <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne">
+								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+								      	<div id="mesExercices">
+								      		<!-- interieur du collapse élèves -->
+								        	<div class="load">
+						        				<img src="./img/gif-load.GIF" />
+						        			</div>
+								      	</div>
+								      </div>
+								    </div>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="eleve_cor">
+
+				      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionCorrections">
+				  				<div class="accordion-group">
+
+								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
+										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+											<a class="brand">Travail effectué</a>
+										</div>
+									</div>
+
+								    <div id="collapseCorrections" class="accordion-body collapse NavMenuInterne">
+								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+								      	<div id="mesCorrections">
+								      		<!-- interieur du collapse élèves -->
+								        	<div class="load">
+						        				<img src="./img/gif-load.GIF" />
+						        			</div>
+								      	</div>
+								      </div>
+								    </div>
+
+								</div>
+							</div>
+
+						</div>
+					<!-- </div>/
+			      </div>
+			    </div>
+			  </div>
+			</div>/ -->
+		</div>	
+	
+	</div>
+	
+		<!-- Modaux de la page  -->
+		<!-- RESSOURCES -->
+
+  <!-- Modal création nouvelle ressource -->
+  	<div id="modalNewRessource" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="resModalLabel" aria-hidden="true">
+  	</div>
+
+  <!--Imagette modal -->
+  	<div id='modalNewRessource_img' class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="resModalLabel_img" aria-hidden="true">
+  		<div class="modal-header">
+  			<a class="close" data-dismiss='modal'>&times;</a>
+  	    <h3 id="resModalLabel_img">Ajouter une imagette</h3>
+  		</div>
+  		<div class="modal-body">
+  			<div id="imagette_res" class="carousel slide">
+  			  	<div class="carousel-inner" id="imagette_carousel">
+  			  	</div>
+  			  	<a class="left carousel-control ressource_modal_swap" href="#imagette_res" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control ressource_modal_swap" href="#imagette_res" data-slide="next">&rsaquo;</a>
+  			</div>
+  		</div>
+  		<div class="modal-footer">
+  			<input id="search_modal_input" type="text" class="search-query pull-left" placeholder="Mots clés"/>
+        <span class="pull-left" style="padding-left:10px;">
+          <input type="checkbox" id="modal_search_ressource" class="img_modal_search_checkbox" checked> Mes images 
+          <input type="checkbox" id="modal_search_platform" class="img_modal_search_checkbox" checked> Mookitek 
+        </span>
+  			<button id="close_modale_img" class="btn" aria-hidden="true" data-dismiss="modal">Annuler</button>
+  		</div>
+  	</div>
+
+  <!-- Modal drop fichier externe -->
+    <div id="dropFileExtModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dropFileExtModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <h3 id="dropFileExtModalLabel"></h3>
+        </div>
+        <div class="modal-body">  
+        </div>
+        <div class="modal-footer">
+          <span class="pull-left progress progress-info" style="width: 50%; height: 30px; margin: inherit;" id="progress_bar_extern">
+          </span>
+          <button id="cancel_drop_ext" class="btn">Annuler l'upload</button>
+          <button id="valid_drop_ext" class="btn btn-primary">Valider</button>
+        </div>
+    </div>
+
+  <!-- Modal de barre de chargement -->
+  	<div id="progressBarModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
+    		<div class="modal-header">
+      		<h3>Chargement sur le serveur en cours</h3>
+    		</div>
+    		<div class="modal-body sizer">
+      		<p id="action_description"></p>
+      		<div class="progress progress-info" id="progress_bar">
+      		</div>
+    		</div>
+  	</div>
+
+  <!-- Modal de visualisation d'audio -->
+  	<div id="audioModal" class="modal hide fade">
+    		<div class="modal-header">
+      		<a class="close" data-dismiss='modal'>&times;</a>
+      		<h3>Audio Player</h3>
+    		</div>
+    		<div class="modal-body sizer">
+      		<audio controls id="audioPlayer" style="margin-right:5px; margin-top:8px"> 
+  			</audio>
+    		</div>
+  		<div class="modal-footer">
+      		<a class="btn" data-dismiss='modal'>Fermer</a>
+    		</div>
+  	</div>
+
+  <!-- Modal de visualisation de video -->
+  	<!--<div id="videoModal" class="modal hide fade">
+    		<div class="modal-header">
+      		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      		<h3>Video Player</h3>
+    		</div>
+    		<div class="modal-body sizer">
+      		<video controls id="videoPlayer" width="100%" height="100%" style="margin-right:5px; margin-top:8px"> 
+  			</video>
+    		</div>
+  		<div class="modal-footer">
+      		<a class="btn" data-dismiss='modal'>Fermer</a>
+    		</div>
+  	</div>-->
+
+  <!-- Modal de visualisation d'image -->
+  	<div id="pictureModal" class="modal hide fade">
+    		<div class="modal-header">
+      		<a class="close" data-dismiss='modal'>&times;</a>
+      		<h3>Picture Modal</h3>
+    		</div>
+    		<div class="modal-body sizer">
+      		<img id="pictureSource" style="max-width:529px;max-height:400px"> 
+  			</img>
+    		</div>
+  	</div>
+
+  <!-- Modal de visualisation de fiche -->
+  	<div id="ficheModal" class="modal hide fade">
+    		<div class="modal-header">
+          <a class="close" data-dismiss='modal'>&times;</a>
+      		<h3>Fiche Modal</h3>
+    		</div>
+    		<div class="modal-body sizer">
+      		<img id="ficheSource" style="max-width:830px;max-height:700px"> 
+  			</img>
+    		</div>
+  	</div>
+
+  <!-- Modal de visualisation d'exercice -->
+  	<div id="exoModal" class="modal hide fade">
+    		<div class="modal-header">
+          <a class="close" data-dismiss='modal'>&times;</a>
+      		<h3>Exo Modal</h3>
+    		</div>
+    		<div class="modal-body sizer" style="overflow: hidden; height : 380px;">
+      		<iframe id="svgIframe" width="480px" height="380px" scrolling="no" ></iframe>
+    		</div>
+  		<div class="modal-footer">
+  	    	<a id="fullscreenExo" class="btn">
+  	    		<i class="icon-resize-full"></i>
+  	    	</a>
+      		<a class="btn" data-dismiss='modal'>Fermer</a>
+    		</div>
+  	</div>
+
+<!-- FIN RESSOURCES -->
+<!-- ELEVES -->
+
+  <div id="exportModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <h3>Export du travail préparé</h3>
+      </div>
+      <div class="modal-body" style="min-height : 200px;">
+        <dl class="dl-horizontal">
+          <dt>Etape 1</dt>
+          <dd>Préparation du dossier</dd>
+          <dd  style="height:40px;">
+            <div id="spinPrepareExportTar"></div>
+          </dd>
+          <dt class="exportModalStep2">Etape 2</dt>
+          <dd class="exportModalStep2">Téléchargement du dossier</dd>
+          <dd class="exportModalStep2">Télécharger le fichier sur votre ordinateur en cliquant sur le bouton de téléchargement ci-dessous. Appuyer ensuite sur le bouton ""</dd>
+        <dd class="exportModalStep2"><a id="btnDownloadExportFile" class="btn btn-large btn-block btn enabled" href=""><i class="icon-download"></i></a></dd>
+          <dt class="exportModalStep3">Etape 3</dt>
+          <dd class="exportModalStep3">Vérifier le téléchargement du fichier puis cliquer sur le bouton ci-dessous</dd>
+          <dd class="exportModalStep3"><a id="btnDownloadChecked" class="btn btn-large btn-block btn" href=""><i class="icon-check"></i></a></dd>
+          <dt class="exportModalStep4">Etape 4</dt>
+          <dd class="exportModalStep4">Suppression du dossier d'export du serveur.</dd>
+          <dd class="exportModalStep4"id="spinSupprimeExportTar"></dd>
+        </dl>
+      </div>
+  </div>
+
+  <!--[DEBUT] Modal pour l'ajout d'un élève-->
+  <div id="ajoutEleveModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <h3>Ajout d'un élève</h3>
+      </div>
+      <div class="modal-body" style="min-height : 200px;">
+        <div class="tab-pane" id="tab_ajout_eleve">
+          <form id="ajout_eleve_form" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputNom">Nom</label>
+              <div class="controls">
+                <input type="text" id="inputNom" placeholder="Nom de l'élève">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputPrenom">Prénom</label>
+              <div class="controls">
+                <input type="text" id="inputPrenom" placeholder="Prénom de l'élève">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputPseudo">Pseudo</label>
+              <div class="controls">
+                <input type="text" id="inputPseudo" placeholder="Pseudo">
+                <div class="for-pseudo"></div>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputPassword">Mot de passe</label>
+              <div class="controls">
+                <input type="password" id="inputPassword" placeholder="Mot de passe">
+                <div class="for-pwd"></div>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputPasswordVerif">Vérification du mot de passe</label>
+              <div class="controls">
+                <input type="password" id="inputPasswordVerif" placeholder="Vérification du mot de passe">
+                <div class="for-pwd-verif"></div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <div class="control-group">
+            <div class="controls">
+              <a class="btn" data-dismiss='modal'>Annuler</a>
+              <button id="ajout_eleve_btn" type="submit" class="btn btn-primary">Valider</button>
+            </div>
+          </div>
+          </form>
+      </div>
+  </div>
+  <!--[FIN] Modal pour l'ajout d'un élève-->
+
+  <!--[DEBUT] Modal pour la modification de l'élève-->
+  <div id="modifUserModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <h3>Modification d'un utilisateur</h3>
+      </div>
+      <div class="modal-body" style="min-height : 200px;">
+        <div class="tab-pane" id="tab_modif_eleve">
+        <form id="modif_eleve_form" class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" for="inputNomModif">Nom</label>
+            <div class="controls">
+              <input type="text" id="inputNomModif">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPrenomModif">Prénom</label>
+            <div class="controls">
+              <input type="text" id="inputPrenomModif">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPseudoModif">Pseudo</label>
+            <div class="controls">
+              <input type="text" id="inputPseudoModif" disabled>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPasswordModif">Mot de passe</label>
+            <div class="controls">
+              <input type="password" id="inputPasswordModif" placeholder="Mot de passe">
+              <div class="for-pwd-modif"></div>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPasswordVerifModif">Vérification du mot de passe</label>
+            <div class="controls">
+              <input type="password" id="inputPasswordVerifModif" placeholder="Vérification du mot de passe">
+              <div class="for-pwd-verif-modif"></div>
+            </div>
+          </div>
+          <input type="text" id="inputTypeModif" style="display:none;">
+      </div>
+    </div>
+    <div class="modal-footer">
+        <div class="control-group">
+          <div class="controls">
+            <a id="annul_modif" class="btn" data-dismiss='modal'>Annuler</a>
+            <button id="modif_eleve_btn" type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--[FIN] Modal pour la modification de l'élève-->
+
+  <div id="correctionModal" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Le travail déjà fait</h3>
+      </div>
+      <div  class="modal-body sizer" style="max-height: 500px; overflow-y: scroll;">
+        <table id="body_correctionModal" class="table table-striped">
+        </table>
+      </div>
+    <div class="modal-footer">
+        <a class="btn" data-dismiss='modal'>Fermer</a>
+      </div>
+  </div>
+
+<!-- FIN ELEVE -->
+
+<!--modale de gestion de compte-->
+
+
+		
+  <!-- Modal de visualisation d'exercice -->
+  	<!--div id="exoModal" class="modal hide fade">
+    	<div class="modal-header">
+          <a class="close" data-dismiss='modal'>&times;</a>
+      		<h3>Exo Modal</h3>
+    	</div>
+    		<div class="modal-body sizer" style="overflow: hidden; height : 380px;">
+      		<iframe id="svgIframe" width="480px" height="380px" scrolling="no"></iframe>
+    		</div>
+  		<div class="modal-footer">
+  	    	<a id="fullscreenExo" class="btn">
+  	    		<i class="icon-resize-full"></i>
+  	    	</a>
+      		<a class="btn" data-dismiss='modal'>Fermer</a>
+    	</div>
+  	</div>
+
+	<!-- <div id="correctionModal" class="modal hide fade">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    		<h3>Le travail déjà fait</h3>
+  		</div>
+  		<div  class="modal-body sizer">
+  			<table id="body_correctionModal" class="table table-striped">
+  			</table>
+  		</div>
+		<div class="modal-footer">
+    		<a class="btn" data-dismiss='modal'>Close</a>
+  		</div>
+	</div> -->
+	
+			
+
+    <!--<script src="./lib/jquery.js"></script>-->
+    <script src="./lib/ejs_production.js"></script>
+
+	<script>
+
+		$(".UserWorkSpace").addClass('active');
+		$(".UserWorkSpace").children().addClass('actif');
+
+	    var cfgWs = {
+			prefix : 'http://mookitek.fr:8111'   	
+	    }
+
+		var ip = "37.187.46.97";
+		var pseudo = "Johnny";
+		var workDone = null;
+
+		var activated = "1";
+		var pseudoProf = "rodolphe";
+
+		var afficheInfoEleve = function () {
+
+			if (activated == '1') {
+
+				afficheAssignedSequenceEleve(pseudo, pseudoProf, $('#mesExercices'));
+				
+			}
+			else {
+				$('#mesExercices').html("Votre classe n'est pas activée.");
+			}
+	        displayCorrectionModal();
+
+		}; // end of afficheInfoEleve
+
+
+		var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences) {
+
+	        var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		xhrFields: {
+            		withCredentials : true
+          		},	            
+	            success: function(data) {
+	              
+	              	var input = {
+			    		"data" : data,
+			    		"mode" : "eleve_detail"
+			    	}
+
+	              	var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
+
+	              	// var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
+
+					displaySequences.html(result);
+
+					$('.eleve_sequence_content').each(function() {
+						afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
+					});
+
+	           	},
+	            error: function() { 
+	              console.log('afficheAssignedSequence : GET process error ');
+	              window.location.href = "./index.html";
+	            }
+	          }); /* end of ajax call */
+
+		}; // end of afficheAssignedSequence
+
+
+		var afficheSequenceRessources = function (pseudoEleve, noSeq, seqDetailDisplay) {
+
+			var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
+
+			console.log("afficheSequenceRessources : " + myUrl_Get);
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		xhrFields: {
+            		withCredentials : true
+          		},	            
+	            success: function(data) {
+
+	            	var input = {
+			    		"data" : data,
+			    		"mode" : "eleve_detail"
+			    	}
+
+	              	var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
+
+	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
+	              	
+					seqDetailDisplay.html(result);
+
+	           	},
+	            error: function() {
+	              console.log('afficheSequenceRessources : GET process error ');
+	              window.location.href = "./index.html";
+	            }
+	        }); /* end of ajax call */
+
+		}; // end of afficheSequenceRessources
+
+		var displayCorrectionModal = function() {
+
+	        retrieveWorkDone(pseudo, pseudoProf, 'TRAVAUX', function(data) {
+	           	workDone = data;
+
+	           	displayCorrectionList(null, $('#mesCorrections'), 'eleve', workDone, null, null);
+	           	
+	        });
+
+		} // end of displayCorrectionModal
+
+		var refreshHeight = function () {
+			var h = window.innerHeight - 70;
+			$('body').css('height', h + 'px');
+		}
+
+		var refreshHeightSeq = function () {
+			var h = window.innerHeight - 70 - 25;
+			var h2 = $('.eleve_cor').height();
+			var hm = parseInt($('#accordionExercice').css('margin-bottom').slice(0,-2));
+			var ht = $('#accordionExercice .accordion-heading').height();
+			var h1 = h - h2 - hm - ht;
+
+			$('#collapseExercices').css('max-height', h1 + 'px');
+		}
+
+		var refreshHeightCor = function () {
+			var h = window.innerHeight - 70 - 25;
+			var t1 = $('.eleve_seq').position().top;
+			var t2 = $('#collapseCorrections').position().top;
+			var h2 = h - ( t2 - t1 );
+
+			$('#collapseCorrections').css('max-height', h2 + 'px');
+		}
+
+		$('#collapseCorrections').on('shown', function () {
+		  	refreshHeightCor();
+		})
+
+		$('#collapseExercices').on('shown', function () {
+		  	refreshHeightSeq();
+		})
+
+		window.onresize = function(event) {
+			refreshHeight();
+
+			if($('#collapseExercices').hasClass('in')){
+        		refreshHeightSeq();
+        	}
+
+        	if($('#collapseCorrections').hasClass('in')){
+        		refreshHeightCor();
+        	}
+		};
+
+    	$(document).ready(function(){
+    		
+    		initializePopOverUser();
+
+    		afficheInfoEleve();
+  			refreshHeight();	
+			refreshHeightSeq();
+
+			$('*').off('touchstart');
+			console.log('page eleve chargée.');
+    	}); // end of document ready event handler
+
+	</script>
+
+	<script src="./lib/bootstrap.js"></script>
+	<script src="./lib/holder.js"></script>
+	<script src="./js/correction/correction.js"></script>
+	
+	<script src="./js/ressources/definitions.js"></script>
+	<script src="./js/ressources/ressources.js"></script>
+	<script src="./js/dragndrop/dragndrop.js"></script>
+	<script src="./js/users/users.js"></script>
+
+
+  </body>
+</html>
