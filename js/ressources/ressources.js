@@ -17,9 +17,13 @@
 	 *	@param url String		url de la ressource
 	 *	@param thumbnail String	thumbnail de la ressource
 	 */
-	var manageRessource = function(resId, type, titre, desc, url, thumbnail, etat) {
+	var manageRessource = function(resId, type, titre, desc, url, thumbnail, etat, element) {
 
-		console.log("manageRessource : " + resId);
+		if(element){
+			titre = escape(element.parents('.infos_ressource').find('#modifTitle input').val());
+			desc = escape(element.parents('.infos_ressource').find('#modifDesc textarea').val());;
+		}
+
 		afficherModalCreaRess(type, titre, desc, resId, url, thumbnail, etat);
 
 	}
@@ -37,20 +41,11 @@
 	 */
 	var afficherModalCreaRess = function(num_type, titre, desc, resId, url, thumbnail, etat){
 
-		console.log(etat)
-
 		$('#inputNewRes_title').parent().parent().css("display", "block");
 		$('#inputNewRes_desc').parent().parent().css("display", "block");
-		$('#NewRes_motcle').css("display", "block");
+		// $('#NewRes_motcle').css("display", "block");
 		$('#inputNewRes_file').parent().parent().css("display", "block");
 		$('#NewRes_img').css("display", "block");
-
-		//--------------------------------------------------------------------->
-		//A supprimer pour upload fichier ------------------------------------->
-		$('#creat_new_ressource').css("display", "");
-		$("#MsgWaitNewRessource").css('display', 'none');
-		//A supprimer pour upload fichier ------------------------------------->
-		//--------------------------------------------------------------------->
 
 		//Si image
 		if (num_type == resType.image){
@@ -61,30 +56,19 @@
 		if ((((num_type == resType.sequence)||(num_type == resType.exercice))&&(!resId))||(etat == "new_ext")){
 
 			if(etat != "new_ext"){
-				$('#NewRes_motcle').css("display", "none");
+				// $('#NewRes_motcle').css("display", "none");
 			}
-
-			// $('#inputNewRes_title').attr("onKeyPress", "if(event.keyCode == 13) {return false;}");
 			$('#inputNewRes_file').parent().parent().css("display", "none");
 
 		}
 		//Si nouvelle ressource
 		else if (etat == "new"){
-			$('#NewRes_motcle').css("display", "none");
-
-			//--------------------------------------------------------------------->
-			//A supprimer pour upload fichier ------------------------------------->
-			$("#MsgWaitNewRessource").css('display', 'block');
-			$("#MsgWaitNewRessource").html('<h2>Coming soon !!</h2> <p>Pour créer une nouvelle ressource (document, image, audio ou vidéo), merci de la déposer tout simplement dans la partie ressource (3ème colonne).</p>');
-			$('#creat_new_ressource').css("display", "none");
-
-			$('#inputNewRes_title').parent().parent().css("display", "none");
-			$('#inputNewRes_desc').parent().parent().css("display", "none");
-			$('#NewRes_motcle').css("display", "none");
+			// $('#NewRes_motcle').css("display", "none");
+		}
+		//Si appelé dans le studio
+		else if (etat == "studio"){
+			$('#resModalLabel').html('Modification de la ressource');
 			$('#inputNewRes_file').parent().parent().css("display", "none");
-			$('#NewRes_img').css("display", "none");
-			//A supprimer pour upload fichier ------------------------------------->
-			//--------------------------------------------------------------------->
 		}
 		//Si modification
 		else if (!etat){
@@ -95,8 +79,8 @@
 		}
 
 		//Doublon pour le DOM (attr) et le cache JQuery (data)
-		$('#NewRes_motcle').attr('data-resid', resId).data('resid', resId);
-		afficherTag(resId, '#tagNewRes');
+		// $('#NewRes_motcle').attr('data-resid', resId).data('resid', resId);
+		// afficherTag(resId, '#tagNewRes');
 
 		$('#inputNewRes_title').val(unescape(titre));
 		$('#inputNewRes_desc').val(unescape(desc));
@@ -139,7 +123,7 @@
 		var newDesc = $(element).parent().parent().find('#modifDesc').find('textarea').val();
 
 		if((newTitle != lastTitle)||(newDesc != lastDesc)){
-			ressourceDefined(id, newTitle, newDesc, url, urlThumbnail, num_type);
+			ressourceDefined(id, newTitle, newDesc, url, urlThumbnail, num_type, $(element).parents('.rightBar_ressource'));
 		}
 
 		return false;		
@@ -155,9 +139,9 @@
 	 *	@param thumbnail String	thumbnail de la ressource
 	 *	@param type Integer	 	numéro du type de la ressource (défini dans definition.js)
 	 */
-	var ressourceDefined = function(id, title, desc, url, urlThumbnail, type){
+	var ressourceDefined = function(id, title, desc, url, urlThumbnail, type, refreshDisplay){
 
-		var myUrl_Put = cfgWs.prefix+"/platoatic/ressources/" + pseudo + "/VERRU_MODIF/" + id;
+		var myUrl_Put = cfgWs.prefix+"/platoatic/ressource/" + pseudo + "/VERRU_MODIF/" + id;
 
 		var message;
 		message = {
@@ -183,7 +167,26 @@
 
 	    	success: function(data) {
 	      		console.log ("modifyressource success : type"+type);
-	      		refreshRessourceCarousel(type);
+	      		if(refreshDisplay!="no"){
+		      		$("[data-id='"+id+"']").each(function(){
+
+		      			if($(this).find('.infos_ressource[data-mode=view]').css('display') == "none"){
+		      				showDetailModif($(this).data('id'), $(this));
+		      			}
+
+		      			var input = {
+				    		'data' : data,
+				    		'cpt' : 'no',
+				    		'mode' : $(this).data('mode'),
+				    		'pseudo' : pseudo
+				    	};
+
+						var result = new EJS({url: 'js/ressources/template_ressource_list.ejs'}).render(input);
+						$(this).html(result);
+
+		      		})
+		      		initRessourceDragging("res");
+		      	}
 
 	    	},
 	    	error: function(jqXHR, textStatus, errorThrown) {
@@ -199,54 +202,97 @@
 	 * refresh the corresponding carousel according to the type
 	 *
 	 **/
-	var refreshRessourceCarousel = function(type) {
+	var refreshRessourceCarousel = function(type, refreshDisplay, rendu) {
+
+		var NameTypeRessource = "";
+
+		var searchTagProfil = "";
+		if(type==resType.sequence) {
+			var checkTags = '#collapseSequence1 .searchTagProfil input';
+		}else{ 
+			var checkTags = '#collapseRessource1 .searchTagProfil input';
+		}
+		$(checkTags).each(function(){
+			if($(this).is(':checked')){
+				searchTagProfil += $(this).data('tag')+" ";	
+			}
+        })
+
+		//spinningwhell
+		if(rendu == "append"){
+	    	refreshDisplay.append('<div class="DLRessources">');
+		} else {
+			refreshDisplay.html('<div class="DLRessources">');
+		}
+
+		refreshDisplay.find('.DLRessources').append('<div class="spinningwheel" id="loadRessources"></div>');
+		refreshDisplay.find('.DLRessources').append('<div class="spinningwheeltext">Chargement en cours...</div>');
+		refreshDisplay.find('#loadRessources').spin();
+		//spinningwhell
 
         if(type==resType.sequence) {
-			console.log('manage séquence');
-			// var active=$('.carousel-inner[name="sequence_carousel"]').children('.active').data('index');
-			afficheMesSequences(pseudo, $('#sequences_res'), $('#search_seq_field').val());
-			// afficheMesSequences(pseudo, $('.carousel-inner[name="sequence_carousel"]'), $('#search_seq_field').val(), active);
+
+			if(!refreshDisplay.hasClass('liste_sequence_eleve')) {
+				afficheMesSequences(pseudo, refreshDisplay, $('#search_seq_field').val(), '', rendu, searchTagProfil);
+			} else {
+				// afficheAssignedSequence(pseudo, refreshDisplay.parents('.liste_sequence_eleve').data('pseudo'), refreshDisplay.parent());
+				afficheAssignedSequence(pseudo, refreshDisplay.data('pseudo'), refreshDisplay);
+			}
+			return false;
         }
         else if(type==resType.exercice) {
-			console.log('manage exercice');
-			// var active=$('.carousel-inner[name="exercice_carousel"]').children('.active').data('index');
-			// afficheMesExercices(pseudo, $('#exercices_res'), $('#search_exo_field').val(), active);
-			$('.ressources_ens').find('.brand').html('Mes exercices');
-			afficheMesExercices(pseudo, $('#mesRessources'), $('#search_field').val());
-			// afficheMesExercices(pseudo, $('.carousel-inner[name="exercice_carousel"]'), $('#search_exo_field').val(), active);
+
+        	NameTypeRessource = "Mes exercices";
+			if(!refreshDisplay.hasClass('sequences_detail_res')){
+				afficheMesExercices(pseudo, refreshDisplay, $('#search_field').val(), '', rendu, searchTagProfil);
+			} else {
+				afficheExoSequence(pseudo, refreshDisplay.data('index'), refreshDisplay);
+				return false;
+			}
 		}
 		else if(type==resType.fiche) {
-			console.log('manage fiche');
-			// var active=$('.carousel-inner[name="fiche_carousel"]').children('.active').data('index');
-			// afficheMesFiches(pseudo, $('#document_res'), $('#search_fiche_field').val(), active);
-			$('.ressources_ens').find('.brand').html('Mes documents');
-			afficheMesFiches(pseudo, $('#mesRessources'), $('#search_field').val()); 
-			// afficheMesFiches(pseudo, $('.carousel-inner[name="fiche_carousel"]'), $('#search_fiche_field').val(), active); 
+
+			NameTypeRessource = "Mes documents";
+			if(!refreshDisplay.hasClass('sequences_detail_res')){
+				afficheMesFiches(pseudo, refreshDisplay, $('#search_field').val(), '', rendu, searchTagProfil);
+			} else {
+				afficheExoSequence(pseudo, refreshDisplay.data('index'), refreshDisplay);
+				return false;
+			}
+
 		}
 		else if(type==resType.image) {
-			console.log('manage image');
-			// var active=$('.carousel-inner[name="image_carousel"]').children('.active').data('index');
-			// afficheMesImages(pseudo, $('#image_res'), $('#search_image_field').val(), active);
-			$('.ressources_ens').find('.brand').html('Mes images');
-			afficheMesImages(pseudo, $('#mesRessources'), $('#search_field').val());
-			// afficheMesImages(pseudo, $('.carousel-inner[name="image_carousel"]'), $('#search_image_field').val(), active);
+
+			NameTypeRessource = "Mes images";
+			if(!refreshDisplay.hasClass('sequences_detail_res')){
+				afficheMesImages(pseudo, refreshDisplay, $('#search_field').val(), '', rendu, searchTagProfil);
+			} else {
+				afficheExoSequence(pseudo, refreshDisplay.data('index'), refreshDisplay);
+				return false;
+			}
 		}
 		else if(type==resType.audio) {
-			console.log('manage audio');
-			// var active=$('.carousel-inner[name="audio_carousel"]').children('.active').data('index');
-			// afficheMesAudio(pseudo, $('#audio_res'), $('#search_audio_field').val(), active);
-			$('.ressources_ens').find('.brand').html('Mes audios');
-			afficheMesAudio(pseudo, $('#mesRessources'), $('#search_field').val());
-			// afficheMesAudio(pseudo, $('.carousel-inner[name="audio_carousel"]'), $('#search_audio_field').val(), active);
+
+			NameTypeRessource = "Mes audios";
+			if(!refreshDisplay.hasClass('sequences_detail_res')){
+				afficheMesAudio(pseudo, refreshDisplay, $('#search_field').val(), '', rendu, searchTagProfil);
+			} else {
+				afficheExoSequence(pseudo, refreshDisplay.data('index'), refreshDisplay);
+				return false;
+			}
 		}
 		else if(type==resType.video) {
-			console.log('manage video');
-			// afficheMesVideo(pseudo, $('#video_res'), $('#search_video_field').val());
-			$('.ressources_ens').find('.brand').html('Mes vidéos');
-			afficheMesVideo(pseudo, $('#mesRessources'), $('#search_field').val());
-			// afficheMesAudio(pseudo, $('.carousel-inner[name="audio_carousel"]'), $('#search_audio_field').val(), active);
+
+			NameTypeRessource = "Mes vidéos";
+			if(!refreshDisplay.hasClass('sequences_detail_res')){
+				afficheMesVideo(pseudo, refreshDisplay, $('#search_field').val(), '', rendu, searchTagProfil);
+			} else {
+				afficheExoSequence(pseudo, refreshDisplay.data('index'), refreshDisplay);
+				return false;
+			}
 		}
 
+		$('.ressources_ens').find('.NavMenuInterne .brand').html(NameTypeRessource);
 		$('.ressources_ens').find('#search_field').attr('data-type', type).data('type', type);
         $('.ressources_ens').find('#creatNewRessource').attr('data-type', type).data('type', type);
 
@@ -257,9 +303,9 @@
 	 *
 	 *	@param resId Integer	identifiant de la ressources 
 	 *	@param divId Integer	identifiant de la div dans laquelle nous voulons afficher les tags
+	 *	@param mode  String 	permet de savoir si on doit afficher ou refresh
 	 */
-	var afficherTag = function(resId, divId){
-    	console.log("afficherTag for "+resId);
+	var afficherTag = function(resId, divId, mode){
 
     	var myUrl_Get = cfgWs.prefix+"/platoatic/tag/"+resId;
 
@@ -274,14 +320,24 @@
       		},
             success: function(data) {
 
+            	var owner = $(divId).parents('.NavDetailMenuInterne').prev().data('own');
+
             	var input = {
 		    		'data' : data,
-		    		'resId' : resId
+		    		'resId' : resId,
+		    		'owner' : owner
 		    	};
 
-				var result = new EJS({url: 'js/ressources/template_tag.ejs'}).render(input);
+				// var result = new EJS({url: 'js/ressources/template_tag.ejs'}).render(input);
+				// $(divId).html(result);
 
-				$(divId).html(result);
+				if(!mode){
+					var result = new EJS({url: 'js/ressources/template_tag.ejs'}).render(input);
+					$(divId).html(result);
+				} else if (mode == "refresh") {
+					var result = new EJS({url: 'js/ressources/template_tag_ressource.ejs'}).render(input);
+					$(divId+" .collapseTag_"+resId).html(result);
+				}
             		            
            	},
             error: function() {
@@ -293,19 +349,28 @@
     	
     }
 
+    /**
+	 *	Refresh des tags d'une ressource
+	 *
+	 *	@param resId Integer	identifiant de la ressources 
+	 *	@param divId Integer	identifiant de la div dans laquelle nous voulons afficher les tags
+	 */
+	var refreshTag = function(resId, divId){
+		afficherTag(resId, divId, 'refresh');
+	}
+
 	/**
 	 *	Ajout d'un tag a une ressource
 	 *
 	 *	@param resId Integer	identifiant de la ressources 
 	 *	@param tag String 		tag à ajouter
+	 * 	@parma element Object 	element dans lequel est saisie le tag a ajouter
 	 */
-	var tagDefined = function(resId, tag) {
+	var tagDefined = function(resId, tag, element) {
 
 		if(!tag){
 			return false;
 		}
-
-		console.log(escape(tag))
 
 		var myUrl_Post = cfgWs.prefix+"/platoatic/tag/"+resId;
         var message = {
@@ -326,7 +391,8 @@
             success: function(data) {
 
             	console.log ("tagDefined success");
-            	afficherTag(resId, '#tagNewRes');
+            	refreshTag(resId, '#ressource_tags[data-index="'+resId+'"] .tags');
+            	$(element).val("");
             
            	},
             error: function() {
@@ -363,7 +429,7 @@
       		},
             success: function(data) {
 
-            	afficherTag(resId, '#tagNewRes');
+            	refreshTag(resId, '#ressource_tags[data-index="'+resId+'"] .tags');
             
            	},
             error: function() {
@@ -372,6 +438,234 @@
             }
 
         });
+	}
+
+	/**
+	 *	Affichage des compétence d'une ressource
+	 *
+	 *	@param resId Integer	identifiant de la ressources 
+	 *	@param divId Integer	identifiant de la div dans laquelle nous voulons afficher les compétences
+	 *	@param mode  String 	permet de savoir si on doit afficher ou refresh
+	 */
+	var afficherComp = function(resId, divId, mode){
+		
+    	var myUrl_Get = cfgWs.prefix+"/platoatic/competency/"+pseudo+"/"+resId;
+
+    	$.ajax({
+            url: myUrl_Get,
+            type: "GET",
+            dataType: "json",
+            //contentType: "application/json",
+           	//crossDomain: true,
+      		xhrFields: {
+        		withCredentials : true
+      		},
+            success: function(data) {
+
+            	var owner = $(divId).parents('.NavDetailMenuInterne').prev().data('own');
+
+            	var input = {
+		    		'data' : data,
+		    		'resId' : resId,
+		    		'owner' : owner
+		    	};
+
+		    	if(!mode){
+					var result = new EJS({url: 'js/ressources/template_competence.ejs'}).render(input);
+					$(divId).html(result);
+				} else if (mode == "refresh") {
+					var result = new EJS({url: 'js/ressources/template_competence_ressource.ejs'}).render(input);
+					$(divId+" .collapseComp_"+resId).html(result);
+				}
+
+				typeheadComp();
+            		            
+           	},
+            error: function() {
+              console.log('afficherComp POST process error');
+              //window.location.href = "./index.html";
+            }
+
+        });
+	}
+
+	/**
+	 *	Refresh des compétence d'une ressource
+	 *
+	 *	@param resId Integer	identifiant de la ressources 
+	 *	@param divId Integer	identifiant de la div dans laquelle nous voulons afficher les compétences
+	 */
+	var refreshComp = function(resId, divId){
+		afficherComp(resId, divId, 'refresh');
+	}
+
+	/**
+	 *	Ajout d'une compétence a une ressource
+	 *
+	 *	@param resId 		Integer		identifiant de la ressources 
+	 *	@param competence 	String 		compétence à ajouter
+	 */
+	var ajoutComp = function(resId, competence) {
+
+		if(!competence){
+			return false;
+		}
+
+		var myUrl_Post = cfgWs.prefix+"/platoatic/competency/"+pseudo+"/"+resId;
+        var message = {
+        	"resComp": escape(competence)
+        };
+
+        $.ajax({
+            url: myUrl_Post,
+            type: "POST",
+            dataType: "json",
+            data: message,
+            cache: false,
+            timeout: 5000,
+            //crossDomain: true,
+      		xhrFields: {
+        		withCredentials : true
+      		},
+            success: function(data) {
+
+            	console.log ("ajoutComp success");
+            	refreshComp(resId, '#ressource_competences[data-index="'+resId+'"] .competences');
+            	typeheadComp();
+            
+           	},
+            error: function() {
+              console.log('ajoutComp POST process error');
+              //window.location.href = "./index.html";
+            }
+
+        });
+	}
+
+
+	/**
+	 *	Modification d'une compétence pour une ressource
+	 *
+	 *	@param resId 		Integer		identifiant de la ressources 
+	 *	@param compId 		Integer 	competence à supprimer
+	 */
+	var modifComp = function(resId, compId) {
+
+		var element = $(".tablecomp td[data-comp="+compId+"]");
+		if(element.find('input').length > 0){
+
+			if(element.data('textcomp') != escape(element.find('input').val())){
+
+				supprComp(resId, compId);
+				ajoutComp(resId, element.find('input').val());
+
+			} else {
+
+				var text = element.find('input').val();
+				element.html(text);
+
+				element.parent().find('.icon-remove').show();
+				element.parent().find('.icon-ok').removeClass('icon-ok').addClass('icon-pencil');
+
+			}
+
+		} else {
+
+			var text = element.html();
+			text = $.trim(text);
+			element.html('<input type="text" value="'+text.replace(/"/g, '&quot;')+'" style="margin: inherit;"/>');
+
+			element.parent().find('.icon-remove').hide();
+			element.parent().find('.icon-pencil').removeClass('icon-pencil').addClass('icon-ok');
+
+		}		
+
+	}
+
+	/**
+	 *	Suppression d'une compétence pour une ressource
+	 *
+	 *	@param resId 	Integer		identifiant de la ressources 
+	 *	@param compId 	Integer 	competence à supprimer
+	 */
+	var supprComp = function(resId, compId) {
+
+		var myUrl_Post = cfgWs.prefix+"/platoatic/competency/"+pseudo+"/"+resId;
+        var message = {
+        	"compId":compId
+        };
+
+        $.ajax({
+            url: myUrl_Post,
+            type: "DELETE",
+            dataType: "json",
+            data: message,
+            cache: false,
+            timeout: 5000,
+            //crossDomain: true,
+      		xhrFields: {
+        		withCredentials : true
+      		},
+            success: function(data) {
+
+            	refreshComp(resId, '#ressource_competences[data-index="'+resId+'"] .competences');
+            	typeheadComp();
+            
+           	},
+            error: function() {
+              console.log('supprComp POST process error');
+              //window.location.href = "./index.html";
+            }
+
+        });
+	}
+
+	/**
+	 *	Permet de générer le typehead pour les compétences
+	 *
+	 *	@param competence 	Array 	tableau des compétences
+	 */
+	var typeheadComp = function(competence){
+
+		var myUrl_Post = cfgWs.prefix+"/platoatic/competency/"+pseudo;
+		var message = "";
+
+		$.ajax({
+            url: myUrl_Post,
+            type: "GET",
+            dataType: "json",
+            data: message,
+            cache: false,
+            timeout: 5000,
+            //crossDomain: true,
+      		xhrFields: {
+        		withCredentials : true
+      		},
+            success: function(data) {
+
+    			var arrayComp = [];
+    			var competence = data.listCompProf;
+
+				for (var i = 0; i < competence.length; i++) {
+					arrayComp[i] = unescape(competence[i].competency);
+				};
+
+				// $('.typeheadComp').typeahead('destroy');
+
+				$('.typeheadComp').each(function(){
+					$(this).typeahead({
+						items : 6
+					}).data('typeahead').source = arrayComp;
+				});
+            
+           	},
+            error: function() {
+              console.log('supprComp POST process error');
+              //window.location.href = "./index.html";
+            }
+
+        });
+
 	}
 
 	/**
@@ -519,13 +813,11 @@
 	//Affiche les images pour le thumbnail d'une ressource
 		var imageView = function(filter, Carousel) {
 
-			console.log('imgView from ressource.js');
-			var myUrl_Get = cfgWs.prefix + "/platoatic/ressources/"+pseudo+"/type/IMAGES/";
-
-			// console.log("checkbox : " + $('#res_search_ressource').val());
+			var myUrl_Get = cfgWs.prefix + "/platoatic/ressources/IMAGES/"+pseudo+"/";
 
 			var search_filter = {
 				"search" : escape(filter),
+				"searchTag" : '',
                 "userSearch" : ($('#modal_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#modal_search_platform:checked').val()=="on"?'true':'false')
 			};
@@ -561,9 +853,9 @@
 		} // end of imageView
 
 	//Attacher une ressource à une séquence
-		var attachRessourceToSequence = function (noSeq, resId, position, seqDetailDisplay) {
+		var attachRessourceToSequence = function (noSeq, resId, position, seqDetailDisplay, callback) {
 
-			var myUrl_Put = cfgWs.prefix+"/platoatic/ressources/" + pseudo + "/VERRU_MODIF/" + noSeq;
+			var myUrl_Put = cfgWs.prefix+"/platoatic/ressource/" + pseudo + "/VERRU_MODIF/" + noSeq;
 
 	        console.log("attachRessourceToSequence [" + myUrl_Put + "] " + resId + " - " + position);
 
@@ -573,8 +865,6 @@
 	        	"resId": resId, 
 	        	"position": position
 	        };
-	        
-	        console.log(message);
 	        
 	        $.ajax({
 	            url: myUrl_Put,
@@ -589,8 +879,10 @@
           		},
 
 	            success: function(data) {
-	            	console.log ("modifySequence success : ");
-	              	afficheExoSequence(pseudo, noSeq, seqDetailDisplay, $('#inputSeqTitle').val());
+	            	if (callback) callback();
+					// $('#sequences_detail_res[data-seqid="'+seqDetailDisplay.data('seqid')+'"]').each(function(){
+					// 	afficheExoSequence(pseudo, seqDetailDisplay.data('seqid'), $(this));	
+					// })
 	           	},
 	            error: function(jqXHR, textStatus, errorThrown) {
 	            	console.log(textStatus);
@@ -603,9 +895,9 @@
 		}; // end of attachRessourceToSequence
 
 	//Détacher une ressource d'une séquence
-		var detachRessourceToSequence = function (noSeq, resId) {
+		var detachRessourceToSequence = function (noSeq, resId, callback) {
 
-			var myUrl_Put = cfgWs.prefix+"/platoatic/ressources/" + pseudo + "/VERRU_MODIF/" + noSeq;
+			var myUrl_Put = cfgWs.prefix+"/platoatic/ressource/" + pseudo + "/VERRU_MODIF/" + noSeq;
 
 	        console.log("detachRessourceToSequence [" + myUrl_Put + "] " + resId);
 
@@ -629,6 +921,7 @@
 
 	            success: function(data) {
 	            	console.log ("modifySequence success : ");
+	            	if(callback) callback();
 	           	},
 	            error: function(jqXHR, textStatus, errorThrown) {
 	            	console.log(textStatus);
@@ -642,9 +935,9 @@
 
 
 	//Supprimer une ressource
-		var removeRessource = function(resId) {
+		var removeRessource = function(resId, callback) {
 
-			var myUrl_Put = cfgWs.prefix+"/platoatic/ressources/" + pseudo + "/VERRU_DELETE/" + resId;
+			var myUrl_Put = cfgWs.prefix+"/platoatic/ressource/" + pseudo + "/VERRU_DELETE/" + resId;
 	        console.log(">> removeRessource[" + resId + "] : " + myUrl_Put); // : " + $('#inputSeqTitle').val());
 
 	        var message = "na";
@@ -663,6 +956,7 @@
 
 	            success: function(data) {
 	            	console.log ("removeRessource success : ");
+	            	if(callback) callback();
 	            },
 	            error: function(jqXHR, textStatus, errorThrown) {
 	            	console.log(textStatus);
@@ -677,14 +971,12 @@
 	//Assigner une ressource
 		var createRessourceRelation = function(resId, urlExo, callback) {
 
-			var myUrl_Post = cfgWs.prefix+"/platoatic/ressources/" + pseudo + "/VERRU_MODIF/" + resId;
+			var myUrl_Post = cfgWs.prefix+"/platoatic/ressource/" + pseudo + "/VERRU_MODIF/" + resId;
 
 	        console.log("createRessourceRelation [" + myUrl_Post + "] " + resId + "-" + urlExo);
 
 	        var message;
 	        message = {"action":"attach_exo_ressources",  "resId": resId, "resUrl": urlExo};
-	        
-	        console.log(message);
 	        
 	        $.ajax({
 	            url: myUrl_Post,
@@ -752,7 +1044,7 @@
     //Créer une nouvelle séquence
         var createNewSequence = function(title, description, url) {
             
-            var myUrl_Post = cfgWs.prefix+"/platoatic/ressources/"+pseudo;
+            var myUrl_Post = cfgWs.prefix+"/platoatic/ressource/"+pseudo;
             console.log(">> createNewSequence");
             var message = {
                 "resType": resType.sequence, 
@@ -778,7 +1070,8 @@
 
                     console.log ("createNewSequence success : " + data.resId);
                     // afficheExoSequence(pseudo, data.resId, $('#sequences_detail_res'), title);                    
-                    afficheMesSequences(pseudo, $('#sequences_res'), $('#search_seq_field').val());                    
+                    // afficheMesSequences(pseudo, $('#sequences_res'), $('#search_seq_field').val());  
+                    refreshRessourceCarousel(resType.sequence, $("#sequences_res"));                  
                 },
                 error: function() {
                   console.log('createNewSequence POST process error');
@@ -791,8 +1084,7 @@
 
 
     //Affiche les séquences
-        var afficheMesSequences = function(pseudoProf, seqDisplay, filter, active) {
-
+        var afficheMesSequences = function(pseudoProf, seqDisplay, filter, active, rendu, searchTagProfil) {
             // $('#textSectionMesSequences').html("Mes séquences");
             // $('#attacheRessourceSeq').hide('fast');
             // $('#back2SeqList').hide("fast");
@@ -802,17 +1094,24 @@
             // $('#goLastSeq').show('fast');
             // $('#search_seq').show('fast');
 
-            refreshMesSequences(pseudoProf, seqDisplay, filter, active);
+            refreshMesSequences(pseudoProf, seqDisplay, filter, active, rendu, searchTagProfil);
 
         }; // end of afficheMesSequences
 
 
     //Rafraichi les séquences
-        var refreshMesSequences = function(pseudoProf, seqDisplay, filter, active) {
+        var refreshMesSequences = function(pseudoProf, seqDisplay, filter, active, rendu, searchTagProfil) {
+        	
+        	if($(seqDisplay).children('.rightBar_ressource').length > 0){
+        		var idLast = $(seqDisplay).children('.rightBar_ressource').last().data('id');
+        	} else {
+        		var idLast = 0;
+        	}
 
-            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/type/SEQUENCES/";
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/SEQUENCES/"+pseudoProf+"/"+idLast;
             var search_filter = {
                 "search" : escape(filter),
+                "searchTag" : escape(searchTagProfil),
                 "userSearch" : ($('#seq_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#seq_search_platform:checked').val()=="on"?'true':'false')
             };
@@ -830,14 +1129,36 @@
                 
                 success: function(data) {
 
-                    var input = {
-                        'data' : data,
-                        'mode' : 'enseignant',
-                        'display' : seqDisplay
-                    };
+                	//spinningwhell
+                	seqDisplay.find('.DLRessources').remove();
+                	//spinningwhell
+
+                	if (seqDisplay.children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if (seqDisplay.children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
+			    	var input = {
+			    		"data" : data,
+			    		"mode" : "enseignant",
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
+			    	}
 
                     var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
-                    seqDisplay.html(result);
+
+                    //spinningwhell
+                    if(rendu == 'append'){
+                    	seqDisplay.append(result);
+                    } //spinningwhell
+                    else {
+                    	seqDisplay.html(result);
+                    }
 
                     if(active){
                         seqDisplay.carousel(active);
@@ -858,14 +1179,13 @@
     //Affiche les ressources de la séquence
         var afficheExoSequence = function(pseudoProf, resId, seqDetailDisplay, title, active) {
 
-        	console.log("refresh sequence detail");
         	console.log(pseudoProf+", "+resId+", "+seqDetailDisplay);
 
             if(title){
                 $(seqDetailDisplay).parent().children(":first-child").children(":first-child").html("Séquences > "+unescape(title));
             }
 
-            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/"+resId;
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoProf+"/"+resId;
 
             $.ajax({
                 url: myUrl_Get,
@@ -878,11 +1198,22 @@
                 },
                 success: function(data) {
 
-                    var input = {
-                        'data' : data,
-                        'mode' : 'enseignant_detail',
-                        'display' : seqDetailDisplay
-                    };
+                	if ($(seqDetailDisplay).children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if ($(seqDetailDisplay).children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
+			    	var input = {
+			    		"data" : data,
+			    		"mode" : "enseignant_detail",
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
+			    	}
 
                     var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
                     $(seqDetailDisplay).attr('data-seqid', resId);
@@ -912,7 +1243,7 @@
     //Créer un nouvel exercice
         var createNewExercice = function(resId, url, title, desc, thumbnail) {
 
-            console.log("createNewExercice");
+
             // studio(resId, url, title, desc, thumbnail);
             studio(resId, url, escape(title), escape(desc), escape(thumbnail));
 
@@ -930,11 +1261,18 @@
 
 
     //Affiche les exercices
-        var afficheMesExercices = function(pseudoProf, exoDisplay, filter, active) {
+        var afficheMesExercices = function(pseudoProf, exoDisplay, filter, active, rendu, searchTagProfil) {
 
-            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/type/EXERCICES/";
+        	if($(exoDisplay).find('.rightBar_ressource').length > 0){
+        		var idLast = $(exoDisplay).find('.rightBar_ressource').last().data('id');
+        	} else {
+        		var idLast = 0;
+        	}
+
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/EXERCICES/"+pseudoProf+"/"+idLast;
             var search_filter = {
                 "search" : escape(filter),
+                "searchTag" : escape(searchTagProfil),
                 "userSearch" : ($('#res_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#res_search_platform:checked').val()=="on"?'true':'false')
             };
@@ -951,15 +1289,36 @@
                 },
                 success: function(data) {
 
-                    var input = {
-                        'data' : data,
-                        'pseudo' : pseudoProf,
-                        "mode" : "enseignant",
-                        'display' : exoDisplay
-                    };
+                	//spinningwhell
+                	exoDisplay.find('.DLRessources').remove();
+                	//spinningwhell
 
-                    var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input) 
-                    exoDisplay.html(result);
+                	if (exoDisplay.children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if (exoDisplay.children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
+			    	var input = {
+			    		"data" : data,
+			    		"mode" : "enseignant",
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
+			    	}
+
+                    var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
+
+                    //spinningwhell
+                    if(rendu == 'append'){
+                    	exoDisplay.append(result);
+                    } //spinningwhell
+                    else {
+                    	exoDisplay.html(result);
+                    }
 
                     if(active){
                         exoDisplay.carousel(active);
@@ -968,6 +1327,7 @@
 
                     initRessourceDragging("res");
                     initExternalDragging();
+
                 },
                 error: function() { 
                   console.log('afficheMesExercices : GET process error ');
@@ -978,11 +1338,11 @@
 
 
     //Duplique une exercice
-        var duplicateExo = function(resId) {
+        var duplicateExo = function(resId, event) {
 
             event.stopPropagation();
 
-            var myUrl_Post = cfgWs.prefix+"/platoatic/ressources/"+pseudo+"/"+resId;
+            var myUrl_Post = cfgWs.prefix+"/platoatic/ressource/"+pseudo+"/"+resId;
             var message = {
                 'selectionType' : 'duplicate'
             }; 
@@ -1001,10 +1361,7 @@
                 success: function(data) {
 
                     console.log ("duplicateExo success "+resId);
-                    // afficheMesExercices(pseudo, $('.carousel-inner[name="exercice_carousel"]'), $('#search_exo_field').val());
-                    afficheMesExercices(pseudo, $('#mesRessources'), $('#search_field').val());
-                    // afficheMesExercices(pseudo, $('.rightBar_ressource[data-resid="'+resId+'"]').parent(), $('#search_exo_field').val());
-                    // afficheMesExercices(pseudo, $('#exercices_res[data-index="'+idMenu+'"]'), $('#search_exo_field').val());
+                    refreshRessourceCarousel(resType.exercice, $('#mesRessources'));
                 },
 
                 error: function() {
@@ -1015,18 +1372,56 @@
             });
         } // end of duplicateExo
 
-        
+    //Selection d'une ressource mookitek
+	var selectionneRessources = function(element) {
+
+			console.log("selectionneRessources : " + element.data('resid'));
+			var myUrl_Post = cfgWs.prefix+"/platoatic/ressource/"+pseudo+"/"+element.data('resid');
+	        var message = "na"; 
+
+	        $.ajax({
+	            url: myUrl_Post,
+	            type: "POST",
+	            dataType: "json",
+	            data: message,
+	            cache: false,
+	            timeout: 5000,
+	            //crossDomain: true,
+          		xhrFields: {
+            		withCredentials : true
+          		},
+	            success: function(data) {
+
+	            	console.log ("selectionneRessources success");
+	          		//afficheListeClasse();
+
+	           	},
+
+	            error: function() {
+	              console.log('selectionneRessources POST process error');
+	              window.location.href = "./index.html";
+	            }
+
+	        });
+		}; // end of selectionneRessources        
 
 // End Exercices ===================>
 //==================================>
 // Fiches ==========================>
 
-        var afficheMesFiches = function(pseudoProf, ficheDisplay, filter, active) {
+        var afficheMesFiches = function(pseudoProf, ficheDisplay, filter, active, rendu, searchTagProfil) {
 
-            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/type/FICHES/";
+        	if($(ficheDisplay).find('.rightBar_ressource').length > 0){
+        		var idLast = $(ficheDisplay).find('.rightBar_ressource').last().data('id');
+        	} else {
+        		var idLast = 0;
+        	}
+
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/FICHES/"+pseudoProf+"/"+idLast;
 
             var search_filter = {
                 "search" : escape(filter),
+                "searchTag" : escape(searchTagProfil),
                 "userSearch" : ($('#res_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#res_search_platform:checked').val()=="on"?'true':'false')
             };
@@ -1042,14 +1437,36 @@
                 },
                 success: function(data) {
 
-                    var input = {
-                        'data' : data,
-                        'mode' : "enseignant",
-                        'display' : ficheDisplay
-                    }
+                	//spinningwhell
+                	ficheDisplay.find('.DLRessources').remove();
+                	//spinningwhell
+
+                	if (ficheDisplay.children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if (ficheDisplay.children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
+			    	var input = {
+			    		"data" : data,
+			    		"mode" : "enseignant",
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
+			    	}
 
                     var result = new EJS({url: 'js/ressources/template_ressources_list'}).render(input);
-                    ficheDisplay.html(result);
+
+                    //spinningwhell
+                    if(rendu == 'append'){
+                    	ficheDisplay.append(result);
+                    } //spinningwhell
+                    else {
+                    	ficheDisplay.html(result);
+                    }
 
                     if(active){
                         ficheDisplay.carousel(active);
@@ -1058,7 +1475,7 @@
 
                     // initExternalFicheDragging();
                     initExternalDragging();
-                    initRessourceDragging("res");;
+                    initRessourceDragging("res");
 
                 },
                 error: function() { 
@@ -1073,18 +1490,25 @@
 //==================================>
 // Images ==========================>
 
-        var afficheMesImages = function(pseudoProf, imgDisplay, filter, active) {
+        var afficheMesImages = function(pseudoProf, imgDisplay, filter, active, rendu, searchTagProfil) {
 
-            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/type/IMAGES/";
+        	if($(imgDisplay).find('.rightBar_ressource').length > 0){
+        		var idLast = $(imgDisplay).find('.rightBar_ressource').last().data('id');
+        	} else {
+        		var idLast = 0;
+        	}
+
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/IMAGES/"+pseudoProf+"/"+idLast;
 
 			console.log("checkbox : " + $('#res_search_ressource').val());
 
-
             var search_filter = {
                 "search" : escape(filter),
+                "searchTag" : escape(searchTagProfil),
                 "userSearch" : ($('#res_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#res_search_platform:checked').val()=="on"?'true':'false')
             };
+
             $.ajax({
                 url: myUrl_Get,
                 type: "GET",
@@ -1097,30 +1521,44 @@
                 },
                 success: function(data) {
 
-                    var input = {
-                        "data" : data,
-                        "mode" : "enseignant",
-                        'display' : imgDisplay
-                    }
+                	//spinningwhell
+                	imgDisplay.find('.DLRessources').remove();
+                	//spinningwhell
+
+                	if (imgDisplay.children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if (imgDisplay.children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
+			    	var input = {
+			    		"data" : data,
+			    		"mode" : "enseignant",
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
+		    		}
 
                     var result = new EJS({url: 'js/ressources/template_ressources_list'}).render(input);
-                    imgDisplay.html(result);
+
+                    //spinningwhell
+                    if(rendu == 'append'){
+                    	imgDisplay.append(result);
+                    } //spinningwhell
+                    else {
+                    	imgDisplay.html(result);
+                    }
 
                     if(active){
                         imgDisplay.carousel(active);
                         imgDisplay.carousel('pause');
                     }
 
-                    // initExternalImgDragging();
                     initExternalDragging();
                     initRessourceDragging("res");
-
-                    // $(imgDisplay).children().each(function(){
-                    //     $(this).draggable({ 
-                    //         revert: true,
-                    //         opacity: 0.5
-                    //     });
-                    // });
 
                 },
                 error: function() { 
@@ -1134,12 +1572,19 @@
 //==================================>
 // Audios ==========================>
 
-        var afficheMesAudio = function(pseudoProf, audioDisplay, filter, active) {
+        var afficheMesAudio = function(pseudoProf, audioDisplay, filter, active, rendu, searchTagProfil) {
 
-            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/type/AUDIOS/";
+        	if($(audioDisplay).find('.rightBar_ressource').length > 0){
+        		var idLast = $(audioDisplay).find('.rightBar_ressource').last().data('id');
+        	} else {
+        		var idLast = 0;
+        	}
+
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/AUDIOS/"+pseudoProf+"/"+idLast;
 
             var search_filter = {
                 "search" : escape(filter),
+                "searchTag" : escape(searchTagProfil),
                 "userSearch" : ($('#res_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#res_search_platform:checked').val()=="on"?'true':'false')
             };
@@ -1155,14 +1600,36 @@
                 },
                 success: function(data) {
 
-                    var input = {
-                        "data" : data,
-                        "mode" : "enseignant",
-                        'display' : audioDisplay
-                    }
+                	//spinningwhell
+                	audioDisplay.find('.DLRessources').remove();
+                	//spinningwhell
+
+                	if (audioDisplay.children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if (audioDisplay.children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
+			    	var input = {
+			    		"data" : data,
+			    		"mode" : "enseignant",
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
+			    	}
 
                     var result = new EJS({url: 'js/ressources/template_ressources_list'}).render(input);
-                    audioDisplay.html(result);
+
+                    //spinningwhell
+                    if(rendu == 'append'){
+                    	audioDisplay.append(result);
+                    } //spinningwhell
+                    else {
+                    	audioDisplay.html(result);
+                    }
 
                     if(active){
                         audioDisplay.carousel(active);
@@ -1196,6 +1663,7 @@
             });
             //Fermeture par bouton
             $('#close_modale_img').click(function(event){
+            	$('#modalNewRessource_img').modal('hide');
                 $('#modalNewRessource').modal('show');
             });
             //Fermeture par clic exterieur
@@ -1206,31 +1674,7 @@
         //Bouton "Valider" du modal de définition des ressources
             $('#creat_new_ressource').click(function(event){
                 event.preventDefault();
-
-            //Valider pour une nouvelle sequence
-                if (($('#creat_new_ressource').data('type')==resType.sequence)&&(!$('#creat_new_ressource').data('resid'))){
-                    createNewSequence($('#inputNewRes_title').val(), $('#inputNewRes_desc').val(), $('#inputNewRes_img>img').attr('href'));
-                    effacerForm_NewRess();
-                }
-
-            //Valider pour un nouvel exercice
-                else if(($('#creat_new_ressource').data('type')==resType.exercice)&&(!$('#creat_new_ressource').data('resid'))){
-                    createNewExercice("new", "", $('#inputNewRes_title').val(), $('#inputNewRes_desc').val(), $('#inputNewRes_img>img').attr('href'));
-                }
-
-            // //Valider pour une nouvelle ressource (sans D'n'D)
-            //     else if(($('#creat_new_ressource').data('type'))&&(($('#creat_new_ressource').data('type')!=resType.sequence)||($('#creat_new_ressource').data('type')!=resType.exercice))) {
-            //         console.log('creatnewfile >> idRess : '+ $('#creat_new_ressource').data('type') +' (function no implement)');
-            //     }
-
-            //Sinon modification de la ressource
-                else {
-                    ressourceDefined($('#creat_new_ressource').data('resid'), $('#inputNewRes_title').val(), $('#inputNewRes_desc').val(), $('#creat_new_ressource').data('url'), $('#inputNewRes_img>img').attr('href'), $('#creat_new_ressource').data('type'));
-                    effacerForm_NewRess();
-                }
-
-                $('#modalNewRessource').modal('hide');
-
+                submitForm();
             });
 
         //Champ de recherche pour les images
@@ -1244,8 +1688,38 @@
                 event.preventDefault();
                 imageView($('#search_modal_input').val(), '#imagette_carousel');
             });
+
+            $('#inputNewRes_title').keypress(function(event){
+            	if(event.keyCode == 13) {
+            		event.preventDefault();
+            		event.stopPropagation();
+            		submitForm();
+            	}
+            });
         
         }// End LaunchModalRessource
+
+        var submitForm = function(){
+        	
+        	//Valider pour une nouvelle sequence
+            if (($('#creat_new_ressource').data('type')==resType.sequence)&&(!$('#creat_new_ressource').data('resid'))){
+                createNewSequence($('#inputNewRes_title').val(), $('#inputNewRes_desc').val(), $('#inputNewRes_img>img').attr('href'));
+                effacerForm_NewRess();
+            }
+
+            //Valider pour un nouvel exercice
+            else if(($('#creat_new_ressource').data('type')==resType.exercice)&&(!$('#creat_new_ressource').data('resid'))){
+                createNewExercice("new", "", $('#inputNewRes_title').val(), $('#inputNewRes_desc').val(), $('#inputNewRes_img>img').attr('href'));
+            }
+
+            //Sinon modification de la ressource
+            else {
+                ressourceDefined($('#creat_new_ressource').data('resid'), $('#inputNewRes_title').val(), $('#inputNewRes_desc').val(), $('#creat_new_ressource').data('url'), $('#inputNewRes_img>img').attr('href'), $('#creat_new_ressource').data('type'));
+                effacerForm_NewRess();
+            }
+
+            $('#modalNewRessource').modal('hide');
+    	}
 
     //Permet d'effacer le formulaire de création d'une ressource
         var effacerForm_NewRess = function(){
@@ -1311,12 +1785,19 @@
 
         // Vidéos ==========================>
 
-		var afficheMesVideo = function(pseudoProf, videoDisplay, filter, active) {
+		var afficheMesVideo = function(pseudoProf, videoDisplay, filter, active, rendu, searchTagProfil) {
 
-	        var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoProf+"/type/VIDEOS/";
+			if($(videoDisplay).find('.rightBar_ressource').length > 0){
+        		var idLast = $(videoDisplay).find('.rightBar_ressource').last().data('id');
+        	} else {
+        		var idLast = 0;
+        	}
+
+            var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/VIDEOS/"+pseudoProf+"/"+idLast;
 
 	        var search_filter = {
 	        	"search" : escape(filter),
+	        	"searchTag" : escape(searchTagProfil),
                 "userSearch" : ($('#res_search_ressource:checked').val()=="on"?'true':'false'),
 				"platformSearch" : ($('#res_search_platform:checked').val()=="on"?'true':'false')
 	        };
@@ -1332,23 +1813,36 @@
           		},
 	            success: function(data) {
 
+	            	//spinningwhell
+                	videoDisplay.find('.DLRessources').remove();
+                	//spinningwhell
+
+                	if (videoDisplay.children().eq(-1).hasClass('rightBar_ressource')) {
+                		var ressource = true;
+                	}else{
+                		var ressource = false;
+                	}
+
+                	if (videoDisplay.children().eq(-1).hasClass('noRessources')) {
+                		return false;
+                	};
+
 			    	var input = {
 			    		"data" : data,
 			    		"mode" : "enseignant",
-			    		'display' : videoDisplay
+			    		'pseudo' : pseudoProf,
+			    		"ressource" : ressource
 			    	}
 
 	              	var result = new EJS({url: 'js/ressources/template_ressources_list'}).render(input);
-					videoDisplay.html(result);
 
-					/*if(active){
-						videoDisplay.carousel(active);
-						videoDisplay.carousel('pause');
-					}
-					else {
-						videoDisplay.carousel(videoDisplay.children().last().data('index'));
-    					videoDisplay.carousel("pause");
-					}*/
+                    //spinningwhell
+                    if(rendu == 'append'){
+                    	videoDisplay.append(result);
+                    } //spinningwhell
+                    else {
+                    	videoDisplay.html(result);
+                    }
 
 					initExternalDragging();
 					initRessourceDragging("res");
@@ -1360,3 +1854,131 @@
 	            }
 	          }); /* end of ajax call */
 		}; // end of afficheMesVideo
+
+	//###########################################
+	//### [DEBUT] Upload d'un fichier externe ###
+	//###########################################
+
+		var clickExternal;
+
+		/**
+		 *	Fonction pour uploader un fichier
+		 *
+		 *	@param tupfile Integer Nb total de fichier à uploader
+		 */
+		var uploadFileExt = function (event, tupfile, element) {
+
+			if (element.attr('name') == "dropzone_external")
+				var upresfile = event.dataTransfer;
+			else if (element.attr('name') == "uploadfile")
+				var upresfile = document.getElementById(element.attr('id'));
+			else return false;
+
+			//loading element
+			var trLoad= "<tr id=\"trLoad\"><td colspan=\"4\" style=\"text-align: center;\"><img src=\"/img/gif-load.GIF\" /></td></tr>";
+			
+			//conteur de requete XML
+			var cmtXMLReq = 0;
+
+			$('#cancel_drop_ext, #valid_drop_ext').hide();
+			$('#dropFileExtModalLabel').html('Upload de '+(tupfile)+' fichier(s) en cours');
+			$('#dropFileExtModal .modal-body').html("<div id='dropFileExtModalBody'></div>");
+			$('#dropFileExtModal #dropFileExtModalBody').append("<table class=\"table table-striped table-hover\"><tbody></tbody></table>");
+
+			//Pour chaque fichier à uploader
+			for (var i = 0; i < tupfile; i++) {
+				
+				//On rajoute un loading
+				$('#dropFileExtModal #dropFileExtModalBody tbody').append(trLoad);
+
+				var formData = new FormData();
+				var file = upresfile.files[i];
+				formData.append('file', file);
+
+				var myUrl_Post = cfgWs.prefix+"/platoatic/files/"+pseudo; // WOrkaround for android limitation with credentials
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('post', myUrl_Post);
+				xhr.withCredentials = 'true';
+
+				//Elements draggés
+				xhr.onload = function(event) {
+					console.log("xhr.onload ...");
+					console.log(event.target);
+					var ret = JSON.parse(event.target.response);
+					if (ret.result == "success") {
+
+						//Si derniere requête XML on affiche les bouton pour annuler ou accepter
+						if(cmtXMLReq==(tupfile-1)) $('#cancel_drop_ext, #valid_drop_ext').show();
+
+						//On supprime le loading
+						$('#trLoad').remove();
+
+						//On génère la ligne du fichier
+						$('#dropFileExtModal #dropFileExtModalBody tbody').append('<tr class="'+ret.resId+'" data-url="'+ret.url+'" data-urlThumbnail="'+ret.urlThumbnail+'" data-type="'+ret.resType+'"></tr>');
+						$('#dropFileExtModal #dropFileExtModalBody tbody tr.'+ret.resId).append("<td>Titre</td>");
+						$('#dropFileExtModal #dropFileExtModalBody tbody tr.'+ret.resId).append("<td><input class='titleExt input-medium' type='text' maxlength='30' value='"+ret.title.slice(0, 30)+"' placeholder='Renseigner le titre'/></td>");
+						$('#dropFileExtModal #dropFileExtModalBody tbody tr.'+ret.resId).append("<td>Description</td>");
+						$('#dropFileExtModal #dropFileExtModalBody tbody tr.'+ret.resId).append("<td><textarea class='descExt' maxlength='250' style='width:auto; resize: none;' placeholder='Renseigner la description'>"+ret.desc.slice(0, 30)+"</textarea></td>");
+						
+						cmtXMLReq++
+					}
+					else {
+						console.log("error received from upload");
+						$('#dropFileExtModal').modal('hide');
+					}
+
+				};
+
+				//Barre de chargement
+				xhr.upload.onprogress = function(event) {
+
+					// TODO : modify progress bar modal
+					var percent = (event.loaded / event.total ) * 100;
+					$('#progress_bar_extern').html("<div class=\"bar\" style=\"padding: 5px; width: "+percent+"%;\">"+percent+"%</div>")
+				};
+				
+				xhr.send(formData);
+			}
+
+			clickExternal = 0;
+		}
+
+		/**
+		 *	Appyue sur le bouton de validation
+		 */
+		$('#valid_drop_ext').click(function(event){
+			$('#dropFileExtModal #dropFileExtModalBody tbody tr').each(function(){
+				ressourceDefined($(this).attr('class'), $(this).find('.titleExt').val(), $(this).find('.descExt').val(), $(this).data('url'), $(this).data('urlthumbnail'), $(this).data('type'), "no")
+			})
+			clickExternal = 1;
+			$('#dropFileExtModal').modal('hide');
+		})
+
+		/**
+		 *	Appyue sur le bouton d'annulation
+		 */
+		$('#cancel_drop_ext').click(function(event){
+			$('#dropFileExtModal #dropFileExtModalBody tbody tr').each(function(){
+				removeRessource($(this).attr('class'))
+			})
+			clickExternal = 1;
+			$('#dropFileExtModal').modal('hide');
+		})
+
+		/**
+		 *	Quand on cache le modal
+		 */
+		$('#dropFileExtModal').bind('hide', function(){
+			if(clickExternal == 0){
+				$('#dropFileExtModal #dropFileExtModalBody tbody tr').each(function(){
+					ressourceDefined($(this).attr('class'), $(this).find('.titleExt').val(), $(this).find('.descExt').val(), $(this).data('url'), $(this).data('urlthumbnail'), $(this).data('type'), "no")
+				})
+			}
+			refreshRessourceCarousel($('#dropFileExtModal #dropFileExtModalBody tbody tr:last-child').data('type'), $("#mesRessources"));
+			$('#uploadNewRes').val('');
+		})
+
+	//###########################################
+	//#### [FIN] Upload d'un fichier externe ####
+	//###########################################

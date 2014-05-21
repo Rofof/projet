@@ -6,7 +6,8 @@ var resType = {
 	'fiche' : 3,
 	'image' : 4,
 	'audio' : 5,
-	'video' : 6
+	'video' : 6,
+	'youtube' : 7
 }
 
 var UrlThumbnailType = {
