@@ -1,0 +1,89 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mon casier_paul</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+	-->
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
+
+	<link href="./css/global.css" rel="stylesheet">
+	<link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./css/carousel.css" rel="stylesheet">
+    <link href="./css/right_bar.css" rel="stylesheet"/>
+    <link href="./css/eleve.css" rel="stylesheet"/>
+    <link href="./css/theme_classe.css" rel="stylesheet"/>
+	
+    <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/>
+  </head>
+  <body style="padding-top: 70px; overflow: hidden;">
+      <div id="test1" >hello
+      </div>
+      <script src="./lib/ejs_production.js"></script>
+      <script src="./lib/jquery.js"></script>
+
+
+      <script type="text/javascript"> 
+  
+var cfgWs = {
+			prefix : 'http://mookitek.fr:8111'   	
+	    };
+
+		var ip = "37.187.46.97";
+		var pseudo = "Johnny";
+		var workDone = null;
+
+		var activated = "1";
+		var pseudoProf = "rodolphe";
+                var displaySequences="test1";
+               
+var test2 = function(pseudoEleve, pseudoProf){
+	      
+                var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		xhrFields: {
+            		withCredentials : true
+          		},	            
+	            success: function() {
+	              
+	              	
+					$('#test1').html("pas de problème de get");
+					
+
+	           	},
+	            error: function() { 
+                        $('#test1').html("ca n'a pas marché "+myUrl_Get);
+                    }
+	          })}; /* end of ajax call */
+
+$(document).ready(function(){  
+    /*document.write("document.write marche");*/
+  //  changeinfotest();
+    test2(pseudo, pseudoProf);
+  });
+      </script>
+
+
+
+    	<script src="./lib/bootstrap.js"></script>
+	<script src="./lib/holder.js"></script>
+	<script src="./js/correction/correction.js"></script>
+	
+	<script src="./js/ressources/definitions.js"></script>
+	<script src="./js/ressources/ressources.js"></script>
+	<script src="./js/dragndrop/dragndrop.js"></script>
+	<script src="./js/users/users.js"></script>
+  </body>
+</html>
