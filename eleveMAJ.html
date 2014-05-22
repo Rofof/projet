@@ -75,57 +75,6 @@
 
   </div>
 
-<!--fin modale de selection de classe-->
-
-<!--modalLogin-->
-
-
-<div id="modalLogin"class="modal hide fade">
-
-      <div class="modal-header">    
-          <h3>Connectez-vous :</h3>
-      </div>
-  
-  <div class="modal-body">
-    
-<div id="SelectClasse" class="modal-body">
-              
-                <form class="form-horizontal">
-                        <div class="control-group">
-                          <label class="control-label" for="pseudo">Votre pseudo : </label>
-                          <div class="controls">
-                            <input type="text" id="pseudo2" placeholder="Pseudo">
-                          </div>
-                        </div>
-                        <div class="control-group">
-                          <label class="control-label" for="pwd2">Votre mot de passe : </label>
-                          <div class="controls">
-                            <input type="password" id="pwd2" placeholder="Mot de passe">
-                          </div>
-                        </div>  
-                </form>
-</div>
-
-  </div>
-  <div class="modal-footer">
-
-    <div class="control-group">
-
-                    <div class="controls">     
-
-                      <button id="connectModalUser" type="submit" class="btn btn-large btn-primary">Valider</button>
-
-                    </div>
-
-                  </div>
-      </div>
-</div>
-
-<!--fin modalLogin-->
-
-
-
-  
 
 
     <div class="navbar-wrapper">
@@ -306,261 +255,7 @@ var cacherLoginPopup = function(){
 }
  
 
-//choix du systeme   
 
-
-
-
-     if($('#logo').css('background-image')=="none"){
-        $('.home').html('<i class="icon-home icon-white"></i>');
-      }else{
-        $('.home').html('Accueil');
-      }
-
-//fonction de deconnection
-
-var disconnect = function() {
-
-        var ip = "37.187.46.97";
-        var myUrl_Post = cfgWs.prefix+"/platoatic/logout";
-
-        console.log(">> createNewSequence");
-
-        var message = {
-         /*"resType": "1", 
-           "resTitle": "",
-           "resDesc": "",
-           "resUrl": "",
-           "resUrlThumbnail": ""*/
-        }; 
-
-        $.ajax({
-          url: myUrl_Post,
-          type: "POST",
-          dataType: "json",
-          data: message,
-          cache: false,
-          timeout: 5000,
-                    //crossDomain: true,
-          xhrFields: {
-            withCredentials : true
-          },
-
-          success: function(data) {
-            console.log("disconnect success");
-            window.location.href = "./signout.php";
-          },
-
-          error: function() {
-            console.log('signout POST process error');
-            window.location.href = "./signout.php";
-          }
-        });
-
-      } // end of disconnect
-
-
-//fonction d'authentification
-
-var authentification = function (){
-
-
-    var enterUserEnvironment = function(next, params) {
-
-            if(next=="null") {
-              window.location.href = "./signin.php?"+params;
-            } else {
-              window.location.href = "./signin.php?"+params+"&next="+next;
-            }
-        }; 
-
-        var cfgWs = {
-          prefix : 'http://mookitek.fr:8111'
-        }
-
-
-        var ip = "37.187.46.97";
-
-         
-
-              //var pseudo = $("input[id=pseudo]").val();
-				var pseudo = "Johnny";
-              //var pwd = $("input[id=pwd]").val();
-			  var pwd = "johnny"
-
-
-                 
-             
-        var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
-
-       
-        var message = {
-          username : pseudo,
-          password : pwd
-        }; 
-
-         $.ajax({
-         
-          url: myUrl_Post,
-          type: "POST",
-          dataType: "json",
-          data: message, //{objectData: message},
-          //contentType: "application/json",
-          cache: false,
-          timeout: 5000,
-          //crossDomain: true,
-          xhrFields: {
-            withCredentials : true
-          },
-          success: function(data) {
-
-            var params = null;
-            console.log(data.found);
-
-        
-            if (data.found == true) {
-
-              console.log("Bienvenue à <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
-              params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
-              
-              if (data.ids.type == 2) {
-                
-                console.log("Vous êtes enseignant.");
-                params += "&enseignant=true";
-                params += "&profil=" + data.ids.profileId;
-                next = "enseignant.html";
-
-                if (data.infoClasse.length == 1) {
-                  
-                  params += "&noClasse="+data.infoClasse[0].noClasse;
-                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
-                  params += "&activated="+data.infoClasse[0].activated;
-
-
-                enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
-                  
-                  cacherLoginPopup();
-
-                  $("#modalSelectClasse").modal();
-
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
-
-                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
-                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
-                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
-
-
-                    enterUserEnvironment(next, params);
-
-                    $("#modalSelectClasse").hide();
-                  });
-                  
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
-
-              } else if (data.ids.type == 1) {
-                params += "&enseignant=false";
-                next = "eleves.html";
-
-                console.log("--------------------------------------------");
-                console.log(data.infoClasse);
-
-                if (data.infoClasse.length == 1) {
-
-                  params += "&noClasse="+data.infoClasse[0].noResp;
-                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+data.infoClasse[0].identifiant;
-                  params += "&activated="+data.infoClasse[0].activated;
-
-                  
-                  enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
-                  
-                  cacherLoginPopup();
-                  $("#modalSelectClasse").modal();
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
-
-                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noResp;
-                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+data.infoClasse[$('#classList').val()].identifiant;
-                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
-
-                   
-                    enterUserEnvironment(next, params);
-
-                    $("#modalSelectClasse").hide();
-                  });
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
-
-              } else {
-                params += "&enseignant=false";
-              }
-              
-            } else {
-
-              console.log("Vous n'êtes pas enregistrés.");
-              window.location.href = "./signin.php";
-            }
-
-           
-
-          }, 
-
-          error: function() {
-
-              console.log('PUT process error during sign-in');
-              window.location = "./signin.php";
-          }
-
-       });
-
-}//fin fonction authentification
-
-var updateSessionUserInfo = function(nom, prenom) {
-
-  var params = "&nom=" + nom + "&prenom=" + prenom;
-  params += "&enseignant="+((typeUser == '2')?"true":"false");
-  params += "&pseudo=Johnny";
-  params += "&profil=";
-  params += "&noClasse=141";
-  params += "&libelleClasse=projet S4_3";
-  params += "&activated=1";
-  params += "&pseudoProf=rodolphe";
-
-  var url=document.URL.split('/')[document.URL.split('/').length-1];
-  params += "&next="+url;
-  window.location.href = "./signin.php?"+params;
-
-} // end of updateSessionUserInfo
-
-
-      //fix bug for ipad collapse
-      var isiPad = navigator.userAgent.match(/iPad/i);
-      if(isiPad){
-        var ipadCss = document.createElement('link');
-        ipadCss.type = "text/css";
-        ipadCss.rel = "stylesheet";
-        ipadCss.href = "/css/ipad.css";
-        document.head.appendChild(ipadCss);
-      }
 
 
 
@@ -929,7 +624,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 		
   <!-- Modal de visualisation d'exercice -->
-  	<!--div id="exoModal" class="modal hide fade">
+  	div id="exoModal" class="modal hide fade">
     	<div class="modal-header">
           <a class="close" data-dismiss='modal'>&times;</a>
       		<h3>Exo Modal</h3>
@@ -945,7 +640,7 @@ var updateSessionUserInfo = function(nom, prenom) {
     	</div>
   	</div>
 
-	<!-- <div id="correctionModal" class="modal hide fade">
+	<div id="correctionModal" class="modal hide fade">
   		<div class="modal-header">
     		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     		<h3>Le travail déjà fait</h3>
@@ -957,11 +652,11 @@ var updateSessionUserInfo = function(nom, prenom) {
 		<div class="modal-footer">
     		<a class="btn" data-dismiss='modal'>Close</a>
   		</div>
-	</div> -->
+	</div>
 	
 			
 
-    <!--<script src="./lib/jquery.js"></script>-->
+   <script src="./lib/jquery.js"></script>
     <script src="./lib/ejs_production.js"></script>
 
 	<script>
@@ -1026,10 +721,10 @@ var updateSessionUserInfo = function(nom, prenom) {
 					});
 
 	           	},
-	            error: function() { 
-	              console.log('afficheAssignedSequence : GET process error ');
-	              window.location.href = "./index.html";
-	            }
+	           // error: function() { 
+	           //    console.log('afficheAssignedSequence : GET process error ');
+	           //    window.location.href = "./index.html";
+	           //  } 
 	          }); /* end of ajax call */
 
 		}; // end of afficheAssignedSequence
