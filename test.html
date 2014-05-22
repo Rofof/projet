@@ -33,7 +33,7 @@
   </head>
   <body>
 
-      <div id='tamere'>Monisueur Moreau </div>
+      <div id='message'>Monisueur Moreau </div>
 
       <script src="./lib/jquery.js"></script>
 
@@ -103,7 +103,7 @@
               error: function() { 
              /*   console.log('afficheAssignedSequence : GET process error ');
                 window.location.href = "./index.html";*/
-                displaySequences.html("reve pas ca ne marche pas");
+                displaySequences.html("ca ne marche pas");
               }
             }); /* end of ajax call */
 
@@ -205,9 +205,8 @@
       $(document).ready(function(){
         
         //initializePopOverUser();
-        var pseudo = "Johnny";
-        var pseudoProf = "rodolphe";
-        afficheAssignedSequenceEleve(pseudo,pseudoProf,$('#tamere'));
+
+        afficheAssignedSequenceEleve(pseudo,pseudoProf,$('#message'));
 
         //afficheInfoEleve();
         //refreshHeight();  
