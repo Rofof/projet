@@ -20,21 +20,16 @@
     <link href="./css/eleve.css" rel="stylesheet"/>
     <link href="./css/theme_classe.css" rel="stylesheet"/>
 	
-	<link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/>
+    <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/>
   </head>
   <body style="padding-top: 70px; overflow: hidden;">
       <div id="test1" >hello
       </div>
-            <script src="./lib/ejs_production.js"></script>
-<script src="./lib/jquery.js"></script>
+      <script src="./lib/ejs_production.js"></script>
+      <script src="./lib/jquery.js"></script>
 
 
-    <script type="text/javascript"> 
-  //var changeinfotest =function(){
-    /*  $("#test1").html("bou");*/
-    /*document.write("ca marche");*/
-//    $("#test1").html("Hello <b>world!</b>");
-//}
+      <script type="text/javascript"> 
   
 var cfgWs = {
 			prefix : 'http://mookitek.fr:8111'   	
@@ -48,10 +43,8 @@ var cfgWs = {
 		var pseudoProf = "rodolphe";
                 var displaySequences="test1";
                
-    /*$('#test1').html("problème de get3");*/
- 
 var test2 = function(pseudoEleve, pseudoProf){
-	       /* var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;*/
+	      
                 var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
 
 	        $.ajax({
@@ -66,14 +59,12 @@ var test2 = function(pseudoEleve, pseudoProf){
 	            success: function() {
 	              
 	              	
-					$('#test1').html("pas de problème de get2");
+					$('#test1').html("pas de problème de get");
 					
 
 	           	},
 	            error: function() { 
                         $('#test1').html("ca n'a pas marché "+myUrl_Get);
-	              console.log('afficheAssignedSequence : GET process error ');
-	             /* window.location.href = "./eleve_paul.html";*/
                     }
 	          })}; /* end of ajax call */
 
