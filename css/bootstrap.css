@@ -6165,3 +6165,11 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+  
+.container_eleve{
+  display: inline-block;
+  vertical-align: top; 
+  max-width: 45%;
+  min-width: 40%;
+  overflow: scroll;
+}

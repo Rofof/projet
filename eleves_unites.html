@@ -582,58 +582,162 @@ var updateSessionUserInfo = function(nom, prenom) {
 			      <div class="accordion-inner">
 			      	<div class="accordion-group"> -->
                         <div class="container_eleve">
-			      		<div class="eleve_seq">
+                            <div class="eleve_seq">
 
-				      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionExercice">
-				  				<div class="accordion-group">
+                                <!--		tenter d'enlever accordion classe		      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionExercice">-->
+                                <div class=" accordion item_ens NavDetailMenuInterne" id="accordionExercice">
 
-								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
-										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Travail � faire</a>
-										</div>
-									</div>
+                                    <!--                                                    <div class="accordion-group">-->
+                                    <div >
 
-								    <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne">
-								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-								      	<div id="mesExercices">
-								      		<!-- interieur du collapse �l�ves -->
-								        	<div class="load">
-						        				<img src="./img/gif-load.GIF" />
-						        			</div>
-								      	</div>
-								      </div>
-								    </div>
+                                        <!--<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">-->
+                                        <div class="navbar accordion-heading accordion-toggle" >
+                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+                                                <a class="brand">Nom d'unité (a changer)</a>
 
-								</div>
-							</div>
+                                            </div>
+                                        </div>
 
-						</div>
-						<div class="eleve_cor">
+                                        <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne">
+                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+                                                <div id="mesExercices">
+                                                    <!-- interieur du collapse �l�ves -->
+                                                    <div class="accordion" id="accordion_1">
+                                                        <div class="accordion-group">
+                                                            <div class="accordion-heading">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_1">
+                                                                    <ul class="inline">
+                                                                        <li class="img_sequence">
+                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        </li>
+                                                                        <li class="info_sequence">
+                                                                            <div class="titre">Test1</div>
+                                                                            <div class="desc">test d'unité_1</div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapse_1" class="accordion-body collapse">
+                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
+                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
+                                                                    <div class="arrow"></div>
+                                                                    <div id="seqDetailCarousel_1" class="carousel-inner eleve_sequence_content" data-resid="1" >
+                                                                    </div>
+                                                                </div>
+                                                                <!-- </div> -->	
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion" id="accordion_2">
+                                                        <div class="accordion-group">
+                                                            <div class="accordion-heading">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_2">
+                                                                    <ul class="inline">
+                                                                        <li class="img_sequence">
+                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        </li>
+                                                                        <li class="info_sequence">
+                                                                            <div class="titre">Test2</div>
+                                                                            <div class="desc">test d'unité_2</div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapse_2" class="accordion-body collapse">
+                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
+                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
+                                                                    <div class="arrow"></div>
+                                                                    <div id="seqDetailCarousel_2" class="carousel-inner eleve_sequence_content" data-resid="2" >
+                                                                    </div>
+                                                                </div>
+                                                                <!-- </div> -->	
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-				      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionCorrections">
-				  				<div class="accordion-group">
+                                                   <div class="accordion" id="accordion_3">
+                                                        <div class="accordion-group">
+                                                            <div class="accordion-heading">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
+                                                                    <ul class="inline">
+                                                                        <li class="img_sequence">
+                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        </li>
+                                                                        <li class="info_sequence">
+                                                                            <div class="titre">Test3</div>
+                                                                            <div class="desc">test d'unité_3</div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapse_3" class="accordion-body collapse">
+                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
+                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
+                                                                    <div class="arrow"></div>
+                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
+                                                                    </div>
+                                                                </div>
+                                                                 </div> 	
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
-										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Travail effectu�</a>
-										</div>
-									</div>
+                                    </div>
+                                </div>
 
-								    <div id="collapseCorrections" class="accordion-body collapse NavMenuInterne">
-								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-								      	<div id="mesCorrections">
-								      		<!-- interieur du collapse �l�ves -->
-								        	<div class="load">
-						        				<img src="./img/gif-load.GIF" />
-						        			</div>
-								      	</div>
-								      </div>
-								    </div>
+                            </div>
+                            <div class="eleve_cor">
 
-								</div>
-							</div>
+                                <div class="accordion item_ens NavDetailMenuInterne" id="accordionCorrections">
+                                    <div class="accordion-group">
 
-						</div>
+                                        <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
+                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+                                                <a class="brand">Test de l'unité</a>
+                                            </div>
+                                        </div>
+
+                                        <div id="collapseCorrections" class="accordion-body collapse in NavMenuInterne">
+                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+                                                <div id="mesCorrections">
+                                                    <!-- interieur du collapse �l�ves -->
+                                                                                                       <div class="accordion" id="accordion_3">
+                                                        <div class="accordion-group">
+                                                            <div class="accordion-heading">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
+                                                                    <ul class="inline">
+                                                                        <li class="img_sequence">
+                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        </li>
+                                                                        <li class="info_sequence">
+                                                                            <div class="titre">Test3</div>
+                                                                            <div class="desc">test d'unité_3</div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapse_3" class="accordion-body collapse">
+                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
+                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
+                                                                    <div class="arrow"></div>
+                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
+                                                                    </div>
+                                                                </div>
+                                                                 </div> 	
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                         <div class="container_eleve">
                             <div class="eleve_comp">
@@ -1008,25 +1112,28 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 		var activated = "1";
 		var pseudoProf = "rodolphe";
-
-		var afficheInfoEleve = function () {
+                var numSeq = "4725";
+		
+                var afficheInfoEleve = function () {
 
 			if (activated == '1') {
 
-				afficheAssignedSequenceEleve(pseudo, pseudoProf, $('#mesExercices'));
+				afficheSequenceRessources(pseudo, numSeq, $('#mesExercices'), $('#mesCorrections'));
 				
 			}
 			else {
 				$('#mesExercices').html("Votre classe n'est pas activ�e.");
+                                $('#mesCorrections').html("Votre classe n'est pas activ�e.");
+
 			}
-	        displayCorrectionModal();
+	       // plus besoin dans l'unité displayCorrectionModal();
 
 		}; // end of afficheInfoEleve
 
 
-		var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences) {
+		/*var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences, displayTest) {
 
-	        var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
+	        var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
 
 	        $.ajax({
 	            url: myUrl_Get,
@@ -1044,27 +1151,25 @@ var updateSessionUserInfo = function(nom, prenom) {
 			    		"mode" : "eleve_detail"
 			    	}
 
-	              	var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
+	              	var result = new EJS({url: 'template_eleve_unité_ressources.ejs'}).render(input);
+                        var result2 = new EJS({url: 'template_eleve_unité_test.ejs'}).render(input);
 
 	              	// var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
 
 					displaySequences.html(result);
-
-					$('.eleve_sequence_content').each(function() {
-						afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
-					});
+                                        displayTest.html(result2);
 
 	           	},
 	            error: function() { 
 	              console.log('afficheAssignedSequence : GET process error ');
 	             /* window.location.href = "./index.html";*/
-	            }
+	           /* }
 	          }); /* end of ajax call */
 
-		}; // end of afficheAssignedSequence
+		/*};*/ // end of afficheAssignedSequence
 
 
-		var afficheSequenceRessources = function (pseudoEleve, noSeq, seqDetailDisplay) {
+		var afficheSequenceRessources = function (pseudoEleve, noSeq, displayUnit, seqDetailDisplay) {
 
 			var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
 
@@ -1081,16 +1186,21 @@ var updateSessionUserInfo = function(nom, prenom) {
           		},	            
 	            success: function(data) {
 
-	            	var input = {
+	            	var input1 = {
 			    		"data" : data,
-			    		"mode" : "eleve_detail"
+			    		"mode" : ""
+			    	}
+                                var input2 = {
+			    		"data" : data,
+			    		"mode" : "test"
 			    	}
 
-	              	var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
-
+	              	var result1 = new EJS({url: 'template_eleve_unité_test.ejs'}).render(input1);
+                        var result2 = new EJS({url: 'template_eleve_unité_test.ejs'}).render(input2);
 	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
-	              	
-					seqDetailDisplay.html(result);
+                                            
+                                        displayUnit.html(result1);
+					seqDetailDisplay.html(result2);
 
 	           	},
 	            error: function() {
@@ -1100,7 +1210,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 	            }
 	        }); /* end of ajax call */
 
-		}; // end of afficheSequenceRessources
+		};*/ // end of afficheSequenceRessources
 
 		var displayCorrectionModal = function() {
 
@@ -1113,7 +1223,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 		} // end of displayCorrectionModal
 
-		/*var refreshHeight = function () {
+		var refreshHeight = function () {
 			var h = window.innerHeight - 70;
 			$('body').css('height', h + 'px');
 		}
@@ -1136,7 +1246,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 			$('#collapseCorrections').css('max-height', h2 + 'px');
 		}
-*/
+
 		$('#collapseCorrections').on('shown', function () {
 		  	refreshHeightCor();
 		})
