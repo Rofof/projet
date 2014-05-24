@@ -31,604 +31,192 @@
 	
 	
   </head>
-  <body><script type='text/javascript' language='javascript' src='/B1D671CF-E532-4481-99AA-19F420D90332/netdefender/hui/ndhui.js?0=0&amp;0=0&amp;0=0'></script>
+  <body>
 
-	<div class="container" style="padding-top:60px;">
+      <div id='message'>Monisueur Moreau </div>
 
-  		    <!-- NAVBAR
-    ================================================== -->
-                    <div class="navbar-wrapper">
-                        <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
-                        <div class="container">
+      <script src="./lib/jquery.js"></script>
 
-                            <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
-                                <div class="navbar-inner">
-                                    <div class="container">
-                                        <button type="button" class="btn btn-navbar" data-toggle="collapse" href=".nav-collapse">
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button>
-                                        <div class="nav-collapse collapse">
-                                            <ul class="nav">
-                                                <li ><a href="./index.html"><i class="icon-home icon-white"></i></a></li>
-
-                                                <li class="active" ><a href="./eleves.html">Mon espace</a></li>
-                                                <li class="active" ><a href="./eleves_resultat.html">Mes résultats</a></li>
-                                                <li class="active" ><a href="./eleves_forum.html"><i class="icon-envelope icon-white"></i></a></li>
-                                            </ul>
-                                            <form class="navbar-form pull-right" method='post'>
-                                                <ul class="nav">
-
-                                                    <li class="disabled active"><a>A A (élève)</a></li>
-                                                    <li class="active"><a id="logoff_button" onClick="disconnect();"><i class="icon-off icon-white"></i></a></li>
-                                                </ul>
-
-                                            </form>
-                                        </div><!--/.nav-collapse -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- /.container -->
-                    </div><!-- /.navbar-wrapper -->
-
-
-    <script src="./lib/jquery.js"></script>
     <script>
 
-      var disconnect = function() {
+/*    $(".UserWorkSpace").addClass('active');
+    $(".UserWorkSpace").children().addClass('actif');*/
 
-        var ip = "37.187.46.97";
-        var myUrl_Post = cfgWs.prefix+"/platoatic/logout";
+      var cfgWs = {
+      prefix : 'http://mookitek.fr:8111'    
+      }
 
-        console.log(">> createNewSequence");
+    var ip = "37.187.46.97";
+    var pseudo = "Johnny";
+    var workDone = null;
 
-        var message = {
-         /*"resType": "1", 
-           "resTitle": "",
-           "resDesc": "",
-           "resUrl": "",
-           "resUrlThumbnail": ""*/
-        }; 
+    var activated = "1";
+    var pseudoProf = "rodolphe";
 
-        $.ajax({
-          url: myUrl_Post,
-          type: "POST",
-          dataType: "json",
-          data: message,
-          cache: false,
-          timeout: 5000,
-                    //crossDomain: true,
-          xhrFields: {
-            withCredentials : true
-          },
+    /*var afficheInfoEleve = function () {
 
-          success: function(data) {
-            console.log("disconnect success");
-            window.location.href = "./signout.php";
-          },
+      if (activated == '1') {
 
-          error: function() {
-            console.log('signout POST process error');
-            window.location.href = "./signout.php";
-          }
-        });
-
-      } // end of disconnect
-
-      //Click sur le bouton log
-      $("#connectUser").click(function(){
-
-        var enterUserEnvironment = function(next, params) {
-            if(next=="null") {
-              window.location.href = "./signin.php?"+params;
-            } else {
-              window.location.href = "./signin.php?"+params+"&next="+next;
-            }
-        }; 
-
-        var cfgWs = {
-          prefix : 'http://mookitek.fr:8111'
-        }
-
-        var ip = "37.187.46.97";
-       // var pseudo = $('input[id=pseudo]').val();
-        var pseudo='Johnny';
-        //var pwd = $('input[id=pwd]').val();
-        var pwd='johnny';
-        var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
-
-        var message = {
-          username : pseudo,
-          password : pwd
-        }; 
-
-        $.ajax({
-          url: myUrl_Post,
-          type: "POST",
-          dataType: "json",
-          data: message, //{objectData: message},
-          //contentType: "application/json",
-          cache: false,
-          timeout: 5000,
-          //crossDomain: true,
-          xhrFields: {
-            withCredentials : true
-          },
-          success: function(data) {
-
-            var params = null;
-            console.log(data.found);
-
-            if (data.found == true) {
-
-              console.log("Bienvenue à <strong>" + data.ids.out_prenom + " " + data.ids.out_nom + "</strong>.");
-              params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
-              
-              if (data.ids.type == 2) {
-                console.log("Vous êtes enseignant.");
-                params += "&enseignant=true";
-                next = "enseignant.html";
-
-                if (data.infoClasse.length == 1) {
-
-                  sessionStorage.noClasse = data.infoClasse[0].noClasse;
-                  sessionStorage.libelleClasse = data.infoClasse[0].libelleClasse;                
-                  sessionStorage.activated = data.infoClasse[0].activated;
-
-                  enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
-                  
-                  $('#modalSelectClasse').modal();
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
-
-
-                    sessionStorage.noClasse = data.infoClasse[$('#classList').val()].noClasse;
-                    sessionStorage.libelleClasse = data.infoClasse[$('#classList').val()].libelleClasse;                
-                    sessionStorage.activated = data.infoClasse[$('#classList').val()].activated;
-
-                    enterUserEnvironment(next, params);
-
-                    $('#modalSelectClasse').modal('hide');
-                  });
-                  
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
-
-              } else if (data.ids.type == 1) {
-                params += "&enseignant=false";
-                next = "eleves.html";
-
-                if (data.infoClasse.length == 1) {
-                  sessionStorage.noClasse = data.infoClasse[0].noClasse;
-                  sessionStorage.libelleClasse = data.infoClasse[0].libelleClasse;
-                  sessionStorage.pseudoProf = data.infoClasse[0].identifiant;
-                  sessionStorage.activated = data.infoClasse[0].activated;
-
-                  enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
-                  
-                  $('#modalSelectClasse').modal();
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
-
-                    sessionStorage.noClasse = data.infoClasse[$('#classList').val()].noClasse;
-                    sessionStorage.libelleClasse = data.infoClasse[$('#classList').val()].libelleClasse;
-                    sessionStorage.pseudoProf = data.infoClasse[$('#classList').val()].identifiant;
-                    sessionStorage.activated = data.infoClasse[$('#classList').val()].activated;
-
-                    enterUserEnvironment(next, params);
-
-                    $('#modalSelectClasse').modal('hide');
-                  });
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
-
-              } else {
-                params += "&enseignant=false";
-              }
-              
-            } else {
-
-              console.log("Vous n'êtes pas enregistrés.");
-              //console.log(params);
-              window.location.href = "./signin.php";
-            }
-
-          }, error: function() {
-              console.log('PUT process error during sign-in');
-              window.location = "./signin.php";
-          },
-
-        });
-
-        return false;
+        afficheAssignedSequenceEleve(pseudo, pseudoProf, $('#mesExercices'));
         
-      });//End click btn login
-
-    </script>
-
-	    <div class="eleve">
-	    	
-		  	<!-- <div class="row-fluid"> -->
-		  		<div class="accordion item_ens" id="accordionEleve">
-				  <div class="accordion-group">
-
-				  	<div class="navbar accordion-heading accordion-toggle">
-						<div class="navbar-inner">
-							<a class="brand">Ma classe</a>
-						</div>
-					</div>
-
-				    <div id="collapseWork" class="accordion-body collapse in">
-				      <!--  -->
-				      <div class="accordion-inner">
-				      	<div class="accordion-group">
-
-				      		<div class="accordion item_ens" id="accordionExercice">
-				  				<div class="accordion-group">
-
-								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
-										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Travail à faire</a>
-										</div>
-									</div>
-
-								    <div id="collapseExercices" class="accordion-body collapse in">
-								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-								      	<div id="mesExercices">
-								      		<!-- interieur du collapse élèves -->
-                                                                                <div class="accordion-heading">
-
-                                                                                    <a class="accordion-toggle acc_sequence thumbnail collapsed" href="#collapse_4169" data-parent="#accordion_4169" data-toggle="collapse" style="background: white;">
-                                                                                        <ul class="inline">
-                                                                                            <li class="img_sequence">
-                                                                                                <img border="0" alt="blank image" src="./img/wordcloud_sequence.jpg"></img>
-                                                                                            </li>
-                                                                                            <li class="info_sequence">
-                                                                                                <div class="titre">
-
-                                                                                                    Test1
-
-                                                                                                </div>
-                                                                                                <div class="desc">
-
-                                                                                                    Test linh tinh
-
-                                                                                                </div>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </a>
-
-                                                                                </div>
-                                                                        </div>
-								      </div>
-								    </div>
-
-								</div>
-							</div>
-						<!-- </div>
-				      </div>
-				      <div class="accordion-inner">
-				      	<div class="accordion-group"> -->
-				      		<div class="accordion item_ens" id="accordionCorrections">
-				  				<div class="accordion-group">
-
-								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
-										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Corrections</a>
-										</div>
-									</div>
-
-								    <div id="collapseCorrections" class="accordion-body collapse">
-								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-								      	<div id="mesCorrections">
-								      		<!-- interieur du collapse élèves -->
-								        	<div class="load">
-						        				<img src="./img/gif-load.GIF" />
-						        			</
-								      	</div>
-								      </div>
-								    </div>
-
-								</div>
-							</div>
-						</div>
-				      </div>
-				      <!--  -->
-				    </div>
-				  </div>
-				</div>
-                                    		</div>
-                                                            		</div>	
-
-                        <div class="accordion item_ens" id="accordionGraphe">
-                            <div class="accordion-group">
-
-                                <div class="navbar accordion-heading accordion-toggle">
-                                    <div class="navbar-inner">
-                                        <a class="brand">Graphe Compétence</a>
-                                    </div>
-                                </div>
-
-                                <div id="collapseGraphe" class="accordion-body collapse in">
-                                    <!--  -->
-                                    <div class="accordion-inner">
-                                        <div class="accordion-group">
-
-                                            <div class="accordion item_ens" id="accordionExercice2">
-                                                <div class="accordion-group">
-
-                                                    <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
-                                                        <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                            <a class="brand">Diagramme radar</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="collapsecgraphe" class="accordion-body collapse in">
-                                                       <div class="accordion-inner" style="border-top: inherit;padding: 4px;margin: 4px; background-color: white">
-                                                            <div id="monGraphe">
-                                                                <!-- interieur du collapse élèves  -->
-                                                                    <img src="./img/radar.jpg" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <!-- </div>
-                                  </div>
-                                  <div class="accordion-inner">
-                                    <div class="accordion-group"> -->
-                                           <!-- <div class="accordion item_ens" id="accordionCorrections">
-                                                <div class="accordion-group">
-
-                                                    <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
-                                                        <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                            <a class="brand">Corrections</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="collapseCorrections" class="accordion-body collapse">
-                                                        <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                                                            <div id="mesCorrections">
-                                                                <!-- interieur du collapse élèves -->
-                                                               <!-- <div class="load">
-                                                                    <img src="./img/gif-load.GIF" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>-->
-                                        </div>
-                                    </div>
-                                    <!--  -->
-                                </div>
-                            </div>
-                        </div>
-			<!-- </div> -->
-		</div>	
-	
-	</div>
-
-  <!-- Modal de visualisation d'exercice -->
-  	<div id="exoModal" class="modal hide fade">
-    	<div class="modal-header">
-          <a class="close" data-dismiss='modal'>&times;</a>
-      		<h3>Exo Modal</h3>
-    	</div>
-    		<div class="modal-body sizer">
-      		<iframe id="svgIframe" width="480px" height="380px"></iframe>
-    		</div>
-  		<div class="modal-footer">
-  	    	<a id="fullscreenExo" class="btn">
-  	    		<i class="icon-resize-full"></i>
-  	    	</a>
-      		<a class="btn" data-dismiss='modal'>Fermer</a>
-    	</div>
-  	</div>
-
-	<!-- <div id="correctionModal" class="modal hide fade">
-  		<div class="modal-header">
-    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    		<h3>Le travail déjà fait</h3>
-  		</div>
-  		<div  class="modal-body sizer">
-  			<table id="body_correctionModal" class="table table-striped">
-  			</table>
-  		</div>
-		<div class="modal-footer">
-    		<a class="btn" data-dismiss='modal'>Close</a>
-  		</div>
-	</div> -->
-	
-	
-    <style type="text/css">
-
-      /* Sticky footer styles
-      -------------------------------------------------- */
-
-      html, body {
-        height: 100%;
       }
-
-      body > .container {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
+      else {
+        $('#mesExercices').html("Votre classe n'est pas activée.");
       }
-
-      #footer {
-      	margin-top: 60px;
-        height: 60px;
-      }
-
-    </style>
-
-   <!-- FOOTER -->
-	<div id="footer" class="navbar-inverse navbar-bottom">
-	  <div class="navbar-inner" style="-webkit-border-radius: inherit; -moz-border-radius: inherit; border-radius: inherit; height: 60px;">
-	    <div class="container" style="padding-top: 10px;">
-	       <p class="pull-left">
-	        	&copy; 2013 OATIC. &middot; 
-	        	<a href="Privacy">Privacy</a> 
-	        	&middot; 
-	        	<a href="Terms">Terms</a>
-	    	</p>
-	    	<p class="pull-right">
-				<a href="#"><i title="Aller en haut" class="icon-arrow-up icon-white"></i></a>
-			</p>
-	    </div>
-	  </div>
-	</div>
-
-	</div> <!-- /container -->
-		
-
-    <script src="./lib/jquery.js"></script>
-    <script src="./lib/ejs_production.js"></script>
-
-	<script>
-
-	    var cfgWs = {
-			prefix : 'http://mookitek.fr:8111'   	
-	    }
-
-		var ip = "37.187.46.97";
-		var pseudo = "A";
-		var workDone = null;
+          displayCorrectionModal();
 
 
-
-		var afficheInfoEleve = function () {
-
-			if (sessionStorage.activated == '1') {
-				afficheAssignedSequence(pseudo, sessionStorage.pseudoProf, $('#mesExercices'));
-			}
-			else {
-				$('#mesExercices').html("Votre classe n'est pas activée.");
-			}
-	        displayCorrectionModal();
-
-		}; // end of afficheInfoEleve
+    }; // end of afficheInfoEleve*/
 
 
-		var afficheAssignedSequence = function(pseudoEleve, pseudoProf, displaySequences) {
+    var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences) {
 
-	        var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
+          var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
 
-	        $.ajax({
-	            url: myUrl_Get,
-	            type: "GET",
-	            dataType: "json",
-	            //contentType: "application/json",
-	            //crossDomain: true,
-          		xhrFields: {
-            		withCredentials : true
-          		},	            
-	            success: function(data) {
-	              
-	              	var input = {
-			    		"data" : data
-			    	}
+          $.ajax({
+              url: myUrl_Get,
+              type: "GET",
+              dataType: "json",
+              //contentType: "application/json",
+              //crossDomain: true,
+ /*             xhrFields: {
+                withCredentials : true
+              },  */            
+              success: function(data) {
+                
+                  /*var input = {
+              "data" : data,
+              "mode" : "eleve_detail"
+            }
 
-	              	var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
+                  var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
 
-	              	// var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
+                  // var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);*/
 
-					displaySequences.html(result);
+          displaySequences.html("ca marche");
 
-					$('.eleve_sequence_content').each(function() {
-						afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
-					});
+/*          $('.eleve_sequence_content').each(function() {
+            afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
+          });*/
 
-	           	},
-	            error: function() { 
-	              console.log('afficheAssignedSequence : GET process error ');
-	              window.location.href = "./index.html";
-	            }
-	          }); /* end of ajax call */
+              },
+              error: function() { 
+             /*   console.log('afficheAssignedSequence : GET process error ');
+                window.location.href = "./index.html";*/
+                displaySequences.html("ca ne marche pas");
+              }
+            }); /* end of ajax call */
 
-		}; // end of afficheAssignedSequence
-
-
-		var afficheSequenceRessources = function (pseudoEleve, noSeq, seqDetailDisplay) {
-
-			var myUrl_Get = cfgWs.prefix+"/platoatic/ressources/"+pseudoEleve+"/"+noSeq;
-
-			console.log("afficheSequenceRessources : " + myUrl_Get);
-
-	        $.ajax({
-	            url: myUrl_Get,
-	            type: "GET",
-	            dataType: "json",
-	            //contentType: "application/json",
-	            //crossDomain: true,
-          		xhrFields: {
-            		withCredentials : true
-          		},	            
-	            success: function(data) {
-
-	            	var input = {
-			    		"data" : data,
-			    		"mode" : "eleve_detail",
-			    		"display" : seqDetailDisplay
-			    	}
-
-	              	var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
-
-	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
-	              	
-					seqDetailDisplay.html(result);
-
-	           	},
-	            error: function() {
-	              console.log('afficheSequenceRessources : GET process error ');
-	              window.location.href = "./index.html";
-	            }
-	        }); /* end of ajax call */
-
-		}; // end of afficheSequenceRessources
-
-		var displayCorrectionModal = function() {
-
-	        retrieveWorkDone(pseudo, sessionStorage.pseudoProf, 'TRAVAUX', function(data) {
-	           	workDone = data;
-
-	           	displayCorrectionList(null, $('#mesCorrections'), 'eleve', workDone, null, null);
-	           	
-	        });
-
-		} // end of displayCorrectionModal
-
-    	$(document).ready(function(){
-
-    		console.log("la page eleve.html est prête !!!")
-
-    		afficheInfoEleve();
+    }; // end of afficheAssignedSequence
 
 
-    	}); // end of document ready event handler
+    // var afficheSequenceRessources = function (pseudoEleve, noSeq, seqDetailDisplay) {
 
+    //   var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
 
-	</script>
+    //   console.log("afficheSequenceRessources : " + myUrl_Get);
+
+    //       $.ajax({
+    //           url: myUrl_Get,
+    //           type: "GET",
+    //           dataType: "json",
+    //           //contentType: "application/json",
+    //           //crossDomain: true,
+    //           xhrFields: {
+    //             withCredentials : true
+    //           },              
+    //           success: function(data) {
+
+    //             var input = {
+    //           "data" : data,
+    //           "mode" : "eleve_detail"
+    //         }
+
+    //               var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
+
+    //               // var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
+                  
+    //       seqDetailDisplay.html(result);
+
+    //           },
+    //           error: function() {
+    //             console.log('afficheSequenceRessources : GET process error ');
+    //             window.location.href = "./index.html";
+    //           }
+    //       }); /* end of ajax call */
+
+    // }; // end of afficheSequenceRessources
+
+    // var displayCorrectionModal = function() {
+
+    //       retrieveWorkDone(pseudo, pseudoProf, 'TRAVAUX', function(data) {
+    //           workDone = data;
+
+    //           displayCorrectionList(null, $('#mesCorrections'), 'eleve', workDone, null, null);
+              
+    //       });
+
+    // } // end of displayCorrectionModal
+
+    // var refreshHeight = function () {
+    //   var h = window.innerHeight - 70;
+    //   $('body').css('height', h + 'px');
+    // }
+
+    // var refreshHeightSeq = function () {
+    //   var h = window.innerHeight - 70 - 25;
+    //   var h2 = $('.eleve_cor').height();
+    //   var hm = parseInt($('#accordionExercice').css('margin-bottom').slice(0,-2));
+    //   var ht = $('#accordionExercice .accordion-heading').height();
+    //   var h1 = h - h2 - hm - ht;
+
+    //   $('#collapseExercices').css('max-height', h1 + 'px');
+    // }
+
+    // var refreshHeightCor = function () {
+    //   var h = window.innerHeight - 70 - 25;
+    //   var t1 = $('.eleve_seq').position().top;
+    //   var t2 = $('#collapseCorrections').position().top;
+    //   var h2 = h - ( t2 - t1 );
+
+    //   $('#collapseCorrections').css('max-height', h2 + 'px');
+    // }
+
+    // $('#collapseCorrections').on('shown', function () {
+    //     refreshHeightCor();
+    // })
+
+    // $('#collapseExercices').on('shown', function () {
+    //     refreshHeightSeq();
+    // })
+
+    // window.onresize = function(event) {
+    //   refreshHeight();
+
+    //   if($('#collapseExercices').hasClass('in')){
+    //         refreshHeightSeq();
+    //       }
+
+    //       if($('#collapseCorrections').hasClass('in')){
+    //         refreshHeightCor();
+    //       }
+    // };
+
+      $(document).ready(function(){
+        
+        //initializePopOverUser();
+
+        afficheAssignedSequenceEleve(pseudo,pseudoProf,$('#message'));
+
+        //afficheInfoEleve();
+        //refreshHeight();  
+      //refreshHeightSeq();
+
+      $('*').off('touchstart');
+      console.log('page eleve chargée.');
+      }); // end of document ready event handler
+
+  </script>
 
 	<script src="./lib/bootstrap.js"></script>
 	<script src="./lib/holder.js"></script>
