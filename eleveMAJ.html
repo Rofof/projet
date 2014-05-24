@@ -38,7 +38,7 @@
     <div class="modal-header">
         <h3 id="selectClasseModalLabel">
 
-            Quelle classe souhaitez-vous intégrer ?
+            Quelle classe souhaitez-vous intï¿½grer ?
 
         </h3>
     </div>
@@ -55,7 +55,7 @@
                         <select id="classList">
                             <option value="0">
 
-                                 Espace créateur 
+                                 Espace crï¿½ateur 
 
                             </option>
                             <option value="1">
@@ -80,7 +80,7 @@
 <!--modalLogin-->
 
 
-<div id="modalLogin"class="modal hide fade">
+<div id="modalLogin" class="modal hide fade">
 
       <div class="modal-header">    
           <h3>Connectez-vous :</h3>
@@ -200,7 +200,7 @@
             <div>
               projet S4_3            </div>
             <div>
-              élève            </div>
+              ï¿½lï¿½ve            </div>
           </div>
         </div>      
       </div>
@@ -210,7 +210,7 @@
       <div class='control-group'>
           <div class='controls'>
             <button id='changepsw' type='submit' class='btn btn-default' align='right' onclick='showInfoUser(pseudo, nom, prenom,typeUser )' >Mot de passe</button> 
-            <button id='disconnect'type='submit' class='btn btn-primary' align='left' onClick='disconnect();' >Déconnexion</button>
+            <button id='disconnect'type='submit' class='btn btn-primary' align='left' onClick='disconnect();' >Dï¿½connexion</button>
           </div>
       </div>
     </div>
@@ -232,7 +232,7 @@
 	if((!navigator.userAgent.match(/iPhone/i))&&(!navigator.userAgent.match(/iPod/i))&&(!navigator.userAgent.match(/iPad/i))){
                 var contenuPopover = $('#donneesCompte').html();
                 contenuPopover+='<div><input class="btn" align="left" onclick="showInfoUser(pseudo, nom, prenom,typeUser)" type="button" name="mot_de_passe" value="Modifier le profil"/>';
-                contenuPopover+='<input style="float : right;" class="btn btn-primary" type="button" onClick="disconnect();" name="se_deconnecter" value="Déconnexion"/></div>';
+                contenuPopover+='<input style="float : right;" class="btn btn-primary" type="button" onClick="disconnect();" name="se_deconnecter" value="Dï¿½connexion"/></div>';
     // $('#user_button').attr('data-content', contenuPopover);
 
                 $("#user_button").popover({
@@ -420,12 +420,12 @@ var authentification = function (){
         
             if (data.found == true) {
 
-              console.log("Bienvenue à <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
+              console.log("Bienvenue ï¿½ <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
               params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
               
               if (data.ids.type == 2) {
                 
-                console.log("Vous êtes enseignant.");
+                console.log("Vous ï¿½tes enseignant.");
                 params += "&enseignant=true";
                 params += "&profil=" + data.ids.profileId;
                 next = "enseignant.html";
@@ -434,7 +434,7 @@ var authentification = function (){
                   
                   params += "&noClasse="+data.infoClasse[0].noClasse;
                   params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
+                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'ï¿½lï¿½ve.
                   params += "&activated="+data.infoClasse[0].activated;
 
 
@@ -453,7 +453,7 @@ var authentification = function (){
 
                     params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
                     params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
+                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'ï¿½lï¿½ve.
                     params += "&activated="+data.infoClasse[$('#classList').val()].activated;
 
 
@@ -516,7 +516,7 @@ var authentification = function (){
               
             } else {
 
-              console.log("Vous n'êtes pas enregistrés.");
+              console.log("Vous n'ï¿½tes pas enregistrï¿½s.");
               window.location.href = "./signin.php";
             }
 
@@ -587,14 +587,14 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
 										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Travail à faire</a>
+											<a class="brand">Travail ï¿½ faire</a>
 										</div>
 									</div>
 
 								    <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne">
 								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
 								      	<div id="mesExercices">
-								      		<!-- interieur du collapse élèves -->
+								      		<!-- interieur du collapse ï¿½lï¿½ves -->
 								        	<div class="load">
 						        				<img src="./img/gif-load.GIF" />
 						        			</div>
@@ -613,14 +613,14 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
 										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Travail effectué</a>
+											<a class="brand">Travail effectuï¿½</a>
 										</div>
 									</div>
 
 								    <div id="collapseCorrections" class="accordion-body collapse NavMenuInterne">
 								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
 								      	<div id="mesCorrections">
-								      		<!-- interieur du collapse élèves -->
+								      		<!-- interieur du collapse ï¿½lï¿½ves -->
 								        	<div class="load">
 						        				<img src="./img/gif-load.GIF" />
 						        			</div>
@@ -644,7 +644,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 		<!-- Modaux de la page  -->
 		<!-- RESSOURCES -->
 
-  <!-- Modal création nouvelle ressource -->
+  <!-- Modal crï¿½ation nouvelle ressource -->
   	<div id="modalNewRessource" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="resModalLabel" aria-hidden="true">
   	</div>
 
@@ -663,7 +663,7 @@ var updateSessionUserInfo = function(nom, prenom) {
   			</div>
   		</div>
   		<div class="modal-footer">
-  			<input id="search_modal_input" type="text" class="search-query pull-left" placeholder="Mots clés"/>
+  			<input id="search_modal_input" type="text" class="search-query pull-left" placeholder="Mots clï¿½s"/>
         <span class="pull-left" style="padding-left:10px;">
           <input type="checkbox" id="modal_search_ressource" class="img_modal_search_checkbox" checked> Mes images 
           <input type="checkbox" id="modal_search_platform" class="img_modal_search_checkbox" checked> Mookitek 
@@ -775,21 +775,21 @@ var updateSessionUserInfo = function(nom, prenom) {
 
   <div id="exportModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
       <div class="modal-header">
-        <h3>Export du travail préparé</h3>
+        <h3>Export du travail prï¿½parï¿½</h3>
       </div>
       <div class="modal-body" style="min-height : 200px;">
         <dl class="dl-horizontal">
           <dt>Etape 1</dt>
-          <dd>Préparation du dossier</dd>
+          <dd>Prï¿½paration du dossier</dd>
           <dd  style="height:40px;">
             <div id="spinPrepareExportTar"></div>
           </dd>
           <dt class="exportModalStep2">Etape 2</dt>
-          <dd class="exportModalStep2">Téléchargement du dossier</dd>
-          <dd class="exportModalStep2">Télécharger le fichier sur votre ordinateur en cliquant sur le bouton de téléchargement ci-dessous. Appuyer ensuite sur le bouton ""</dd>
+          <dd class="exportModalStep2">Tï¿½lï¿½chargement du dossier</dd>
+          <dd class="exportModalStep2">Tï¿½lï¿½charger le fichier sur votre ordinateur en cliquant sur le bouton de tï¿½lï¿½chargement ci-dessous. Appuyer ensuite sur le bouton ""</dd>
         <dd class="exportModalStep2"><a id="btnDownloadExportFile" class="btn btn-large btn-block btn enabled" href=""><i class="icon-download"></i></a></dd>
           <dt class="exportModalStep3">Etape 3</dt>
-          <dd class="exportModalStep3">Vérifier le téléchargement du fichier puis cliquer sur le bouton ci-dessous</dd>
+          <dd class="exportModalStep3">Vï¿½rifier le tï¿½lï¿½chargement du fichier puis cliquer sur le bouton ci-dessous</dd>
           <dd class="exportModalStep3"><a id="btnDownloadChecked" class="btn btn-large btn-block btn" href=""><i class="icon-check"></i></a></dd>
           <dt class="exportModalStep4">Etape 4</dt>
           <dd class="exportModalStep4">Suppression du dossier d'export du serveur.</dd>
@@ -798,10 +798,10 @@ var updateSessionUserInfo = function(nom, prenom) {
       </div>
   </div>
 
-  <!--[DEBUT] Modal pour l'ajout d'un élève-->
+  <!--[DEBUT] Modal pour l'ajout d'un ï¿½lï¿½ve-->
   <div id="ajoutEleveModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
       <div class="modal-header">
-        <h3>Ajout d'un élève</h3>
+        <h3>Ajout d'un ï¿½lï¿½ve</h3>
       </div>
       <div class="modal-body" style="min-height : 200px;">
         <div class="tab-pane" id="tab_ajout_eleve">
@@ -809,13 +809,13 @@ var updateSessionUserInfo = function(nom, prenom) {
             <div class="control-group">
               <label class="control-label" for="inputNom">Nom</label>
               <div class="controls">
-                <input type="text" id="inputNom" placeholder="Nom de l'élève">
+                <input type="text" id="inputNom" placeholder="Nom de l'ï¿½lï¿½ve">
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputPrenom">Prénom</label>
+              <label class="control-label" for="inputPrenom">Prï¿½nom</label>
               <div class="controls">
-                <input type="text" id="inputPrenom" placeholder="Prénom de l'élève">
+                <input type="text" id="inputPrenom" placeholder="Prï¿½nom de l'ï¿½lï¿½ve">
               </div>
             </div>
             <div class="control-group">
@@ -833,9 +833,9 @@ var updateSessionUserInfo = function(nom, prenom) {
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputPasswordVerif">Vérification du mot de passe</label>
+              <label class="control-label" for="inputPasswordVerif">Vï¿½rification du mot de passe</label>
               <div class="controls">
-                <input type="password" id="inputPasswordVerif" placeholder="Vérification du mot de passe">
+                <input type="password" id="inputPasswordVerif" placeholder="Vï¿½rification du mot de passe">
                 <div class="for-pwd-verif"></div>
               </div>
             </div>
@@ -851,9 +851,9 @@ var updateSessionUserInfo = function(nom, prenom) {
           </form>
       </div>
   </div>
-  <!--[FIN] Modal pour l'ajout d'un élève-->
+  <!--[FIN] Modal pour l'ajout d'un ï¿½lï¿½ve-->
 
-  <!--[DEBUT] Modal pour la modification de l'élève-->
+  <!--[DEBUT] Modal pour la modification de l'ï¿½lï¿½ve-->
   <div id="modifUserModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
       <div class="modal-header">
         <h3>Modification d'un utilisateur</h3>
@@ -868,7 +868,7 @@ var updateSessionUserInfo = function(nom, prenom) {
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputPrenomModif">Prénom</label>
+            <label class="control-label" for="inputPrenomModif">Prï¿½nom</label>
             <div class="controls">
               <input type="text" id="inputPrenomModif">
             </div>
@@ -887,9 +887,9 @@ var updateSessionUserInfo = function(nom, prenom) {
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputPasswordVerifModif">Vérification du mot de passe</label>
+            <label class="control-label" for="inputPasswordVerifModif">Vï¿½rification du mot de passe</label>
             <div class="controls">
-              <input type="password" id="inputPasswordVerifModif" placeholder="Vérification du mot de passe">
+              <input type="password" id="inputPasswordVerifModif" placeholder="Vï¿½rification du mot de passe">
               <div class="for-pwd-verif-modif"></div>
             </div>
           </div>
@@ -906,12 +906,12 @@ var updateSessionUserInfo = function(nom, prenom) {
       </form>
     </div>
   </div>
-  <!--[FIN] Modal pour la modification de l'élève-->
+  <!--[FIN] Modal pour la modification de l'ï¿½lï¿½ve-->
 
   <div id="correctionModal" class="modal hide fade">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Le travail déjà fait</h3>
+        <h3>Le travail dï¿½jï¿½ fait</h3>
       </div>
       <div  class="modal-body sizer" style="max-height: 500px; overflow-y: scroll;">
         <table id="body_correctionModal" class="table table-striped">
@@ -948,7 +948,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 	<!-- <div id="correctionModal" class="modal hide fade">
   		<div class="modal-header">
     		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    		<h3>Le travail déjà fait</h3>
+    		<h3>Le travail dï¿½jï¿½ fait</h3>
   		</div>
   		<div  class="modal-body sizer">
   			<table id="body_correctionModal" class="table table-striped">
@@ -988,7 +988,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 				
 			}
 			else {
-				$('#mesExercices').html("Votre classe n'est pas activée.");
+				$('#mesExercices').html("Votre classe n'est pas activï¿½e.");
 			}
 	        displayCorrectionModal();
 
@@ -1136,7 +1136,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 			refreshHeightSeq();
 
 			$('*').off('touchstart');
-			console.log('page eleve chargée.');
+			console.log('page eleve chargï¿½e.');
     	}); // end of document ready event handler
 
 	</script>
