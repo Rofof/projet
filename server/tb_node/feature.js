@@ -70,6 +70,37 @@ var Feature_Get2 = function(req, res) {
 
 } // end of Feature_Get2
 
+var Feature_Get3 = function(req, res) {
+	console.log('Feature_Get3');
+	res.writeHead(200, {'Content-Type': 'application/javascript'});
+
+	var resultat;
+	  
+	connection.query('select p.unitId,u.title,u.url from parcours p join unit u on p.unitId=u.unitId', function(err, rows) {
+		console.log(err);
+
+		var result;
+		console.log(rows);
+		  
+		if (!err) {
+
+			//for (var i in rows) {result+=rows[i]};
+
+			result = { 'result' : 'success', 'unite' : rows};
+			
+		
+		}
+		else {
+			console.log("Query error ==> " + err);
+			result = { 'result' : 'failure'};
+		}
+
+		res.end(JSON.stringify(result));
+
+	});
+
+} // end of Feature_Get3
+
 var Feature_Post1 = function(req, res) {
 	console.log('Feature_Post1 [' + req.params.id + '] : ' + req.body);
 	res.writeHead(200, {'Content-Type': 'application/javascript'});
@@ -101,3 +132,4 @@ var Feature_Post1 = function(req, res) {
 exports.Feature_Get1 = Feature_Get1;
 exports.Feature_Get2 = Feature_Get2;
 exports.Feature_Post1 = Feature_Post1;
+exports.Feature_Get3 = Feature_Get3;

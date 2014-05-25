@@ -18,6 +18,31 @@ USE `bdd_tb_stub`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `parcours`
+--
+
+DROP TABLE IF EXISTS `parcours`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parcours` (
+  `parcoursId` int(11) NOT NULL,
+  `unitId` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  PRIMARY KEY (`parcoursId`,`unitId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parcours`
+--
+
+LOCK TABLES `parcours` WRITE;
+/*!40000 ALTER TABLE `parcours` DISABLE KEYS */;
+INSERT INTO `parcours` VALUES (1,1,0),(1,2,1),(1,3,2),(1,4,3);
+/*!40000 ALTER TABLE `parcours` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ressources`
 --
 
@@ -26,7 +51,7 @@ DROP TABLE IF EXISTS `ressources`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ressources` (
   `id` int(11) NOT NULL,
-  `titre` text,
+  `title` text,
   `description` text,
   `url` varchar(45) DEFAULT NULL,
   `urlThumbnail` varchar(45) NOT NULL DEFAULT 'undefined',
@@ -43,7 +68,7 @@ CREATE TABLE `ressources` (
 
 LOCK TABLES `ressources` WRITE;
 /*!40000 ALTER TABLE `ressources` DISABLE KEYS */;
-INSERT INTO `ressources` VALUES (1,'la sequence',NULL,NULL,'undefined','null',1,'rodolphe'),(10,'la terre',NULL,'exo_4545','undefined','0',2,'rodolphe'),(11,'les calculs',NULL,'exo_4356','undefined','1',2,'rodolphe'),(12,'les maths',NULL,'exo_1234','undefined','2',2,'rodolphe'),(13,'le bingo',NULL,'exo_3243','undefined','3',2,'rodolphe');
+INSERT INTO `ressources` VALUES (1,'la sequence','description sequence',NULL,'undefined','null',1,'rodolphe'),(10,'la terre','etude de la terre','exo_4545','undefined','0',2,'rodolphe'),(11,'les calculs','apprendre les calculs','exo_4356','undefined','1',2,'rodolphe'),(12,'les maths','faire des maths','exo_1234','undefined','2',2,'rodolphe'),(13,'le bingo','jouer au bingo','exo_3243','undefined','3',2,'rodolphe');
 /*!40000 ALTER TABLE `ressources` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,6 +124,31 @@ LOCK TABLES `table1` WRITE;
 INSERT INTO `table1` VALUES (1,'sequence1'),(2,'sequence2'),(10,'tata');
 /*!40000 ALTER TABLE `table1` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `unit`
+--
+
+DROP TABLE IF EXISTS `unit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `unit` (
+  `unitId` int(11) NOT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `url` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`unitId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unit`
+--
+
+LOCK TABLES `unit` WRITE;
+/*!40000 ALTER TABLE `unit` DISABLE KEYS */;
+INSERT INTO `unit` VALUES (1,'les formes','eleves_unites'),(2,'les nombres','eleves_unites'),(3,'les jours','eleves_unites'),(4,'les semaines','eleves_unites');
+/*!40000 ALTER TABLE `unit` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -109,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-25 14:48:22
+-- Dump completed on 2014-05-25 17:01:23
