@@ -42,15 +42,20 @@ var Feature_Get1 = function(req, res) {
 var Feature_Get2 = function(req, res) {
 	console.log('Feature_Get2 [' + req.params.id + ']');
 	res.writeHead(200, {'Content-Type': 'application/javascript'});
+
+	var resultat;
 	  
-	connection.query('select * from ressources where id=' + req.params.id, function(err, rows) {
+	connection.query('select * from ressources', function(err, rows) {
 		console.log(err);
 
 		var result;
+		console.log(rows);
 		  
 		if (!err) {
 
-			result = { 'result' : 'success', 'data' : rows[0]};
+			//for (var i in rows) {result+=rows[i]};
+
+			result = { 'result' : 'success', 'ressource' : rows[0], 'ressources' : [rows[1],rows[2],rows[3]]};
 			
 		
 		}
@@ -94,5 +99,5 @@ var Feature_Post1 = function(req, res) {
 
 
 exports.Feature_Get1 = Feature_Get1;
-exports.Feature_Get1 = Feature_Get2;
+exports.Feature_Get2 = Feature_Get2;
 exports.Feature_Post1 = Feature_Post1;
