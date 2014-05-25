@@ -36,6 +36,7 @@
       <div id='message'>Monisueur Moreau </div>
 
       <script src="./lib/jquery.js"></script>
+      <script src="./lib/ejs_production.js"></script>
 
     <script>
 
@@ -71,8 +72,8 @@
 
     var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences) {
 
-          var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
-
+          //var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
+            var myUrl_Get = "http://localhost:8111/platoatic/g2/1";
           $.ajax({
               url: myUrl_Get,
               type: "GET",
@@ -84,16 +85,17 @@
               },  */            
               success: function(data) {
                 
-                  /*var input = {
+                  var input = {
               "data" : data,
               "mode" : "eleve_detail"
             }
 
-                  var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
+                  var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
 
-                  // var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);*/
-
+                  // var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
+          console.log(data)
           displaySequences.html("ca marche");
+
 
 /*          $('.eleve_sequence_content').each(function() {
             afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
