@@ -20,10 +20,10 @@
     <link href="./css/bootstrap-responsive.css" rel="stylesheet">
     <link href="./css/carousel.css" rel="stylesheet">
     <link href="./css/right_bar.css" rel="stylesheet"/>
-    <link href="./css/eleve.css" rel="stylesheet"/>
-    <link href="./css/theme_classe.css" rel="stylesheet"/>
+<!--     <link href="./css/eleve.css" rel="stylesheet"/>
+ -->    <link href="./css/theme_classe.css" rel="stylesheet"/>
 	
-	<link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/>
+	<!-- <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/> -->
   </head>
   <body style="padding-top: 70px; overflow: hidden;">
 
@@ -1172,7 +1172,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 		var afficheSequenceRessources = function (pseudoEleve, noSeq, displayUnit, seqDetailDisplay) {
 
 			//var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
-      var myUrl_Get = "localhost:8111/platoatic/g2/1";
+      var myUrl_Get = "http://localhost:8111/platoatic/g2/1";
 
 			console.log("afficheSequenceRessources : " + myUrl_Get);
 
@@ -1182,9 +1182,9 @@ var updateSessionUserInfo = function(nom, prenom) {
 	            dataType: "json",
 	            //contentType: "application/json",
 	            //crossDomain: true,
-          		xhrFields: {
+          		/*xhrFields: {
             		withCredentials : true
-          		},	            
+          		},*/	            
 	            success: function(data) {
 
 	            	var input1 = {
@@ -1196,8 +1196,8 @@ var updateSessionUserInfo = function(nom, prenom) {
 			    		"mode" : "test"
 			    	}
 
-	              	var result1 = new EJS({url: 'template_eleve_unité_test.ejs'}).render(input1);
-                        var result2 = new EJS({url: 'template_eleve_unité_test.ejs'}).render(input2);
+	              	var result1 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input1);
+                        var result2 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input2);
 	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
                                             
                                         displayUnit.html(result1);
@@ -1211,7 +1211,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 	            }
 	        }); /* end of ajax call */
 
-		};*/ // end of afficheSequenceRessources
+		}; // end of afficheSequenceRessources
 
 		var displayCorrectionModal = function() {
 

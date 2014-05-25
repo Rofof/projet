@@ -34,6 +34,7 @@
   <body>
 
       <div id='message'>Monisueur Moreau </div>
+      <div id='test'>Test</div>
 
       <script src="./lib/jquery.js"></script>
       <script src="./lib/ejs_production.js"></script>
@@ -70,7 +71,7 @@
     }; // end of afficheInfoEleve*/
 
 
-    var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences) {
+    var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences,displayTest) {
 
           //var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
             var myUrl_Get = "http://localhost:8111/platoatic/g2/1";
@@ -88,13 +89,22 @@
                   var input = {
               "data" : data,
               "mode" : "eleve_detail"
+
             }
 
-                  var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
+            var input_test = {
+              "data" : data,
+              "mode" : "test"
+            }
+                  var result = new EJS({url: './template_eleve_unite_test.ejs'}).render(input);
+                   var result_test = new EJS({url: './template_eleve_unite_test.ejs'}).render(input_test);
+                  //console.log("resultat requete" + result);
 
                   // var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
-          console.log(data)
-          displaySequences.html("ca marche");
+          //console.log(data)
+          displaySequences.html(result);
+          displayTest.html(result_test);
+
 
 
 /*          $('.eleve_sequence_content').each(function() {
@@ -106,6 +116,7 @@
              /*   console.log('afficheAssignedSequence : GET process error ');
                 window.location.href = "./index.html";*/
                 displaySequences.html("ca ne marche pas");
+                displayTest.html("La requete test a echoue");
               }
             }); /* end of ajax call */
 
@@ -208,7 +219,7 @@
         
         //initializePopOverUser();
 
-        afficheAssignedSequenceEleve(pseudo,pseudoProf,$('#message'));
+        afficheAssignedSequenceEleve(pseudo,pseudoProf,$('#message'),$('#test'));
 
         //afficheInfoEleve();
         //refreshHeight();  
