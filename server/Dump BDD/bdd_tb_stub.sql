@@ -18,6 +18,31 @@ USE `bdd_tb_stub`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `competency`
+--
+
+DROP TABLE IF EXISTS `competency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `competency` (
+  `idcompentency` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `resId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idcompentency`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `competency`
+--
+
+LOCK TABLES `competency` WRITE;
+/*!40000 ALTER TABLE `competency` DISABLE KEYS */;
+INSERT INTO `competency` VALUES (1,'calculer',10),(2,'compter',11),(3,'ecrire',12),(4,'lire',13);
+/*!40000 ALTER TABLE `competency` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `parcours`
 --
 
@@ -149,6 +174,30 @@ LOCK TABLES `unit` WRITE;
 INSERT INTO `unit` VALUES (1,'les formes','eleves_unites'),(2,'les nombres','eleves_unites'),(3,'les jours','eleves_unites'),(4,'les semaines','eleves_unites');
 /*!40000 ALTER TABLE `unit` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `work_done`
+--
+
+DROP TABLE IF EXISTS `work_done`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `work_done` (
+  `resId` int(11) NOT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`resId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `work_done`
+--
+
+LOCK TABLES `work_done` WRITE;
+/*!40000 ALTER TABLE `work_done` DISABLE KEYS */;
+INSERT INTO `work_done` VALUES (10,'done'),(11,'done'),(12,'done');
+/*!40000 ALTER TABLE `work_done` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -159,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-25 17:01:23
+-- Dump completed on 2014-05-25 18:37:43

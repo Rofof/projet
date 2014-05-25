@@ -30,4 +30,6 @@ app.all('*', function(req, res, next) {
 app.post('/platoatic/p1/:id', feature.Feature_Post1)
   .get('/platoatic/g1/:id', feature.Feature_Get1)
   .get('/platoatic/g2/:id', feature.Feature_Get2)
-  .get('/platoatic/g3', feature.Feature_Get3);
+  .get('/platoatic/parcours', feature.Feature_Get3)
+  .get('/platoatic/competency/:id',feature.Feature_GetCompetency)
+  .get('/platoatic/workdone/:id',feature.Feature_GetWorkDone);
