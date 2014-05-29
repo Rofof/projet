@@ -11,22 +11,66 @@
 <script src="http://www.pureexample.com/js/flot/jquery.flot.min.js"></script> 
 <script src="http://www.pureexample.com/js/flot/jquery.flot.pie.min.js"></script> 
 <script type="text/javascript"> 
+  var uniteLength;
+  var uniteEnCoursTitre;
+
+  var recupererIndexCurrentUnit = function(){
+    var myUrl_Get = "http://localhost:8111/platoatic/parcours ";
+
+    console.log("afficheParcourUnites : " + myUrl_Get);
+
+    $.ajax({
+      url: myUrl_Get,
+      type: "GET",
+      dataType: "json",
+
+      success: function(data) {
+        uniteLength = data.unite.length;
+
+        if (uniteLength > 0){
+          var index = 0;
+          var UnitEnCours=0;
+          //recherche l'id de l'unite en cours - la premiere unite non faite
+          while (UnitEnCours == 0){
+            if (IsUniteDone(data.unite[index].UnitID)){
+                index++;
+            }
+            else{
+            UnitEnCours=data.unite[index].UnitID;
+            //index ++;
+            }     
+          }
+          uniteEnCoursTitre = data.unite[index].title;
+          return index;
+        } 
+      },
+      error:  function() {
+        console.log('afficheParcoursRessources : GET process error');
+        $("#mesProgres").html('myUrl_Get');
+      }
+    });  // fin d'appel Ajax
+  };   // fin de fonction recupererIndexCurrentUnit
+
+  var UnitEnCoursIndex = recupererIndexCurrentUnit();
+
   $(function () 
   { var data = [
-      //{label: "data1", data: 10}, 
-      //{label: "data2", data: 20}, 
-      {label: "data3", data: 30}, 
+      {label: "à faire", data: uniteLength - UnitEnCoursIndex, color: 'gray'}, 
+      {label: "en cours : " + uniteEnCoursTitre, data: 1, color: 'cyan'}, 
+      {label: "fait", data: UnitEnCoursIndex - 1, color: 'green'}
       //{label: "data4", data: 40}, 
       //{label: "data5", data: 50}, 
       //{label: "data6", data: 60}, 
-      {label: "data7", data: 70} 
+      //{label: "data7", data: 70} 
       ]; 
 
-    var options = { series: 
+    var options = 
+    { series: 
       { pie: 
         { show: true, 
-          radius: 0.5, 
+          radius: 0.4, 
           tilt: 0.5, 
+
           label:
           { radius: 3/4, 
             formatter: function (label, series) 
@@ -49,7 +93,7 @@
         hoverable: true, 
         clickable: true 
       } 
-    }; 
+    };     // fin de variable options
 
     $.plot($("#progres_tarte #flotcontainer"), data, options); 
     $("#progres_tarte #flotcontainer").bind("plothover", function(event, pos, obj)
@@ -62,5 +106,6 @@
         html.push("<div style=\"flot:left;width:105px;height:20px;text-align:center;border:none;background-color:", obj.series.color, "\">", "<span style=\"font-weight:bold;color:white\">", obj.series.label, " (", percent, "%)</span>", "</div>"); 
         $("#affichageInteractive").html(html.join('')); 
       }); 
-  }); 
+  });   // fin de fontion recuperant le contenu de la tarte
+
 </script>     <!-- fin de la tarte-->
