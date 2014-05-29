@@ -1,0 +1,66 @@
+<div id="progres_tarte">   <!-- debut de la tarte-->
+  <div>Pourcentage de progrès:
+    <span id="affichageInteractive"></span>
+    </div> 
+    <div id="flotcontainer" style="width: 600px;height:400px; text-align: left;"></div> 
+</div> 
+
+<!-- Javascript --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
+<script src="http://www.pureexample.com/js/flot/excanvas.min.js"></script> 
+<script src="http://www.pureexample.com/js/flot/jquery.flot.min.js"></script> 
+<script src="http://www.pureexample.com/js/flot/jquery.flot.pie.min.js"></script> 
+<script type="text/javascript"> 
+  $(function () 
+  { var data = [
+      //{label: "data1", data: 10}, 
+      //{label: "data2", data: 20}, 
+      {label: "data3", data: 30}, 
+      //{label: "data4", data: 40}, 
+      //{label: "data5", data: 50}, 
+      //{label: "data6", data: 60}, 
+      {label: "data7", data: 70} 
+      ]; 
+
+    var options = { series: 
+      { pie: 
+        { show: true, 
+          radius: 0.5, 
+          tilt: 0.5, 
+          label:
+          { radius: 3/4, 
+            formatter: function (label, series) 
+            { return '<div style="border:1px solid gray;font-size:8pt;text-align:center;padding:5px;color:white; display:none">' + label + '<br/>' + Math.round(series.percent) + '%</div>'; 
+            }, 
+            background: { 
+              opacity: 0.5, 
+              color: '#000' 
+            } 
+          } 
+        } 
+      }, 
+
+      legend: 
+      { show: 
+        false 
+      }, 
+      grid: 
+      { 
+        hoverable: true, 
+        clickable: true 
+      } 
+    }; 
+
+    $.plot($("#progres_tarte #flotcontainer"), data, options); 
+    $("#progres_tarte #flotcontainer").bind("plothover", function(event, pos, obj)
+      { 
+        if (!obj)
+          {return;} 
+        percent = parseFloat(obj.series.percent).toFixed(2); 
+
+        var html = []; 
+        html.push("<div style=\"flot:left;width:105px;height:20px;text-align:center;border:none;background-color:", obj.series.color, "\">", "<span style=\"font-weight:bold;color:white\">", obj.series.label, " (", percent, "%)</span>", "</div>"); 
+        $("#affichageInteractive").html(html.join('')); 
+      }); 
+  }); 
+</script>     <!-- fin de la tarte-->
