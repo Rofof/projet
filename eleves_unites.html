@@ -20,6 +20,7 @@
     <link href="./css/bootstrap-responsive.css" rel="stylesheet">
     <link href="./css/carousel.css" rel="stylesheet">
     <link href="./css/right_bar.css" rel="stylesheet"/>
+    <link href="./css/projet_s4.css" rel="stylesheet"/>
 <!--     <link href="./css/eleve.css" rel="stylesheet"/>
  -->    <link href="./css/theme_classe.css" rel="stylesheet"/>
 	
@@ -598,7 +599,7 @@ var updateSessionUserInfo = function(nom, prenom) {
                                             </div>
                                         </div>
 
-                                        <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne">
+                                        <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne" style="overflow-y: auto; overflow-style: move ">
                                             <div class="accordion-inner" style="border-top:inherit;padding: 4px">
                                                 <div id="mesExercices">
                                                     <!-- interieur du collapse �l�ves -->
@@ -1302,7 +1303,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 	           	},
 	            error: function() {
 	              console.log('afficheSequenceRessources : GET process error ');
-                      $("#mesExercices").html('myUrl_Get');
+                      $("#mesExercices").html(myUrl_Get);
 	             /* window.location.href = "./index.html";*/
 	            }
 	        }); /* end of ajax call */

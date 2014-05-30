@@ -1,0 +1,15 @@
+.container_eleve{
+  display: inline-block;
+  vertical-align: top; 
+  max-width: 45%;
+  min-width: 40%;
+}
+
+.img_unite{
+    padding: 0px 10px 0px 0px !important;
+    
+}
+.img_unite > img {
+    height: 68px;
+    width: 68px;
+}
