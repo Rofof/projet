@@ -363,179 +363,179 @@ var cacherLoginPopup = function(){
 
 //fonction d'authentification
 
-var authentification = function (){
+// var authentification = function (){
 
 
-    var enterUserEnvironment = function(next, params) {
+//     var enterUserEnvironment = function(next, params) {
 
-            if(next=="null") {
-              //window.location.href = "./signin.php?"+params;
-              window.location.href = "./eleve_paul.html";
-            } else {
-              //window.location.href = "./signin.php?"+params+"&next="+next;
-              window.location.href = "./eleve_paul.html";
-            }
-        }; 
+//             if(next=="null") {
+//               //window.location.href = "./signin.php?"+params;
+//               window.location.href = "./eleve_paul.html";
+//             } else {
+//               //window.location.href = "./signin.php?"+params+"&next="+next;
+//               window.location.href = "./eleve_paul.html";
+//             }
+//         }; 
 
-        var cfgWs = {
-          prefix : 'http://mookitek.fr:8111'
-        }
+//         var cfgWs = {
+//           prefix : 'http://mookitek.fr:8111'
+//         }
 
 
-        var ip = "37.187.46.97";
+//         var ip = "37.187.46.97";
 
          
 
-              //var pseudo = $("input[id=pseudo]").val();
-				var pseudo = "Johnny";
-              //var pwd = $("input[id=pwd]").val();
-			  var pwd = "johnny"
+//               //var pseudo = $("input[id=pseudo]").val();
+// 				var pseudo = "Johnny";
+//               //var pwd = $("input[id=pwd]").val();
+// 			  var pwd = "johnny"
 
 
                  
              
-        var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
+//         var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
 
        
-        var message = {
-          username : pseudo,
-          password : pwd
-        }; 
+//         var message = {
+//           username : pseudo,
+//           password : pwd
+//         }; 
 
-         $.ajax({
+//          $.ajax({
          
-          url: myUrl_Post,
-          type: "POST",
-          dataType: "json",
-          data: message, //{objectData: message},
-          //contentType: "application/json",
-          cache: false,
-          timeout: 5000,
-          //crossDomain: true,
-          xhrFields: {
-            withCredentials : true
-          },
-          success: function(data) {
+//           url: myUrl_Post,
+//           type: "POST",
+//           dataType: "json",
+//           data: message, //{objectData: message},
+//           //contentType: "application/json",
+//           cache: false,
+//           timeout: 5000,
+//           //crossDomain: true,
+//           xhrFields: {
+//             withCredentials : true
+//           },
+//           success: function(data) {
 
-            var params = null;
-            console.log(data.found);
+//             var params = null;
+//             console.log(data.found);
 
         
-            if (data.found == true) {
+//             if (data.found == true) {
 
-              console.log("Bienvenue � <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
-              params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
+//               console.log("Bienvenue � <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
+//               params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
               
-              if (data.ids.type == 2) {
+//               if (data.ids.type == 2) {
                 
-                console.log("Vous �tes enseignant.");
-                params += "&enseignant=true";
-                params += "&profil=" + data.ids.profileId;
-                next = "enseignant.html";
+//                 console.log("Vous �tes enseignant.");
+//                 params += "&enseignant=true";
+//                 params += "&profil=" + data.ids.profileId;
+//                 next = "enseignant.html";
 
-                if (data.infoClasse.length == 1) {
+//                 if (data.infoClasse.length == 1) {
                   
-                  params += "&noClasse="+data.infoClasse[0].noClasse;
-                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
-                  params += "&activated="+data.infoClasse[0].activated;
+//                   params += "&noClasse="+data.infoClasse[0].noClasse;
+//                   params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
+//                   params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
+//                   params += "&activated="+data.infoClasse[0].activated;
 
 
-                enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
+//                 enterUserEnvironment(next, params);
+//                 }
+//                 else if (data.infoClasse.length > 1) {
                   
-                  cacherLoginPopup();
+//                   cacherLoginPopup();
 
-                  $("#modalSelectClasse").modal();
+//                   $("#modalSelectClasse").modal();
 
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
+//                   $('#classList').html(
+//                     new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
+//                   );
+//                   $('#selectClasseBtn').on('click', function(){
 
-                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
-                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
-                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
+//                     params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
+//                     params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
+//                     params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
+//                     params += "&activated="+data.infoClasse[$('#classList').val()].activated;
 
 
-                    enterUserEnvironment(next, params);
+//                     enterUserEnvironment(next, params);
 
-                    $("#modalSelectClasse").hide();
-                  });
+//                     $("#modalSelectClasse").hide();
+//                   });
                   
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
+//                 }
+//                 else {
+//                   console.log("inconsistent class list");
+//                   enterUserEnvironment("null", params);
+//                 }
 
-              } else if (data.ids.type == 1) {
-                params += "&enseignant=false";
-                next = "eleves.html";
+//               } else if (data.ids.type == 1) {
+//                 params += "&enseignant=false";
+//                 next = "eleves.html";
 
-                console.log("--------------------------------------------");
-                console.log(data.infoClasse);
+//                 console.log("--------------------------------------------");
+//                 console.log(data.infoClasse);
 
-                if (data.infoClasse.length == 1) {
+//                 if (data.infoClasse.length == 1) {
 
-                  params += "&noClasse="+data.infoClasse[0].noResp;
-                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+data.infoClasse[0].identifiant;
-                  params += "&activated="+data.infoClasse[0].activated;
+//                   params += "&noClasse="+data.infoClasse[0].noResp;
+//                   params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
+//                   params += "&pseudoProf="+data.infoClasse[0].identifiant;
+//                   params += "&activated="+data.infoClasse[0].activated;
 
                   
-                  enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
+//                   enterUserEnvironment(next, params);
+//                 }
+//                 else if (data.infoClasse.length > 1) {
                   
-                  cacherLoginPopup();
-                  $("#modalSelectClasse").modal();
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
+//                   cacherLoginPopup();
+//                   $("#modalSelectClasse").modal();
+//                   $('#classList').html(
+//                     new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
+//                   );
+//                   $('#selectClasseBtn').on('click', function(){
 
-                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noResp;
-                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+data.infoClasse[$('#classList').val()].identifiant;
-                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
+//                     params += "&noClasse="+data.infoClasse[$('#classList').val()].noResp;
+//                     params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
+//                     params += "&pseudoProf="+data.infoClasse[$('#classList').val()].identifiant;
+//                     params += "&activated="+data.infoClasse[$('#classList').val()].activated;
 
                    
-                    enterUserEnvironment(next, params);
+//                     enterUserEnvironment(next, params);
 
-                    $("#modalSelectClasse").hide();
-                  });
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
+//                     $("#modalSelectClasse").hide();
+//                   });
+//                 }
+//                 else {
+//                   console.log("inconsistent class list");
+//                   enterUserEnvironment("null", params);
+//                 }
 
-              } else {
-                params += "&enseignant=false";
-              }
+//               } else {
+//                 params += "&enseignant=false";
+//               }
               
-            } else {
+//             } else {
 
-              console.log("Vous n'�tes pas enregistr�s.");
-              window.location.href = "./signin.php";
-            }
+//               console.log("Vous n'�tes pas enregistr�s.");
+//               window.location.href = "./signin.php";
+//             }
 
            
 
-          }, 
+//           }, 
 
-          error: function() {
+//           error: function() {
 
-              console.log('PUT process error during sign-in');
-              window.location = "./signin.php";
-          }
+//               console.log('PUT process error during sign-in');
+//               window.location = "./signin.php";
+//           }
 
-       });
+//        });
 
-}//fin fonction authentification
+// }//fin fonction authentification
 
 var updateSessionUserInfo = function(nom, prenom) {
 
@@ -1038,6 +1038,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 		var ip = "37.187.46.97";
 		var pseudo = "Johnny";
 		var workDone = null;
+    var numParc = 0;
 
 		var activated = "1";
 		var pseudoProf = "rodolphe";
@@ -1117,21 +1118,24 @@ var updateSessionUserInfo = function(nom, prenom) {
 	            success: function(data) {
                         
                         
-                        
-                        
+                   console.log(data.unite.length);     
 if (data.unite.length >0){
     var index = 0;
     var UnitEnCours=0;
-    
+console.log("je rentre dans le if");
+
+    console.log("bonjour" + IsUniteDone(data.unite[index].unitId));
     //recherche l'id de l'unite en cours - la premiere unite non faite
         while (UnitEnCours == 0){
-        if (IsUniteDone(data.unite[index].UnitID)){
+        if (IsUniteDone(data.unite[index].unitId)){
             index++;
+
+
         }else{
-            UnitEnCours=data.unite[index].UnitID;
+            UnitEnCours=data.unite[index].unitId;
         }     
     }
-    
+    console.log("UnitEnCours :" + UnitEnCours);
     var input={
         "data" : data,
         "CurrentUnite" : UnitEnCours
@@ -1195,14 +1199,16 @@ if (data.unite.length >0){
 	            url: myUrl_Get,
 	            type: "GET",
 	            dataType: "json",
+
 	            //contentType: "application/json",
 	            //crossDomain: true,
           		/*xhrFields: {
             		withCredentials : true
           		},*/	            
 	            success: function(data) {
-                        if (data.data=="done"){
-                            return true;
+                    console.log("les donnéesé" + data.data.state);
+                        if (data.data.state=="done"){
+                            return data.data.state;
                         }else {
                             return false;
                         }

@@ -128,17 +128,17 @@ var Feature_GetCompetency = function(req, res) {
 } // end of Feature_GetCompetency
 
 var Feature_GetWorkDone = function(req, res) {
-	console.log('Feature_GetCompetency [' + req.params.id + ']');
+	console.log('Feature_GetWorkdone');
 	res.writeHead(200, {'Content-Type': 'application/javascript'});
 	  
-	connection.query('select state from work_done where resId=' + req.params.id , function(err, rows) {
+	connection.query('select id from work_done' , function(err, rows) {
 		//console.log(err);
 
 		var result;
 		  
 		if (!err) {
 
-			result = { 'result' : 'success', 'data' : rows[0]};
+			result = { 'result' : 'success', 'workDone' : rows};
 			
 		
 		}
