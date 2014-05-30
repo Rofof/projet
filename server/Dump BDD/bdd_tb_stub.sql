@@ -63,7 +63,7 @@ CREATE TABLE `parcours` (
 
 LOCK TABLES `parcours` WRITE;
 /*!40000 ALTER TABLE `parcours` DISABLE KEYS */;
-INSERT INTO `parcours` VALUES (1,1,0),(1,2,1),(1,3,2),(1,4,3);
+INSERT INTO `parcours` VALUES (1,10,0),(1,11,1),(1,12,2),(1,13,3);
 /*!40000 ALTER TABLE `parcours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `unit` (
 
 LOCK TABLES `unit` WRITE;
 /*!40000 ALTER TABLE `unit` DISABLE KEYS */;
-INSERT INTO `unit` VALUES (1,'les formes','eleves_unites'),(2,'les nombres','eleves_unites'),(3,'les jours','eleves_unites'),(4,'les semaines','eleves_unites');
+INSERT INTO `unit` VALUES (10,'les formes','eleves_unites'),(11,'les nombres','eleves_unites'),(12,'les jours','eleves_unites'),(13,'les semaines','eleves_unites');
 /*!40000 ALTER TABLE `unit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,9 +183,9 @@ DROP TABLE IF EXISTS `work_done`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `work_done` (
-  `resId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `state` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`resId`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-25 18:37:43
+-- Dump completed on 2014-05-30 13:24:16
