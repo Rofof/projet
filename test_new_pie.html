@@ -1,43 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
   <head>
     <meta charset="utf-8">
-    <title>Mon parcours_paul</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 
-    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-	-->
+    <title>Pie chart 2</title>
 
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-	<link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
 
-	<link href="./css/global.css" rel="stylesheet">
-	<link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="./css/carousel.css" rel="stylesheet">
-    <link href="./css/right_bar.css" rel="stylesheet"/>
-    <link href="./css/projet_s4.css" rel="stylesheet"/>
-<!--     <link href="./css/eleve.css" rel="stylesheet"/>
- -->    <link href="./css/theme_classe.css" rel="stylesheet"/>
-	
-	<!-- <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/> -->
+	<link rel="stylesheet" href="style.css"/>
   </head>
-  <body style="padding-top: 70px; overflow: hidden;">
-<div id="progres_tarte">   <!-- debut de la tarte-->
-  <div>Pourcentage de progrès:
-    <span id="affichageInteractive"></span>
-    </div> 
-    <div id="flotcontainer" style="width: 400px;height:400px; text-align: left;"></div> 
-</div> 
+  <body>
 
-<!-- Javascript --> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
-<script src="http://www.pureexample.com/js/flot/excanvas.min.js"></script> 
-<script src="http://www.pureexample.com/js/flot/jquery.flot.min.js"></script> 
-<script src="http://www.pureexample.com/js/flot/jquery.flot.pie.min.js"></script> 
-<script type="text/javascript"> 
+
+<script src="./lib/jquery.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.js"></script>
+	<script src="./js/pie_chart/dist/angular.easypiechart.min.js"></script>
+
+
+<div class="angular" ng-controller="chartCtrl">
+		
+		<span class="chart" easypiechart percent="anotherPercent" options="anotherOptions">
+			<span class="percent" ng-bind="percent"></span>
+		</span>
+	</div>
+
+		<!-- Affichage de l'avancement global -->
+		<script>
+                    var app = angular.module('app', ['easypiechart']);
+						app.controller('chartCtrl', ['$scope', function ($scope) {
+							$scope.percent = 75;
+							$scope.anotherPercent = 75;
+							$scope.anotherOptions = {
+								animate:{
+									duration:0,
+									enabled:false
+								},
+								barColor:'#2C3E50',
+								scaleColor:false,
+								lineWidth:20,
+								lineCap:'circle'
+							};
+							}]);
+		</script>
+							<!-- FIN Affichage de l'avancement global -->
+
+
+
+
+
+	<script type="text/javascript"> 
 		
     var afficheParcourUnites = function () {
 
@@ -114,7 +124,13 @@
                     var uniteLength = tableUnite.length;
                     var indexCurrentUnit=index;
                     var titleCurrentUnit=tableUnite[index].title;
-                    afficherPieDiagramm(uniteLength, indexCurrentUnit, titleCurrentUnit);
+                    //afficherPieDiagramm(uniteLength, indexCurrentUnit, titleCurrentUnit);
+                    var progression = indexCurrentUnit/uniteLength;
+                    console.log("Progression :" +progression);
+
+
+                    
+
                     
                     },
                     error : function(){
@@ -125,70 +141,17 @@
                 };
                 
     
-var afficherPieDiagramm = function(uniteLength, UnitEnCoursIndex, uniteEnCoursTitre){
-  $(function () 
-  { var data = [
-      {label: "A faire", data: uniteLength - UnitEnCoursIndex, color: 'gray'}, 
-      {label: "en cours : " + uniteEnCoursTitre, data: 1, color: 'cyan'}, 
-      {label: "fait", data: UnitEnCoursIndex - 1, color: 'green'}
-      //{label: "data4", data: 40}, 
-      //{label: "data5", data: 50}, 
-      //{label: "data6", data: 60}, 
-      //{label: "data7", data: 70} 
-      ]; 
 
-    var options = 
-    { series: 
-      { pie: 
-        { show: true, 
-          radius: 0.4, 
-          tilt: 0.5, 
-
-          label:
-          { radius: 3/4, 
-            formatter: function (label, series) 
-            { return '<div style="border:1px solid gray;font-size:8pt;text-align:center;padding:5px;color:white; display:none">' + label + '<br/>' + Math.round(series.percent) + '%</div>'; 
-            }, 
-            background: { 
-              opacity: 0.5, 
-              color: '#000' 
-            } 
-          } 
-        } 
-      }, 
-
-      legend: 
-      { show: 
-        false 
-      }, 
-      grid: 
-      { 
-        hoverable: true, 
-        clickable: true 
-      } 
-    };     // fin de variable options
-
-    $.plot($("#progres_tarte #flotcontainer"), data, options); 
-    $("#progres_tarte #flotcontainer").bind("plothover", function(event, pos, obj)
-      { 
-        if (!obj)
-          {return;} 
-        percent = parseFloat(obj.series.percent).toFixed(2); 
-
-        var html = []; 
-        html.push("<div style=\"flot:left;width:105px;height:20px;text-align:center;border:none;background-color:", obj.series.color, "\">", "<span style=\"font-weight:bold;color:white\">", obj.series.label, " (", percent, "%)</span>", "</div>"); 
-        $("#affichageInteractive").html(html.join('')); 
-      }); 
-  });};
   
     $(document).ready(function(){
     		
     		afficheParcourUnites();
 			$('*').off('touchstart');
-			console.log('page eleve charg�e.');
+			console.log('page eleve chargée.');
     	});   // fin de fontion recuperant le contenu de la tarte
 
 </script> 
 
-  </body>
-</html><!-- fin de la tarte-->
+
+</body>
+</html>
