@@ -16,136 +16,76 @@
 	<script src="./js/pie_chart/dist/angular.easypiechart.min.js"></script>
 
 
-<div class="angular" ng-controller="chartCtrl">
+
+	<div class="angular" ng-controller="chartCtrl">
 		
 		<span class="chart" easypiechart percent="anotherPercent" options="anotherOptions">
 			<span class="percent" ng-bind="percent"></span>
 		</span>
 	</div>
 
+
+<script>
+
+            
+
+
+            
+</script>
+
+
+
 		<!-- Affichage de l'avancement global -->
 		<script>
-                    var app = angular.module('app', ['easypiechart']);
-						app.controller('chartCtrl', ['$scope', function ($scope) {
-							$scope.percent = 75;
-							$scope.anotherPercent = 75;
-							$scope.anotherOptions = {
-								animate:{
-									duration:0,
-									enabled:false
-								},
-								barColor:'#2C3E50',
-								scaleColor:false,
-								lineWidth:20,
-								lineCap:'circle'
-							};
-							}]);
+		var app = angular.module('app', ['easypiechart']);
+		app.controller('chartCtrl', ['$scope', function ($scope) {
+
+			var myUrl_Get = "./parcours.json" ;
+		console.log("afficheCompetence : " + myUrl_Get);
+	    	$.ajax({
+	            url: myUrl_Get,
+	            dataType: "json",
+	            success: function(data) {
+                        console.log("afficheCompetence : Get process functionne");
+                        progression = data.progress;
+                        console.log("progression: " +progression);
+
+
+
+                    },
+                    error : function(){
+                        console.log("afficheCompetence : Get process error");
+                    }
+                });
+
+		$scope.percent = progression;
+
+		$scope.anotherPercent = 56;
+
+			$scope.anotherOptions = {
+					animate:{
+						duration:0,
+						enabled:false
+					},
+					barColor:'#2C3E50',
+					scaleColor:false,
+					lineWidth:20,
+					lineCap:'circle'
+				};
+			}]); //fin de app.controler
+
+
+
+		
+
 		</script>
 							<!-- FIN Affichage de l'avancement global -->
 
 
-
-
-
 	<script type="text/javascript"> 
-		
-    var afficheParcourUnites = function () {
-
-			//var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
-                var myUrl_Get = "http://localhost:8111/platoatic/parcours ";
-
-			console.log("afficheParcourUnites : " + myUrl_Get);
-
-	        $.ajax({
-	            url: myUrl_Get,
-	            type: "GET",
-	            dataType: "json",
-	            //contentType: "application/json",
-	            //crossDomain: true,
-          		/*xhrFields: {
-            		withCredentials : true
-          		},*/	            
-	            success: function(data) {
-                        console.log("data.unite.length " + data.unite.length);     
-                        if (data.unite.length >0){
-                            var tableUnite = data.unite;
-                            afficheUniteParWorkdone(tableUnite);
-                            console.log("je rentre dans le if" + tableUnite);
-                        }
-                    },
-	            error: function() {
-	              console.log('afficheSequenceRessources : GET process error ');
-                     // $("#mesExercices").html('myUrl_Get');
-	             /* window.location.href = "./index.html";*/
-	            }
-	        }); /* end of ajax call */
-
-		}; // end of afficheSequenceRessources
-
-                var afficheUniteParWorkdone = function(tableUnite, displayUnit){
-                    var myUrl_Get = "http://localhost:8111/platoatic/workdone/" ;//+ unitId ;
-                    var index=0;
-                    var UniteEnCours=0;
-			console.log("afficheUniteParWorkdone : " + myUrl_Get);
-
-	        $.ajax({
-	            url: myUrl_Get,
-	            type: "GET",
-	            dataType: "json",
-
-	            //contentType: "application/json",
-	            //crossDomain: true,
-          		/*xhrFields: {
-            		withCredentials : true
-          		},*/	            
-	            success: function(data) {
-                    console.log("les données : " + tableUnite);
-                    
-                    //parcours de la tableUnite 
-                    while (index < tableUnite.length && UniteEnCours==0){
-                        var index2=0;
-                        var aEteFait=false;
-                        //parcours de la table workdone pour vérifier l'unite en cours
-                        //  si on trouve une correspondance, on sort de la boucle
-                        while (index2 < data.workDone.length && aEteFait==false){
-                            if (data.workDone[index2].id == tableUnite[index].unitId){
-                                aEteFait=true;
-                            }else{
-                                index2++;
-                            }
-                        }
-                        
-                        // si l'unite n'a pas ete faite, la considere comme unite en cours
-                        if (aEteFait==false){
-                            UniteEnCours=tableUnite[index].unitId;
-                        }else{index++;}
-                    }
- 
-                    var uniteLength = tableUnite.length;
-                    var indexCurrentUnit=index;
-                    var titleCurrentUnit=tableUnite[index].title;
-                    //afficherPieDiagramm(uniteLength, indexCurrentUnit, titleCurrentUnit);
-                    var progression = indexCurrentUnit/uniteLength;
-                    console.log("Progression :" +progression);
-
-
-                    
-
-                    
-                    },
-                    error : function(){
-                        console.log('IsUniteDone : GET process error');
-                    }
-                }); //end of Ajax call
-                
-                };
-                
-    
-
-  
     $(document).ready(function(){
     		
-    		afficheParcourUnites();
+    		//afficheCompetence();
 			$('*').off('touchstart');
 			console.log('page eleve chargée.');
     	});   // fin de fontion recuperant le contenu de la tarte
