@@ -606,80 +606,56 @@ var updateSessionUserInfo = function(nom, prenom) {
                                                     <div class="accordion" id="accordion_1">
                                                         <div class="accordion-group">
                                                             <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_1">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./Ressources/exercices/exo_1?&exo_id=1">
                                                                     <ul class="inline">
-                                                                        <li class="img_sequence">
+                                                                        <li class="img_unite">
                                                                             <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
                                                                         </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test1</div>
-                                                                            <div class="desc">test d'unité_1</div>
+                                                                        <li class="info_unite">
+                                                                            <div class="titre">Test_unite</div>
+                                                                            <!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
                                                                         </li>
                                                                     </ul>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapse_1" class="accordion-body collapse">
-                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_1" class="carousel-inner eleve_sequence_content" data-resid="1" >
-                                                                    </div>
-                                                                </div>
-                                                                <!-- </div> -->	
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="accordion" id="accordion_2">
                                                         <div class="accordion-group">
                                                             <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_2">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./Ressources/exercices/exo_2?&exo_id=2">
                                                                     <ul class="inline">
-                                                                        <li class="img_sequence">
+                                                                        <li class="img_unite">
                                                                             <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
                                                                         </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test2</div>
-                                                                            <div class="desc">test d'unité_2</div>
+                                                                        <li class="info_unite">
+                                                                            <div class="titre">Test_unite_2</div>
+                                                                            <!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
                                                                         </li>
                                                                     </ul>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapse_2" class="accordion-body collapse">
-                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_2" class="carousel-inner eleve_sequence_content" data-resid="2" >
-                                                                    </div>
-                                                                </div>
-                                                                <!-- </div> -->	
-                                                            </div>
+
                                                         </div>
                                                     </div>
 
                                                    <div class="accordion" id="accordion_3">
                                                         <div class="accordion-group">
                                                             <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
+                                                                <div class="accordion-toggle acc_sequence thumbnail" style="background: white; color: gray;">
                                                                     <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        <li class="img_unite">
+                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image" >
                                                                         </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test3</div>
-                                                                            <div class="desc">test d'unité_3</div>
+                                                                        <li class="info_unite">
+                                                                            <div class="titre">Test_unite_non_accessible</div>
+                                                                            <!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
                                                                         </li>
                                                                     </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_3" class="accordion-body collapse">
-                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
-                                                                    </div>
                                                                 </div>
-                                                                 </div> 	
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1196,18 +1172,49 @@ if (data.unite.length >0){
 //                        var result2 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input2);
 	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
                                             
-                                        displayUnit.html(result1);
+                                       // displayUnit.html(result1);
 
-	           	},
+	           	,
 	            error: function() {
 	              console.log('afficheSequenceRessources : GET process error ');
-                      $("#mesExercices").html('myUrl_Get');
+                     // $("#mesExercices").html('myUrl_Get');
 	             /* window.location.href = "./index.html";*/
 	            }
 	        }); /* end of ajax call */
 
 		}; // end of afficheSequenceRessources
 
+
+
+                var IsUniteDone = function (unitId){
+                     var myUrl_Get = "http://localhost:8111/platoatic/workdone/"+ unitId ;
+
+			console.log("IsUnitedone : " + myUrl_Get);
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                        if (data.data=="done"){
+                            return true;
+                        }else {
+                            return false;
+                        }
+                    },
+                    error : function(){
+                        console.log('IsUniteDone : GET process error');
+                    }
+                }); //end of Ajax call
+                
+                };
+                
+                
 		var displayCorrectionModal = function() {
 
 	        retrieveWorkDone(pseudo, pseudoProf, 'TRAVAUX', function(data) {
