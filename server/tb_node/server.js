@@ -32,4 +32,5 @@ app.post('/platoatic/p1/:id', feature.Feature_Post1)
   .get('/platoatic/g2/:id', feature.Feature_Get2)
   .get('/platoatic/parcours', feature.Feature_Get3)
   .get('/platoatic/competency/:id',feature.Feature_GetCompetency)
+  .get('/platoatic/unite/:id',feature.Feature_GetUnit)
   .get('/platoatic/workdone/',feature.Feature_GetWorkDone);

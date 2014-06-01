@@ -1,0 +1,93 @@
+{
+    "currentId" : 45,
+    "progress" : 70,
+    "data" : [
+        {
+            "unitId" : 10,
+            "competencies" : [
+                {
+                    "name" : "ecrire",
+                    "progress" : 0
+                },
+                {
+                    "name" : "parler",
+                    "progress" : 0
+                },
+                {
+                    "name" : "lire",
+                    "progress" : 0
+                }
+            ]
+        },
+        {
+            "unitId" : 11,
+            "competencies" : [
+                {
+                    "name" : "ecrire",
+                    "progress" : 70
+                },
+                {
+                    "name" : "parler",
+                    "progress" : 20
+                },
+                {
+                    "name" : "lire",
+                    "progress" : 100
+                }
+            ]
+        },
+        {
+            "unitId" : 12,
+            "competencies" : [
+                {
+                    "name" : "ecrire",
+                    "progress" : 30
+                },
+                {
+                    "name" : "parler",
+                    "progress" :40
+                },
+                {
+                    "name" : "lire",
+                    "progress" : 100
+                }
+            ]
+        },
+        {
+            "unitId" : 13,
+            "competencies" : [
+                {
+                    "name" : "ecrire",
+                    "progress" : 0
+                },
+                {
+                    "name" : "parler",
+                    "progress" :40
+                },
+                {
+                    "name" : "lire",
+                    "progress" : 50
+                }
+            ]
+        },
+        {
+            "unitId" : "finish",
+            "competencies" : [
+                {
+                    "name" : "ecrire",
+                    "progress" : 0
+                },
+                {
+                    "name" : "parler",
+                    "progress" : 0
+                },
+                {
+                    "name" : "lire",
+                    "progress" : 50
+                }
+            ]
+        }
+    ]
+    
+    
+}

@@ -683,9 +683,30 @@ var updateSessionUserInfo = function(nom, prenom) {
 								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
 								      	<div id="mesCompetences">
 								      		<!-- interieur du collapse competences -->
-								        	<div class="load">
-						        				<img src="./img/gif-load.GIF" />
-						        			</div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 60%;">60%</div>  
+                                                                                </div>  
+                                                                                </div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 90%;">90%</div>  
+                                                                                </div>  
+                                                                                </div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 10%;">10%</div>  
+                                                                                </div>  
+                                                                                </div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 20%;">20%</div>  
+                                                                                </div>  
+                                                                                </div>
 								      	</div>
 								      </div>
 								    </div>
@@ -1048,7 +1069,8 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 			if (activated == '1') {
 
-				afficheParcourUnites(pseudo, numParc, $('#mesUnites'));
+				afficheParcourUnites(pseudo, numParc, $('#mesUnites'));7
+                                afficheCompetence();
 				
 			}
 			else {
@@ -1187,9 +1209,97 @@ var updateSessionUserInfo = function(nom, prenom) {
                 }); //end of Ajax call
                 
                 };
-
-        
                 
+
+                var afficheCompetence = function() {
+                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
+                    
+			console.log("afficheCompetence : " + myUrl_Get);
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            //type: "GET",
+	            dataType: "json",
+
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                        console.log("afficheCompetence : Get process functionne");
+                    },
+                    error : function(){
+                        console.log("afficheCompetence : Get process error");
+                    }
+                });
+                }
+//                var afficheCompetences= function(noParc){
+//                    var index=0;
+//        
+//                    var tableauCompetence =new Array();
+//                    var tableauUnites=new Array();
+//                    var tableauRessources=new Array();
+//                    var tableauNomCompetences = new Array();
+//                   
+//                    
+//                    //permet de recuperer les unités dans un parcours
+//                    var myUrl_Get = "http://localhost:8111/platoatic/parcours ";
+//
+//			console.log("afficheCompetence : " + myUrl_Get);
+//
+//	        $.ajax({
+//	            url: myUrl_Get,
+//	            type: "GET",
+//	            dataType: "json",
+//	            //contentType: "application/json",
+//	            //crossDomain: true,
+//          		/*xhrFields: {
+//            		withCredentials : true
+//          		},*/	            
+//	            success: function(data) {
+//                     //creation d'un tableau contenant un unitId et un tableau de ressources associees 
+//                     //par unites dans le parcours
+//                    while (index<data.unite.length){
+//                        tableauCompetence[index]=tableauUnites;
+//                        tableauCompetence[index]["unitId"]=data.unite[index].unitId;
+//                        tableauCompetence[index]["ressources"]=tableauRessources;
+//                        console.log("test tableaux : "+ tableauCompetence[index].unitId +index);
+//                        index++;
+//                    }
+//                    var tabComp=tableauCompetence;
+//                    
+//                    console.log("premiere UnitId de la table :" + tabComp[0].unitId);
+//                    console.log("premiere UnitId de la table :" + tabComp[1].unitId);
+//                    recupererRessourcesPourCompetences(tabComp,tabComp[0].unitId);
+//              
+//                    },
+//                    error: function(){
+//                        console.log("afficheCompentence :Get process error");
+//                    }
+//                });//end Ajax Call
+//                }// end afficheCompetence
+//                
+//    
+//                var recupererRessourcesPourCompetences = function(tabComp,unitId){
+//                    
+//                    //recupere les ressources associés à une unité
+//                    var myUrl_Get = "http://localhost:8111/platoatic/unite/"+unitId;
+//			console.log("afficheCompetence : " + myUrl_Get);
+//
+//                    $.ajax({
+//                        url: myUrl_Get,
+//                        type: "GET",
+//                        dataType: "json",
+//                        //contentType: "application/json",
+//                        //crossDomain: true,
+//                            /*xhrFields: {
+//                               withCredentials : true
+//                            },*/	            
+//                        success: function(data) {},
+//                        error :function() {}
+//                    });
+//                 }
                 
 		var displayCorrectionModal = function() {
 

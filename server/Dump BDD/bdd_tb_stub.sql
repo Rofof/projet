@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `bdd_tb_stub` /*!40100 DEFAULT CHARACTER SET utf8
 USE `bdd_tb_stub`;
 -- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: localhost    Database: bdd_tb_stub
+-- Host: 127.0.0.1    Database: bdd_tb_stub
 -- ------------------------------------------------------
 -- Server version	5.6.17
 
@@ -38,7 +38,7 @@ CREATE TABLE `competency` (
 
 LOCK TABLES `competency` WRITE;
 /*!40000 ALTER TABLE `competency` DISABLE KEYS */;
-INSERT INTO `competency` VALUES (1,'calculer',10),(2,'compter',11),(3,'ecrire',12),(4,'lire',13);
+INSERT INTO `competency` VALUES (1,'calculer',20),(2,'compter',21),(3,'ecrire',22),(4,'lire',23);
 /*!40000 ALTER TABLE `competency` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,6 +95,31 @@ LOCK TABLES `ressources` WRITE;
 /*!40000 ALTER TABLE `ressources` DISABLE KEYS */;
 INSERT INTO `ressources` VALUES (1,'la sequence','description sequence',NULL,'undefined','null',1,'rodolphe'),(10,'la terre','etude de la terre','exo_4545','undefined','0',2,'rodolphe'),(11,'les calculs','apprendre les calculs','exo_4356','undefined','1',2,'rodolphe'),(12,'les maths','faire des maths','exo_1234','undefined','2',2,'rodolphe'),(13,'le bingo','jouer au bingo','exo_3243','undefined','3',2,'rodolphe');
 /*!40000 ALTER TABLE `ressources` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seq`
+--
+
+DROP TABLE IF EXISTS `seq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seq` (
+  `unitId` int(11) NOT NULL,
+  `resId` int(11) NOT NULL,
+  `unitOrder` int(11) DEFAULT NULL,
+  PRIMARY KEY (`unitId`,`resId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seq`
+--
+
+LOCK TABLES `seq` WRITE;
+/*!40000 ALTER TABLE `seq` DISABLE KEYS */;
+INSERT INTO `seq` VALUES (10,20,0),(11,21,0),(11,22,1),(12,22,0),(13,23,0);
+/*!40000 ALTER TABLE `seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -161,6 +186,7 @@ CREATE TABLE `unit` (
   `unitId` int(11) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
   `url` varchar(45) DEFAULT NULL,
+  `urlThumbnail` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`unitId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -171,7 +197,7 @@ CREATE TABLE `unit` (
 
 LOCK TABLES `unit` WRITE;
 /*!40000 ALTER TABLE `unit` DISABLE KEYS */;
-INSERT INTO `unit` VALUES (10,'les formes','eleves_unites'),(11,'les nombres','eleves_unites'),(12,'les jours','eleves_unites'),(13,'les semaines','eleves_unites');
+INSERT INTO `unit` VALUES (10,'les formes','eleves_unites','undefined'),(11,'les nombres','eleves_unites','undefined'),(12,'les jours','eleves_unites','undefined'),(13,'les semaines','eleves_unites','undefined');
 /*!40000 ALTER TABLE `unit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-30 13:24:16
+-- Dump completed on 2014-06-01 17:06:44

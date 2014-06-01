@@ -100,6 +100,37 @@ var Feature_Get3 = function(req, res) {
 	});
 
 } // end of Feature_Get3
+
+var Feature_GetUnit = function(req, res) {
+	console.log('Feature_GetUnit');
+	res.writeHead(200, {'Content-Type': 'application/javascript'});
+
+	var resultat;
+	  
+	connection.query('select * from seq where unitId=' + req.params.id , function(err, rows) {
+		console.log(err);
+
+		var result;
+		console.log(rows);
+		  
+		if (!err) {
+
+			//for (var i in rows) {result+=rows[i]};
+
+			result = { 'result' : 'success', 'unites' : rows};
+			
+		
+		}
+		else {
+			console.log("Query error ==> " + err);
+			result = { 'result' : 'failure'};
+		}
+
+		res.end(JSON.stringify(result));
+
+	});
+	}//end of Feature_GetUnit
+
 //recuperer les competences
 var Feature_GetCompetency = function(req, res) {
 	console.log('Feature_GetCompetency [' + req.params.id + ']');
@@ -187,3 +218,4 @@ exports.Feature_Post1 = Feature_Post1;
 exports.Feature_Get3 = Feature_Get3;
 exports.Feature_GetCompetency = Feature_GetCompetency;
 exports.Feature_GetWorkDone = Feature_GetWorkDone;
+exports.Feature_GetUnit = Feature_GetUnit;
