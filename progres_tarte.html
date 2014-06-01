@@ -1,5 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mon parcours_paul</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+	-->
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
+
+	<link href="./css/global.css" rel="stylesheet">
+	<link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./css/carousel.css" rel="stylesheet">
+    <link href="./css/right_bar.css" rel="stylesheet"/>
+    <link href="./css/projet_s4.css" rel="stylesheet"/>
+<!--     <link href="./css/eleve.css" rel="stylesheet"/>
+ -->    <link href="./css/theme_classe.css" rel="stylesheet"/>
+	
+	<!-- <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/> -->
+  </head>
+  <body style="padding-top: 70px; overflow: hidden;">
 <div id="progres_tarte">   <!-- debut de la tarte-->
-  <div>Pourcentage de progrès:
+  <div>Pourcentage de progrÃ¨s:
     <span id="affichageInteractive"></span>
     </div> 
     <div id="flotcontainer" style="width: 600px;height:400px; text-align: left;"></div> 
@@ -11,51 +38,97 @@
 <script src="http://www.pureexample.com/js/flot/jquery.flot.min.js"></script> 
 <script src="http://www.pureexample.com/js/flot/jquery.flot.pie.min.js"></script> 
 <script type="text/javascript"> 
-  var uniteLength;
-  var uniteEnCoursTitre;
+		
+    var afficheParcourUnites = function () {
 
-  var recupererIndexCurrentUnit = function(){
-    var myUrl_Get = "http://localhost:8111/platoatic/parcours ";
+			//var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
+                var myUrl_Get = "http://localhost:8111/platoatic/parcours ";
 
-    console.log("afficheParcourUnites : " + myUrl_Get);
+			console.log("afficheParcourUnites : " + myUrl_Get);
 
-    $.ajax({
-      url: myUrl_Get,
-      type: "GET",
-      dataType: "json",
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                        console.log("data.unite.length " + data.unite.length);     
+                        if (data.unite.length >0){
+                            var tableUnite = data.unite;
+                            afficheUniteParWorkdone(tableUnite);
+                            console.log("je rentre dans le if" + tableUnite);
+                        }
+                    },
+	            error: function() {
+	              console.log('afficheSequenceRessources : GET process error ');
+                     // $("#mesExercices").html('myUrl_Get');
+	             /* window.location.href = "./index.html";*/
+	            }
+	        }); /* end of ajax call */
 
-      success: function(data) {
-        uniteLength = data.unite.length;
+		}; // end of afficheSequenceRessources
 
-        if (uniteLength > 0){
-          var index = 0;
-          var UnitEnCours=0;
-          //recherche l'id de l'unite en cours - la premiere unite non faite
-          while (UnitEnCours == 0){
-            if (IsUniteDone(data.unite[index].UnitID)){
-                index++;
-            }
-            else{
-            UnitEnCours=data.unite[index].UnitID;
-            //index ++;
-            }     
-          }
-          uniteEnCoursTitre = data.unite[index].title;
-          return index;
-        } 
-      },
-      error:  function() {
-        console.log('afficheParcoursRessources : GET process error');
-        $("#mesProgres").html('myUrl_Get');
-      }
-    });  // fin d'appel Ajax
-  };   // fin de fonction recupererIndexCurrentUnit
+                var afficheUniteParWorkdone = function(tableUnite, displayUnit){
+                    var myUrl_Get = "http://localhost:8111/platoatic/workdone/" ;//+ unitId ;
+                    var index=0;
+                    var UniteEnCours=0;
+			console.log("afficheUniteParWorkdone : " + myUrl_Get);
 
-  var UnitEnCoursIndex = recupererIndexCurrentUnit();
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
 
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                    console.log("les données : " + tableUnite);
+                    
+                    //parcours de la tableUnite 
+                    while (index < tableUnite.length && UniteEnCours==0){
+                        var index2=0;
+                        var aEteFait=false;
+                        //parcours de la table workdone pour vérifier l'unite en cours
+                        //  si on trouve une correspondance, on sort de la boucle
+                        while (index2 < data.workDone.length && aEteFait==false){
+                            if (data.workDone[index2].id == tableUnite[index].unitId){
+                                aEteFait=true;
+                            }else{
+                                index2++;
+                            }
+                        }
+                        
+                        // si l'unite n'a pas ete faite, la considere comme unite en cours
+                        if (aEteFait==false){
+                            UniteEnCours=tableUnite[index].unitId;
+                        }else{index++;}
+                    }
+ 
+                    var uniteLength = tableUnite.length;
+                    var indexCurrentUnit=index;
+                    var titleCurrentUnit=tableUnite[index].title;
+                    afficherPieDiagramm(uniteLength, indexCurrentUnit, titleCurrentUnit);
+                    
+                    },
+                    error : function(){
+                        console.log('IsUniteDone : GET process error');
+                    }
+                }); //end of Ajax call
+                
+                };
+                
+    
+var afficherPieDiagramm = function(uniteLength, UnitEnCoursIndex, uniteEnCoursTitre){
   $(function () 
   { var data = [
-      {label: "à faire", data: uniteLength - UnitEnCoursIndex, color: 'gray'}, 
+      {label: "Ã  faire", data: uniteLength - UnitEnCoursIndex, color: 'gray'}, 
       {label: "en cours : " + uniteEnCoursTitre, data: 1, color: 'cyan'}, 
       {label: "fait", data: UnitEnCoursIndex - 1, color: 'green'}
       //{label: "data4", data: 40}, 
@@ -106,6 +179,16 @@
         html.push("<div style=\"flot:left;width:105px;height:20px;text-align:center;border:none;background-color:", obj.series.color, "\">", "<span style=\"font-weight:bold;color:white\">", obj.series.label, " (", percent, "%)</span>", "</div>"); 
         $("#affichageInteractive").html(html.join('')); 
       }); 
-  });   // fin de fontion recuperant le contenu de la tarte
+  });};
+  
+    $(document).ready(function(){
+    		
+    		afficheParcourUnites();
+			$('*').off('touchstart');
+			console.log('page eleve charg�e.');
+    	});   // fin de fontion recuperant le contenu de la tarte
 
-</script>     <!-- fin de la tarte-->
+</script> 
+
+  </body>
+</html><!-- fin de la tarte-->

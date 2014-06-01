@@ -1,25 +1,27 @@
 <%
-if (data.unite.length>0){
+console.log("je suis dans le fichier");
+if (data.length>0){
 index=0;
-    while(data.unite[index].UnitID != CurrentUnite+1){
-                        if(data.unite[index].urlThumbnail!="undefined")
+console.log("je suis dans le fichier");
+    while(data[index].unitId != CurrentUnite){
+                        if(data[index].urlThumbnail!="undefined")
 			{
-				var typePath = UrlThumbnailType.sequence + data.ressources[index].urlThumbnail;
+				var typePath = UrlThumbnailType.sequence + data[index].urlThumbnail;
 			}else{
 				var typePath = noUrlThumbnailType.sequence;
 			}
 %>
-			<div class="accordion" id="accordion_<%=data.unite[index].UnitID%>">
+			<div class="accordion" id="accordion_<%=data[index].unitId%>">
 			  	<div class="accordion-group">
 					<div class="accordion-heading">
-						<a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./eleve_unites.html?&exo_id=<%=data.unite[index].UnitID%>">
+						<a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./eleve_unites.html?&exo_id=<%=data[index].unitId%>">
 							<ul class="inline">
 								<li class="img_unite">
 									<img src="<%=typePath%>" border="0" alt="blank image">
 								</li>
 								<li class="info_unite">
-									<div class="titre"><%=unescape(data.unite[index].title)%></div>
-									<!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
+									<div class="titre"><%=unescape(data[index].unitId)%></div>
+									<!--<div class="desc"><%=unescape(data[index].unitId)%></div>-->
 								</li>
 							</ul>
 						</a>
@@ -30,15 +32,15 @@ index=0;
 <%  index++;
     }
 
-while(index< data.unite.length){
-                        if(data.unite[index].urlThumbnail!="undefined")
+while(index< data.length){
+                        if(data[index].url!="undefined")
 			{
-				var typePath = UrlThumbnailType.sequence + data.ressources[index].urlThumbnail;
+				var typePath = UrlThumbnailType.sequence + data[index].url;
 			}else{
 				var typePath = noUrlThumbnailType.sequence;
 			}
 %>
-			<div class="accordion" id="accordion_<%=data.unite[index].UnitID%>">
+			<div class="accordion" id="accordion_<%=data[index].unitId%>">
 			  	<div class="accordion-group">
 					<div class="accordion-heading">
 						<div class="accordion-toggle acc_sequence thumbnail" style="background: gray; color: black" >
@@ -47,8 +49,8 @@ while(index< data.unite.length){
 									<img src="<%=typePath%>" border="0" alt="blank image">
 								</li>
 								<li class="info_unite">
-									<div class="titre"><%=unescape(data.unite[index].title)%></div>
-									<!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
+									<div class="titre"><%=unescape(data[index].title)%></div>
+									<!--<div class="desc"><%=unescape(data[index].title)%></div>-->
 								</li>
 							</ul>
 						</div>

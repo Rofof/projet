@@ -1116,69 +1116,13 @@ var updateSessionUserInfo = function(nom, prenom) {
             		withCredentials : true
           		},*/	            
 	            success: function(data) {
-                        
-                        
-                   console.log(data.unite.length);     
-if (data.unite.length >0){
-    var index = 0;
-    var UnitEnCours=0;
-console.log("je rentre dans le if");
-
-    console.log("bonjour" + IsUniteDone(data.unite[index].unitId));
-    //recherche l'id de l'unite en cours - la premiere unite non faite
-        while (UnitEnCours == 0){
-        if (IsUniteDone(data.unite[index].unitId)){
-            index++;
-
-
-        }else{
-            UnitEnCours=data.unite[index].unitId;
-        }     
-    }
-    console.log("UnitEnCours :" + UnitEnCours);
-    var input={
-        "data" : data,
-        "CurrentUnite" : UnitEnCours
-    }
-    
-    var result = new EJS({url :'template_eleve_parcours.ejs'}).render(input);
-    
-    displayUnit.html(result);
-}
-//            var input = {
-//                "data" : data,
-//                "mode" : 'workdone_true'
-//            }
-//            var result=new EJS({url: 'template_eleve_parcours_unite'}).render(input);
-//            displayUnit.html(result);
-//        }else{
-//            var input = {
-//                "data" : data,
-//                "mode" : 'workdone_false'
-//            }
-//            var result=new EJS({url: 'template_eleve_parcours_unite'}).render(input);
-//            displayUnit.html(result);
-//        }
-//        index++;
-//    }
-}
-
-//	            	var input1 = {
-//			    		"data" : data,
-//			    		"mode" : ""
-//			    	}
-//                                var input2 = {
-//			    		"data" : data,
-//			    		"mode" : "test"
-//			    	}
-
-//	              	var result1 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input1);
-//                        var result2 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input2);
-	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
-                                            
-                                       // displayUnit.html(result1);
-
-	           	,
+                        console.log("data.unite.length " + data.unite.length);     
+                        if (data.unite.length >0){
+                            var tableUnite = data.unite;
+                            afficheUniteParWorkdone(tableUnite, displayUnit);
+                            console.log("je rentre dans le if" + tableUnite);
+                        }
+                    },
 	            error: function() {
 	              console.log('afficheSequenceRessources : GET process error ');
                      // $("#mesExercices").html('myUrl_Get');
@@ -1188,12 +1132,11 @@ console.log("je rentre dans le if");
 
 		}; // end of afficheSequenceRessources
 
-
-
-                var IsUniteDone = function (unitId){
-                     var myUrl_Get = "http://localhost:8111/platoatic/workdone/"+ unitId ;
-
-			console.log("IsUnitedone : " + myUrl_Get);
+                var afficheUniteParWorkdone = function(tableUnite, displayUnit){
+                    var myUrl_Get = "http://localhost:8111/platoatic/workdone/" ;//+ unitId ;
+                    var index=0;
+                    var UniteEnCours=0;
+			console.log("afficheUniteParWorkdone : " + myUrl_Get);
 
 	        $.ajax({
 	            url: myUrl_Get,
@@ -1206,12 +1149,37 @@ console.log("je rentre dans le if");
             		withCredentials : true
           		},*/	            
 	            success: function(data) {
-                    console.log("les donnéesé" + data.data.state);
-                        if (data.data.state=="done"){
-                            return data.data.state;
-                        }else {
-                            return false;
+                    console.log("les données : " + tableUnite);
+                    
+                    //parcours de la tableUnite 
+                    while (index < tableUnite.length && UniteEnCours==0){
+                        var index2=0;
+                        var aEteFait=false;
+                        //parcours de la table workdone pour vérifier l'unite en cours
+                        //  si on trouve une correspondance, on sort de la boucle
+                        while (index2 < data.workDone.length && aEteFait==false){
+                            if (data.workDone[index2].id == tableUnite[index].unitId){
+                                aEteFait=true;
+                            }else{
+                                index2++;
+                            }
                         }
+                        
+                        // si l'unite n'a pas ete faite, la considere comme unite en cours
+                        if (aEteFait==false){
+                            UniteEnCours=tableUnite[index].unitId;
+                        }else{index++;}
+                    }
+ 
+                    var input={
+                       "data" : tableUnite,
+                       "CurrentUnite" : UniteEnCours
+                    }
+                    
+                    console.log("je rentre dans template_eleve_parcours");
+                    var result = new EJS({url :'template_eleve_parcours.ejs'}).render(input);
+                    console.log("je sors de template_eleve_parcours");
+                    displayUnit.html(result);
                     },
                     error : function(){
                         console.log('IsUniteDone : GET process error');
@@ -1219,6 +1187,8 @@ console.log("je rentre dans le if");
                 }); //end of Ajax call
                 
                 };
+
+        
                 
                 
 		var displayCorrectionModal = function() {

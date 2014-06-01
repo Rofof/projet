@@ -112,7 +112,7 @@ var Feature_GetCompetency = function(req, res) {
 		  
 		if (!err) {
 
-			result = { 'result' : 'success', 'data' : rows};
+			result = { 'result' : 'success', 'donnees' : rows};
 			
 		
 		}
