@@ -1,4 +1,4 @@
-html,
+/*html,
 body {
   padding: 0;
   margin: 0;
@@ -8,8 +8,8 @@ body {
   text-align: center;
   font: 18px / 1.4 'Helvetica', 'Arial', sans-serif;
   padding-top: 60px;
-}
-ul {
+}*/
+/*ul {
   position: fixed;
   top: 0;
   left: 0;
@@ -38,7 +38,7 @@ li a {
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
-}
+}*/
 li a:hover,
 li a.active {
   background: #333333;

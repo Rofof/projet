@@ -11,7 +11,7 @@
   <body>
 
 
-<script src="./lib/jquery.js"></script>
+	<script src="./lib/jquery.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.js"></script>
 	<script src="./js/pie_chart/dist/angular.easypiechart.min.js"></script>
 
@@ -25,13 +25,6 @@
 	</div>
 
 
-<script>
-
-            
-
-
-            
-</script>
 
 
 
@@ -47,10 +40,9 @@
 	            dataType: "json",
 	            success: function(data) {
                         console.log("afficheCompetence : Get process functionne");
-                        progression = data.progress;
-                        console.log("progression: " +progression);
-
-
+                        //var progression = data.progress;
+                        $scope.$apply(function(){ $scope.percent = data.progress;
+                        	$scope.anotherPercent = data.progress;});
 
                     },
                     error : function(){
@@ -58,9 +50,9 @@
                     }
                 });
 
-		$scope.percent = progression;
 
-		$scope.anotherPercent = 56;
+		//$scope.percent = progression;
+        // $scope.anotherPercent = 23;
 
 			$scope.anotherOptions = {
 					animate:{
@@ -71,7 +63,7 @@
 					scaleColor:false,
 					lineWidth:20,
 					lineCap:'circle'
-				};
+				}; //fin de another option
 			}]); //fin de app.controler
 
 
