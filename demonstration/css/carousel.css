@@ -1,0 +1,143 @@
+
+<style>
+
+    div {
+      font-size: 75%;
+    }
+
+    h1 {
+      font-size: 150%;
+    }
+
+    h2 {
+      font-size: 120%;
+    }
+
+    .lead {
+      font-size: 100%;
+    }
+
+    .img-rounded-carousel .img-rounded {
+      height: 500px;
+      min-height: 500px;
+      max-height: 500px;
+    }
+    
+    .responsive-image { 
+      height:auto; 
+    }
+
+    .accordion-heading {
+      margin-bottom: 0px;
+    } 
+
+    .carousel {
+      margin-bottom: 0px;
+    } 
+
+    img.img-circle {
+      height: 200px;
+      margin-right: auto;
+      margin-left: auto; 
+      margin : 10px;
+      float : left;
+    }
+
+    img.banner {
+      display: block;
+      margin-right: auto;
+      margin-left: auto; 
+      margin-top: auto;
+      margin-bottom: auto;
+      height: 250px;
+    }
+
+    img.carousel {
+      display: block;
+      margin-right: auto;
+      margin-left: auto; 
+      margin-top: auto;
+      margin-bottom: auto;
+      height: 180px;
+    }
+
+    li.element_carousel {
+    	margin-left: 5px;
+    }
+
+    ul.element_carousel {
+      margin-left: 5px;      
+      overflow: visible ;
+    }
+
+    div.element_carousel {
+      height: 400px;
+    }
+
+    div.element_carousel_enseignant {
+      height: 310px;
+    }
+
+    a.element_carousel_btn {
+      height : 400px;
+    }
+
+    a.element_carousel_enseignant_btn {
+      height : 360px;
+    }
+
+    p.element_carousel_title {
+      height:30px;
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+
+    p.element_carousel_desc {
+      height:40px;
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+
+    .modal-header{
+      word-wrap: break-word;
+    }
+
+    div.navbar-inner{
+      border: 0px;
+    }
+
+    div.carousel{
+      margin: 10px;
+    }
+
+    .thumbnails > li {
+      margin-bottom: 0px;
+    }
+
+    .tagRessource {
+      border-style:solid;
+      border-width:1px;
+      border-radius: 5px;
+      border-color: RoyalBlue ;
+      background-color: lightskyblue;
+      margin-right:2px;
+    }
+
+    .tagNewRes {
+      padding-left: 180px;
+      width: 220px;
+    }
+    
+    .modal-body {
+      max-height: inherit;
+    }
+
+    .navbar-wrapper>.container, .navbar-fixed-bottom{
+      width: 100%
+    }
+
+    .navbar .brand {
+      text-shadow: inherit;
+    }
+
+</style>

@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mon casier_paul</title>
+    <title>Unite 14</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 
     <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -596,7 +596,7 @@ var updateSessionUserInfo = function(nom, prenom) {
                                         <!--<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">-->
                                         <div class="navbar accordion-heading accordion-toggle" >
                                             <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                <a class="brand">Nom d'unité (a changer)</a>
+                                                <a class="brand">Unité 14</a>
 
                                             </div>
                                         </div>
@@ -1164,7 +1164,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 
 var afficheCompetence = function(displayCompetence) {
-                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
+                    var myUrl_Get = "./parcours_2.json" ;//+ unitId ;
                     
 			console.log("afficheCompetence : " + myUrl_Get);
 
@@ -1183,7 +1183,7 @@ var afficheCompetence = function(displayCompetence) {
                         var input ={
                             "data" : data
                         }
-                        var result = new EJS({url:'template_eleve_parcours_competence.ejs'}).render(input);
+                        var result = new EJS({url:'template_eleve_parcours_competence_dem.ejs'}).render(input);
                         displayCompetence.html(result);
                     },
                     error : function(){
@@ -1193,7 +1193,7 @@ var afficheCompetence = function(displayCompetence) {
                 }
                 
                 var afficheProgressionParcours=function(displayProgres){
-                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
+                    var myUrl_Get = "./parcours_2.json" ;//+ unitId ;
                     
 			console.log("afficheProgresParcours : " + myUrl_Get);
 
@@ -1245,8 +1245,8 @@ var afficheCompetence = function(displayCompetence) {
 			    		"mode" : "test"
 			    	}
 
-	              	var result1 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input1);
-                        var result2 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input2);
+	              	var result1 = new EJS({url: 'template_eleve_unite_test_dem.ejs'}).render(input1);
+                        var result2 = new EJS({url: 'template_eleve_unite_test_dem.ejs'}).render(input2);
 	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
                                             
                                         displayUnit.html(result1);

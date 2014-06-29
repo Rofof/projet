@@ -668,8 +668,8 @@ var updateSessionUserInfo = function(nom, prenom) {
                             </div>
                           
                         </div>
-                        <div class="container_eleve">
-                            <div class="eleve_comp">
+                        <div class="container_eleve" style="overflow: auto; ">
+                            <div class="eleve_comp" style="display:inline-block; height: 250px;">
                             <div class="accordion item_ens NavDetailMenuInterne" id="accordionCompentence">
 				  				<div class="accordion-group">
 
@@ -714,7 +714,27 @@ var updateSessionUserInfo = function(nom, prenom) {
 								</div>
 							</div>
 
-                            </div>	
+                            </div>
+                      
+                            <div class="eleve_progress" style="overflow: auto; height: 250px;">
+                                <div class="accordion item_ens NavDetailMenuInterne" id="accordionProgress">
+                                    <div class="accordion-group">
+
+                                        <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCompentence" href="#collapseCompentence">
+                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+                                                <a class="brand">Progrès parcours</a>
+                                            </div>
+                                        </div>
+
+                                        <div id="collapseCompetence" class="accordion-body collapse in NavMenuInterne">
+                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+                                                <div id="mesProgres">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>		<!-- </div>/
 			      </div>
 			    </div>
@@ -1069,8 +1089,9 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 			if (activated == '1') {
 
-				afficheParcourUnites(pseudo, numParc, $('#mesUnites'));7
-                                afficheCompetence();
+				afficheParcourUnites(pseudo, numParc, $('#mesUnites'));
+                                afficheCompetence($('#mesCompetences'));
+                                afficheProgressionParcours($('#mesProgres'))
 				
 			}
 			else {
@@ -1198,9 +1219,8 @@ var updateSessionUserInfo = function(nom, prenom) {
                        "CurrentUnite" : UniteEnCours
                     }
                     
-                    console.log("je rentre dans template_eleve_parcours");
+
                     var result = new EJS({url :'template_eleve_parcours.ejs'}).render(input);
-                    console.log("je sors de template_eleve_parcours");
                     displayUnit.html(result);
                     },
                     error : function(){
@@ -1211,7 +1231,7 @@ var updateSessionUserInfo = function(nom, prenom) {
                 };
                 
 
-                var afficheCompetence = function() {
+                var afficheCompetence = function(displayCompetence) {
                     var myUrl_Get = "./parcours.json" ;//+ unitId ;
                     
 			console.log("afficheCompetence : " + myUrl_Get);
@@ -1228,78 +1248,43 @@ var updateSessionUserInfo = function(nom, prenom) {
           		},*/	            
 	            success: function(data) {
                         console.log("afficheCompetence : Get process functionne");
+                        var input ={
+                            "data" : data
+                        }
+                        var result = new EJS({url:'template_eleve_parcours_competence.ejs'}).render(input);
+                        displayCompetence.html(result);
                     },
                     error : function(){
                         console.log("afficheCompetence : Get process error");
                     }
                 });
                 }
-//                var afficheCompetences= function(noParc){
-//                    var index=0;
-//        
-//                    var tableauCompetence =new Array();
-//                    var tableauUnites=new Array();
-//                    var tableauRessources=new Array();
-//                    var tableauNomCompetences = new Array();
-//                   
-//                    
-//                    //permet de recuperer les unités dans un parcours
-//                    var myUrl_Get = "http://localhost:8111/platoatic/parcours ";
-//
-//			console.log("afficheCompetence : " + myUrl_Get);
-//
-//	        $.ajax({
-//	            url: myUrl_Get,
-//	            type: "GET",
-//	            dataType: "json",
-//	            //contentType: "application/json",
-//	            //crossDomain: true,
-//          		/*xhrFields: {
-//            		withCredentials : true
-//          		},*/	            
-//	            success: function(data) {
-//                     //creation d'un tableau contenant un unitId et un tableau de ressources associees 
-//                     //par unites dans le parcours
-//                    while (index<data.unite.length){
-//                        tableauCompetence[index]=tableauUnites;
-//                        tableauCompetence[index]["unitId"]=data.unite[index].unitId;
-//                        tableauCompetence[index]["ressources"]=tableauRessources;
-//                        console.log("test tableaux : "+ tableauCompetence[index].unitId +index);
-//                        index++;
-//                    }
-//                    var tabComp=tableauCompetence;
-//                    
-//                    console.log("premiere UnitId de la table :" + tabComp[0].unitId);
-//                    console.log("premiere UnitId de la table :" + tabComp[1].unitId);
-//                    recupererRessourcesPourCompetences(tabComp,tabComp[0].unitId);
-//              
-//                    },
-//                    error: function(){
-//                        console.log("afficheCompentence :Get process error");
-//                    }
-//                });//end Ajax Call
-//                }// end afficheCompetence
-//                
-//    
-//                var recupererRessourcesPourCompetences = function(tabComp,unitId){
-//                    
-//                    //recupere les ressources associés à une unité
-//                    var myUrl_Get = "http://localhost:8111/platoatic/unite/"+unitId;
-//			console.log("afficheCompetence : " + myUrl_Get);
-//
-//                    $.ajax({
-//                        url: myUrl_Get,
-//                        type: "GET",
-//                        dataType: "json",
-//                        //contentType: "application/json",
-//                        //crossDomain: true,
-//                            /*xhrFields: {
-//                               withCredentials : true
-//                            },*/	            
-//                        success: function(data) {},
-//                        error :function() {}
-//                    });
-//                 }
+                
+                var afficheProgressionParcours=function(displayProgres){
+                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
+                    
+			console.log("afficheProgresParcours : " + myUrl_Get);
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            //type: "GET",
+	            dataType: "json",
+
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                        var html = "<div class=\"span4\"><div style=\"display: inline-block; \">Progression sur le parcours</div><div class=\"progress progress-striped\" >  <div class=\"bar\" style=\"width: " + data.progress +"%;\">"+ data.progress + "%</div> </div></div>"
+                        displayProgres.html(html);
+                    },
+                    error : function(){
+                        console.log("afficheProgrèsParcours :Get process error");
+                    }
+                });
+                }
+//               
                 
 		var displayCorrectionModal = function() {
 

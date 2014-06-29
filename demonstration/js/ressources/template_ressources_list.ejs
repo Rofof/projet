@@ -1,0 +1,71 @@
+<%
+	index = 0;
+	indexCar = 0;
+	if ((data.ressources.length==0) && (ressource==false))
+	{
+%>
+		<div class="noRessources" style="padding: 10px; background: white;">
+			Aucune ressource trouvée.<br/>
+			Glissez-déposez vos ressources ici.
+		</div>
+<%	
+	}
+	else 
+	{
+		while(index < data.ressources.length) {
+
+			var pathData="data-id='"+data.ressources[index].id+"' data-resid='"+data.ressources[index].id+"'";
+			var clickModif = "onclick=\"showDetailModif("+data.ressources[index].id+", this)\"";
+			var add_class;
+
+			if(mode=="enseignant_detail"){
+				var add_class="sequence_detail";
+				//clickModif = "";
+			}
+
+			if(data.ressources[index].resType == resType.sequence)
+			{
+				if (mode == "enseignant")
+				{
+					pathData = "data-id='"+data.ressources[index].id+"' data-title='"+data.ressources[index].title+"' data-resid='"+data.ressources[index].id+"'";
+				}
+				else if (mode == "classe" || mode=="enseignant_detail")
+				{
+					pathData = "data-id='"+data.ressources[index].id+"' data-eleveid='"+data.ressources[index].id+"' name='Assignment'";
+				}
+			}
+
+			if (mode == "eleve_detail"){
+%>
+					<div class="rightBar_ressource thumbnail <%=add_class%> ressource<%=data.ressources[index].resType%>" <%=pathData%>>
+
+<%			}else{
+
+				if(pseudo == data.ressources[index].identifiant) {
+					var owner = 1;
+				} else {
+					var owner = 0;
+				}
+%>
+				<div class="rightBar_ressource thumbnail draggable_res draggable_eleve <%=add_class%> ressource<%=data.ressources[index].resType%>" <%=pathData%> data-seqorder="<%=data.ressources[index].seqOrder%>" <%=clickModif%> data-mode="<%=mode%>" data-own="<%=owner%>">
+<%			}
+
+			var input = {
+	    		'data' : data,
+	    		'cpt' : index,
+	    		'mode' : mode,
+	    		'pseudo' : pseudo
+	    	};
+
+			var result = new EJS({url: 'js/ressources/template_ressource_list.ejs'}).render(input);
+%>
+					<%= result %>
+<%
+			index++;
+			indexCar++;
+%>
+			</div>
+<%
+		}
+	}
+%>

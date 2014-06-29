@@ -1,0 +1,48 @@
+<% 
+	if(data.ressources.length > 0){
+if (mode=="test")
+{
+		index = data.ressources.length-1;
+                limite =0;
+}else{
+                index = 0;
+                limite=1;
+}
+		
+while (index < data.ressources.length-limite){
+			if(data.ressources[index].urlThumbnail!="undefined")
+			{
+				var typePath = UrlThumbnailType.sequence + data.ressources[index].urlThumbnail;
+			}else{
+				var typePath = noUrlThumbnailType.sequence;
+			}
+%>
+			<div class="accordion" id="accordion_<%=data.ressources[index].id%>">
+			  	<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./Ressources/exercices/exo_<%=data.ressources[index].id%>?&exo_id=<%=data.ressources[index].id%>">
+							<ul class="inline">
+								<li class="img_unite">
+									<img src="<%=typePath%>" border="0" alt="blank image">
+								</li>
+								<li class="info_sequence">
+									<div class="titre"><%=unescape(data.ressources[index].title)%></div>
+									<div class="desc"><%=unescape(data.ressources[index].description)%></div>
+								</li>
+							</ul>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+<%
+	index++;	
+	}
+} else {
+%>
+		<div style="padding: 8px; color: black;">
+			Aucun travaux à faire.
+		</div>
+<%	
+	}
+%>

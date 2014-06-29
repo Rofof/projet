@@ -1,0 +1,69 @@
+<%
+console.log("je suis dans le fichier");
+if (data.length>0){
+index=0;
+    while(data[index].unitId != CurrentUnite){
+                        if(data[index].urlThumbnail!="undefined")
+			{
+				var typePath = UrlThumbnailType.sequence + data[index].urlThumbnail;
+			}else{
+				var typePath = noUrlThumbnailType.sequence;
+			}
+%>
+			<div class="accordion" id="accordion_<%=data[index].unitId%>">
+			  	<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./eleve_unites_<%=data[index].unitId%>.html">
+							<ul class="inline">
+								<li class="img_unite">
+									<img src="<%=typePath%>" border="0" alt="blank image">
+								</li>
+								<li class="info_unite">
+									<div class="titre"><%=unescape(data[index].title)%></div>
+									<!--<div class="desc"><%=unescape(data[index].unitId)%></div>-->
+								</li>
+							</ul>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+<%  index++;
+    }
+
+while(index< data.length){
+                        if(data[index].urlThumbnail!="undefined")
+			{
+				var typePath = UrlThumbnailType.sequence + data[index].urlThumbnail;
+			}else{
+				var typePath = noUrlThumbnailType.sequence;
+			}
+%>
+			<div class="accordion" id="accordion_<%=data[index].unitId%>">
+			  	<div class="accordion-group">
+					<div class="accordion-heading">
+						<div class="accordion-toggle acc_sequence thumbnail" style="background: gray; color: black" >
+							<ul class="inline">
+								<li class="img_unite">
+									<img src="<%=typePath%>" border="0" alt="blank image">
+								</li>
+								<li class="info_unite">
+									<div class="titre"><%=unescape(data[index].title)%></div>
+									<!--<div class="desc"><%=unescape(data[index].title)%></div>-->
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+<%  index++;
+}
+}  else {
+%>
+		<div style="padding: 8px; color: black;">
+			Aucun travaux à faire.
+		</div>
+<%	
+	}
+%>

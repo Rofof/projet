@@ -1,10 +1,9 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mon casier_paul</title>
+    <title>Mon casier</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 
     <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -20,15 +19,12 @@
     <link href="./css/bootstrap-responsive.css" rel="stylesheet">
     <link href="./css/carousel.css" rel="stylesheet">
     <link href="./css/right_bar.css" rel="stylesheet"/>
-    <link href="./css/projet_s4.css" rel="stylesheet"/>
-<!--     <link href="./css/eleve.css" rel="stylesheet"/>
- -->    <link href="./css/theme_classe.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-
+    <link href="./css/eleve.css" rel="stylesheet"/>
+    <link href="./css/theme_classe.css" rel="stylesheet"/>
 	
-	<!-- <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/> -->
+	<link href="http://mookitek.fr:8111/platoatic/users/A/139/theme.css" rel="stylesheet"/>
   </head>
-  <body style="padding-top: 70px; overflow;">
+  <body style="padding-top: 70px; overflow: hidden;">
 
 	<div class="container">
 
@@ -41,7 +37,7 @@
     <div class="modal-header">
         <h3 id="selectClasseModalLabel">
 
-            Quelle classe souhaitez-vous int�grer ?
+            Quelle classe souhaitez-vous intégrer ?
 
         </h3>
     </div>
@@ -58,7 +54,7 @@
                         <select id="classList">
                             <option value="0">
 
-                                 Espace cr�ateur 
+                                 Espace créateur 
 
                             </option>
                             <option value="1">
@@ -83,7 +79,7 @@
 <!--modalLogin-->
 
 
-<div id="modalLogin" class="modal hide fade">
+<div id="modalLogin"class="modal hide fade">
 
       <div class="modal-header">    
           <h3>Connectez-vous :</h3>
@@ -153,9 +149,9 @@
 
                                           <script>
 
-                        var nom = 'Marston' ;
-                        var prenom = 'John' ;
-                        var pseudo = 'Johnny' ;
+                        var nom = 'A' ;
+                        var prenom = 'A' ;
+                        var pseudo = 'A' ;
                         var typeUser = '1'; 
 
                         </script>
@@ -184,9 +180,8 @@
     </div><!-- /.navbar-wrapper -->
 
 <!--modale de gestion de compte:equivalent-->
-<!--<div id='modalGestion'class='modal hide fade' style='width:400px;margin-left: auto;' >-->
 
-<div id='modalGestion' class='modal hide fade' style='width:400px;margin-left: auto;' >
+<div id='modalGestion'class='modal hide fade' style='width:400px;margin-left: auto;' >
   <!-- <div class='modal-header'>    
       <h3>Vos parametres de connexion :</h3>
   </div> -->
@@ -200,11 +195,11 @@
           </div>
           <div class="span8">
             <div>
-              <span style="font-weight:bold">John Marston</span>            </div>
+              <span style="font-weight:bold">A A</span>            </div>
             <div>
-              projet S4_3            </div>
+              projet S4_1            </div>
             <div>
-              �l�ve            </div>
+              élève            </div>
           </div>
         </div>      
       </div>
@@ -214,7 +209,7 @@
       <div class='control-group'>
           <div class='controls'>
             <button id='changepsw' type='submit' class='btn btn-default' align='right' onclick='showInfoUser(pseudo, nom, prenom,typeUser )' >Mot de passe</button> 
-            <button id='disconnect'type='submit' class='btn btn-primary' align='left' onClick='disconnect();' >D�connexion</button>
+            <button id='disconnect'type='submit' class='btn btn-primary' align='left' onClick='disconnect();' >Déconnexion</button>
           </div>
       </div>
     </div>
@@ -227,16 +222,16 @@
    
 
     <script src="./lib/jquery.js"></script>
-
+  
     <script>
 
  //initialization popover en html
-var initializePopOverUser = function () {
+ var initializePopOverUser = function () {
 
 	if((!navigator.userAgent.match(/iPhone/i))&&(!navigator.userAgent.match(/iPod/i))&&(!navigator.userAgent.match(/iPad/i))){
                 var contenuPopover = $('#donneesCompte').html();
                 contenuPopover+='<div><input class="btn" align="left" onclick="showInfoUser(pseudo, nom, prenom,typeUser)" type="button" name="mot_de_passe" value="Modifier le profil"/>';
-                contenuPopover+='<input style="float : right;" class="btn btn-primary" type="button" onClick="disconnect();" name="se_deconnecter" value="D�connexion"/></div>';
+                contenuPopover+='<input style="float : right;" class="btn btn-primary" type="button" onClick="disconnect();" name="se_deconnecter" value="Déconnexion"/></div>';
     // $('#user_button').attr('data-content', contenuPopover);
 
                 $("#user_button").popover({
@@ -259,6 +254,7 @@ var initializePopOverUser = function () {
                 });
          }
  } // end of initializePopOverUser
+
 
 
 //bouton de changement de mot de passe
@@ -322,7 +318,7 @@ var cacherLoginPopup = function(){
 
 //fonction de deconnection
 
- var disconnect = function() {
+var disconnect = function() {
 
         var ip = "37.187.46.97";
         var myUrl_Post = cfgWs.prefix+"/platoatic/logout";
@@ -371,11 +367,9 @@ var authentification = function (){
     var enterUserEnvironment = function(next, params) {
 
             if(next=="null") {
-              //window.location.href = "./signin.php?"+params;
-              window.location.href = "./eleve_paul.html";
+              window.location.href = "./signin.php?"+params;
             } else {
-              //window.location.href = "./signin.php?"+params+"&next="+next;
-              window.location.href = "./eleve_paul.html";
+              window.location.href = "./signin.php?"+params+"&next="+next;
             }
         }; 
 
@@ -388,10 +382,9 @@ var authentification = function (){
 
          
 
-              //var pseudo = $("input[id=pseudo]").val();
-				var pseudo = "Johnny";
-              //var pwd = $("input[id=pwd]").val();
-			  var pwd = "johnny"
+              var pseudo = $("input[id=pseudo]").val();
+             
+              var pwd = $("input[id=pwd]").val();
 
 
                  
@@ -425,12 +418,12 @@ var authentification = function (){
         
             if (data.found == true) {
 
-              console.log("Bienvenue � <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
+              console.log("Bienvenue à <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
               params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
               
               if (data.ids.type == 2) {
                 
-                console.log("Vous �tes enseignant.");
+                console.log("Vous êtes enseignant.");
                 params += "&enseignant=true";
                 params += "&profil=" + data.ids.profileId;
                 next = "enseignant.html";
@@ -439,7 +432,7 @@ var authentification = function (){
                   
                   params += "&noClasse="+data.infoClasse[0].noClasse;
                   params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
+                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
                   params += "&activated="+data.infoClasse[0].activated;
 
 
@@ -458,7 +451,7 @@ var authentification = function (){
 
                     params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
                     params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
+                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'élève.
                     params += "&activated="+data.infoClasse[$('#classList').val()].activated;
 
 
@@ -521,7 +514,7 @@ var authentification = function (){
               
             } else {
 
-              console.log("Vous n'�tes pas enregistr�s.");
+              console.log("Vous n'êtes pas enregistrés.");
               window.location.href = "./signin.php";
             }
 
@@ -543,12 +536,12 @@ var updateSessionUserInfo = function(nom, prenom) {
 
   var params = "&nom=" + nom + "&prenom=" + prenom;
   params += "&enseignant="+((typeUser == '2')?"true":"false");
-  params += "&pseudo=Johnny";
+  params += "&pseudo=A";
   params += "&profil=";
-  params += "&noClasse=141";
-  params += "&libelleClasse=projet S4_3";
+  params += "&noClasse=139";
+  params += "&libelleClasse=projet S4_1";
   params += "&activated=1";
-  params += "&pseudoProf=rodolphe";
+  params += "&pseudoProf=thi";
 
   var url=document.URL.split('/')[document.URL.split('/').length-1];
   params += "&next="+url;
@@ -571,7 +564,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 </script>
 
-	    <div class="eleve" >
+	    <div class="eleve">
 	  		<!-- <div class="accordion item_ens" id="accordionEleve">
 			  <div class="accordion-group NavMenuInterne">
 
@@ -584,179 +577,95 @@ var updateSessionUserInfo = function(nom, prenom) {
 			    <div id="collapseWork" class="accordion-body collapse in">
 			      <div class="accordion-inner">
 			      	<div class="accordion-group"> -->
-                        <div class="container_eleve">
-                            <div class="eleve_seq">
 
-                                <!--		tenter d'enlever accordion classe		      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionExercice">-->
-                                <div class=" accordion item_ens NavDetailMenuInterne" id="accordionExercice">
+			      		<div class="eleve_seq">
 
-                                    <!--                                                    <div class="accordion-group">-->
-                                    <div >
-
-                                        <!--<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">-->
-                                        <div class="navbar accordion-heading accordion-toggle" >
-                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                <a class="brand">Nom d'unité (a changer)</a>
-
-                                            </div>
-                                        </div>
-
-                                        <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne" style="overflow-y: auto; overflow-style: move ">
-                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                                                <div id="mesExercices">
-                                                    <!-- interieur du collapse �l�ves -->
-                                                    <div class="accordion" id="accordion_1">
-                                                        <div class="accordion-group">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_1">
-                                                                    <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
-                                                                        </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test1</div>
-                                                                            <div class="desc">test d'unité_1</div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_1" class="accordion-body collapse">
-                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_1" class="carousel-inner eleve_sequence_content" data-resid="1" >
-                                                                    </div>
-                                                                </div>
-                                                                <!-- </div> -->	
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion" id="accordion_2">
-                                                        <div class="accordion-group">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_2">
-                                                                    <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
-                                                                        </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test2</div>
-                                                                            <div class="desc">test d'unité_2</div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_2" class="accordion-body collapse">
-                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_2" class="carousel-inner eleve_sequence_content" data-resid="2" >
-                                                                    </div>
-                                                                </div>
-                                                                <!-- </div> -->	
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                   <div class="accordion" id="accordion_3">
-                                                        <div class="accordion-group">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
-                                                                    <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
-                                                                        </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test3</div>
-                                                                            <div class="desc">test d'unité_3</div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_3" class="accordion-body collapse">
-                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
-                                                                    </div>
-                                                                </div>
-                                                                 </div> 	
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="eleve_test">
-
-                                <div class="accordion item_ens NavDetailMenuInterne" id="accordionTest">
-                                    <div class="accordion-group">
-
-                                        <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionTest" href="#collapseTest">
-                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                <a class="brand">Test de l'unité</a>
-                                            </div>
-                                        </div>
-
-                                        <div id="collapseTest" class="accordion-body collapse in NavMenuInterne">
-                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                                                <div id="monTest">
-                                                    <!-- interieur du collapse �l�ves -->
-                                                                                                       <div class="accordion" id="accordion_3">
-                                                        <div class="accordion-group">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
-                                                                    <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
-                                                                        </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test3</div>
-                                                                            <div class="desc">test d'unité_3</div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_3" class="accordion-body collapse">
-                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
-                                                                    </div>
-                                                                </div>
-                                                                 </div> 	
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="container_eleve">
-                            <div class="eleve_comp" style="height: 250px; overflow: auto;">
-                            <div class="accordion item_ens NavDetailMenuInterne" id="accordionCompentence">
+				      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionExercice">
 				  				<div class="accordion-group">
 
-								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCompentence" href="#collapseCompentence">
+								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">
 										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-											<a class="brand">Diagrammes compétences</a>
+											<a class="brand">Travail à faire</a>
 										</div>
 									</div>
 
-								    <div id="collapseCompetence" class="accordion-body collapse in NavMenuInterne">
+								    <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne">
 								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-								      	<div id="mesCompetences">
-								      		<!-- interieur du collapse competences -->
+								      	<div id="mesExercices">
+								      		<!-- interieur du collapse élèves -->
+                                                                                <div class="accordion-group">
+
+                                                                                    <div class="accordion-heading">
+                                                                                        <a class="accordion-toggle acc_sequence thumbnail" href="./eleve_parcours.html"  style="background: white;">
+                                                                                            <ul class="inline">
+                                                                                                <li class="img_sequence">
+                                                                                                    <img border="0" alt="blank image" src="./img/wordcloud_sequence.jpg"></img>
+                                                                                                </li>
+                                                                                                <li class="info_sequence">
+                                                                                                    <div class="titre" style="font-size: 18px;font-weight: bold;">
+
+                                                                                                        Parcours 1
+
+                                                                                                    </div>
+                                                                                                    <div class="desc">
+
+                                                                                                        Test du parcours 1
+
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                        
+                                                                                </div>
+                                                                                <div class="accordion-group">
+
+                                                                                    <div class="accordion-heading">
+                                                                                        <a class="accordion-toggle acc_sequence thumbnail" href="./eleve_parcours_2.html"  style="background: white;">
+                                                                                            <ul class="inline">
+                                                                                                <li class="img_sequence">
+                                                                                                    <img border="0" alt="blank image" src="./img/wordcloud_sequence.jpg"></img>
+                                                                                                </li>
+                                                                                                <li class="info_sequence">
+                                                                                                    <div class="titre" style="font-size: 18px;font-weight: bold;">
+
+                                                                                                        Parcours 2
+
+                                                                                                    </div>
+                                                                                                    <div class="desc">
+
+                                                                                                        Test du parcours 2
+
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                        
+                                                                                </div>
+								      	</div>
+								      </div>
+								    </div>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="eleve_cor">
+
+				      		<div class="accordion item_ens NavDetailMenuInterne" id="accordionCorrections">
+				  				<div class="accordion-group">
+
+								  	<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionExercice" href="#collapseCorrections">
+										<div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+											<a class="brand">Travail effectué</a>
+										</div>
+									</div>
+
+								    <div id="collapseCorrections" class="accordion-body collapse NavMenuInterne">
+								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+								      	<div id="mesCorrections">
+								      		<!-- interieur du collapse élèves -->
 								        	<div class="load">
 						        				<img src="./img/gif-load.GIF" />
 						        			</div>
@@ -767,36 +676,8 @@ var updateSessionUserInfo = function(nom, prenom) {
 								</div>
 							</div>
 
-                            </div>	<!-- </div> de class "eleve_comp"-->
-        <div class="eleve_progress">
-          <div class="accordion item_ens NavDetailMenuInterne" id="accordionCompentence">
-                  <div class="accordion-group">
-
-                    <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCompentence" href="#collapseCompentence">
-                    <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                      <a class="brand">Progrès parcours</a>
-                    </div>
-                  </div>
-
-                    <div id="collapseCompetence" class="accordion-body collapse in NavMenuInterne">
-                      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                        <div id="mesProgres">
-                          <!-- interieur du collapse competences -->
-                          <!--<div class="load">
-                            <img src="./img/gif-load.GIF">
-                          </div>-->
-
-                        </div>
-                      </div>
-                    </div>
-
-                </div>
-              </div>
-
-        </div>
-
-
-      </div>		<!-- </div> de class "container_eleve"/
+						</div>
+					<!-- </div>/
 			      </div>
 			    </div>
 			  </div>
@@ -808,7 +689,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 		<!-- Modaux de la page  -->
 		<!-- RESSOURCES -->
 
-  <!-- Modal cr�ation nouvelle ressource -->
+  <!-- Modal création nouvelle ressource -->
   	<div id="modalNewRessource" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="resModalLabel" aria-hidden="true">
   	</div>
 
@@ -827,7 +708,7 @@ var updateSessionUserInfo = function(nom, prenom) {
   			</div>
   		</div>
   		<div class="modal-footer">
-  			<input id="search_modal_input" type="text" class="search-query pull-left" placeholder="Mots cl�s"/>
+  			<input id="search_modal_input" type="text" class="search-query pull-left" placeholder="Mots clés"/>
         <span class="pull-left" style="padding-left:10px;">
           <input type="checkbox" id="modal_search_ressource" class="img_modal_search_checkbox" checked> Mes images 
           <input type="checkbox" id="modal_search_platform" class="img_modal_search_checkbox" checked> Mookitek 
@@ -939,21 +820,21 @@ var updateSessionUserInfo = function(nom, prenom) {
 
   <div id="exportModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
       <div class="modal-header">
-        <h3>Export du travail pr�par�</h3>
+        <h3>Export du travail préparé</h3>
       </div>
       <div class="modal-body" style="min-height : 200px;">
         <dl class="dl-horizontal">
           <dt>Etape 1</dt>
-          <dd>Pr�paration du dossier</dd>
+          <dd>Préparation du dossier</dd>
           <dd  style="height:40px;">
             <div id="spinPrepareExportTar"></div>
           </dd>
           <dt class="exportModalStep2">Etape 2</dt>
-          <dd class="exportModalStep2">T�l�chargement du dossier</dd>
-          <dd class="exportModalStep2">T�l�charger le fichier sur votre ordinateur en cliquant sur le bouton de t�l�chargement ci-dessous. Appuyer ensuite sur le bouton ""</dd>
+          <dd class="exportModalStep2">Téléchargement du dossier</dd>
+          <dd class="exportModalStep2">Télécharger le fichier sur votre ordinateur en cliquant sur le bouton de téléchargement ci-dessous. Appuyer ensuite sur le bouton ""</dd>
         <dd class="exportModalStep2"><a id="btnDownloadExportFile" class="btn btn-large btn-block btn enabled" href=""><i class="icon-download"></i></a></dd>
           <dt class="exportModalStep3">Etape 3</dt>
-          <dd class="exportModalStep3">V�rifier le t�l�chargement du fichier puis cliquer sur le bouton ci-dessous</dd>
+          <dd class="exportModalStep3">Vérifier le téléchargement du fichier puis cliquer sur le bouton ci-dessous</dd>
           <dd class="exportModalStep3"><a id="btnDownloadChecked" class="btn btn-large btn-block btn" href=""><i class="icon-check"></i></a></dd>
           <dt class="exportModalStep4">Etape 4</dt>
           <dd class="exportModalStep4">Suppression du dossier d'export du serveur.</dd>
@@ -962,10 +843,10 @@ var updateSessionUserInfo = function(nom, prenom) {
       </div>
   </div>
 
-  <!--[DEBUT] Modal pour l'ajout d'un �l�ve-->
+  <!--[DEBUT] Modal pour l'ajout d'un élève-->
   <div id="ajoutEleveModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
       <div class="modal-header">
-        <h3>Ajout d'un �l�ve</h3>
+        <h3>Ajout d'un élève</h3>
       </div>
       <div class="modal-body" style="min-height : 200px;">
         <div class="tab-pane" id="tab_ajout_eleve">
@@ -973,13 +854,13 @@ var updateSessionUserInfo = function(nom, prenom) {
             <div class="control-group">
               <label class="control-label" for="inputNom">Nom</label>
               <div class="controls">
-                <input type="text" id="inputNom" placeholder="Nom de l'�l�ve">
+                <input type="text" id="inputNom" placeholder="Nom de l'élève">
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputPrenom">Pr�nom</label>
+              <label class="control-label" for="inputPrenom">Prénom</label>
               <div class="controls">
-                <input type="text" id="inputPrenom" placeholder="Pr�nom de l'�l�ve">
+                <input type="text" id="inputPrenom" placeholder="Prénom de l'élève">
               </div>
             </div>
             <div class="control-group">
@@ -997,9 +878,9 @@ var updateSessionUserInfo = function(nom, prenom) {
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputPasswordVerif">V�rification du mot de passe</label>
+              <label class="control-label" for="inputPasswordVerif">Vérification du mot de passe</label>
               <div class="controls">
-                <input type="password" id="inputPasswordVerif" placeholder="V�rification du mot de passe">
+                <input type="password" id="inputPasswordVerif" placeholder="Vérification du mot de passe">
                 <div class="for-pwd-verif"></div>
               </div>
             </div>
@@ -1015,9 +896,9 @@ var updateSessionUserInfo = function(nom, prenom) {
           </form>
       </div>
   </div>
-  <!--[FIN] Modal pour l'ajout d'un �l�ve-->
+  <!--[FIN] Modal pour l'ajout d'un élève-->
 
-  <!--[DEBUT] Modal pour la modification de l'�l�ve-->
+  <!--[DEBUT] Modal pour la modification de l'élève-->
   <div id="modifUserModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
       <div class="modal-header">
         <h3>Modification d'un utilisateur</h3>
@@ -1032,7 +913,7 @@ var updateSessionUserInfo = function(nom, prenom) {
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputPrenomModif">Pr�nom</label>
+            <label class="control-label" for="inputPrenomModif">Prénom</label>
             <div class="controls">
               <input type="text" id="inputPrenomModif">
             </div>
@@ -1051,9 +932,9 @@ var updateSessionUserInfo = function(nom, prenom) {
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputPasswordVerifModif">V�rification du mot de passe</label>
+            <label class="control-label" for="inputPasswordVerifModif">Vérification du mot de passe</label>
             <div class="controls">
-              <input type="password" id="inputPasswordVerifModif" placeholder="V�rification du mot de passe">
+              <input type="password" id="inputPasswordVerifModif" placeholder="Vérification du mot de passe">
               <div class="for-pwd-verif-modif"></div>
             </div>
           </div>
@@ -1070,12 +951,12 @@ var updateSessionUserInfo = function(nom, prenom) {
       </form>
     </div>
   </div>
-  <!--[FIN] Modal pour la modification de l'�l�ve-->
+  <!--[FIN] Modal pour la modification de l'élève-->
 
   <div id="correctionModal" class="modal hide fade">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Le travail d�j� fait</h3>
+        <h3>Le travail déjà fait</h3>
       </div>
       <div  class="modal-body sizer" style="max-height: 500px; overflow-y: scroll;">
         <table id="body_correctionModal" class="table table-striped">
@@ -1112,7 +993,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 	<!-- <div id="correctionModal" class="modal hide fade">
   		<div class="modal-header">
     		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    		<h3>Le travail d�j� fait</h3>
+    		<h3>Le travail déjà fait</h3>
   		</div>
   		<div  class="modal-body sizer">
   			<table id="body_correctionModal" class="table table-striped">
@@ -1138,90 +1019,70 @@ var updateSessionUserInfo = function(nom, prenom) {
 	    }
 
 		var ip = "37.187.46.97";
-		var pseudo = "Johnny";
+		var pseudo = "A";
 		var workDone = null;
 
 		var activated = "1";
-		var pseudoProf = "rodolphe";
-                var numSeq = "4725";
-		
-                var afficheInfoEleve = function () {
+		var pseudoProf = "thi";
+
+		var afficheInfoEleve = function () {
 
 			if (activated == '1') {
 
-				afficheSequenceRessources(pseudo, numSeq, $('#mesExercices'), $('#monTest'));
-				afficheCompetence($('#mesCompetences'));
-                                afficheProgressionParcours($('#mesProgres'));
+				afficheAssignedSequenceEleve(pseudo, pseudoProf, $('#mesExercices'));
+				
 			}
 			else {
-				$('#mesExercices').html("Votre classe n'est pas activ�e.");
-                                $('#mesCorrections').html("Votre classe n'est pas activ�e.");
-
+				$('#mesExercices').html("Votre classe n'est pas activée.");
 			}
-	       // plus besoin dans l'unité displayCorrectionModal();
+	        displayCorrectionModal();
 
 		}; // end of afficheInfoEleve
 
 
-var afficheCompetence = function(displayCompetence) {
-                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
-                    
-			console.log("afficheCompetence : " + myUrl_Get);
+		var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences) {
+
+	        var myUrl_Get = cfgWs.prefix+"/platoatic/study/"+pseudoEleve+"/"+pseudoProf;
 
 	        $.ajax({
 	            url: myUrl_Get,
-	            //type: "GET",
+	            type: "GET",
 	            dataType: "json",
-
 	            //contentType: "application/json",
 	            //crossDomain: true,
-          		/*xhrFields: {
+          		xhrFields: {
             		withCredentials : true
-          		},*/	            
+          		},	            
 	            success: function(data) {
-                        console.log("afficheCompetence : Get process functionne");
-                        var input ={
-                            "data" : data
-                        }
-                        var result = new EJS({url:'template_eleve_parcours_competence.ejs'}).render(input);
-                        displayCompetence.html(result);
-                    },
-                    error : function(){
-                        console.log("afficheCompetence : Get process error");
-                    }
-                });
-                }
-                
-                var afficheProgressionParcours=function(displayProgres){
-                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
-                    
-			console.log("afficheProgresParcours : " + myUrl_Get);
+	              
+	              	var input = {
+			    		"data" : data,
+			    		"mode" : "eleve_detail"
+			    	}
 
-	        $.ajax({
-	            url: myUrl_Get,
-	            //type: "GET",
-	            dataType: "json",
+	              	var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(input);
 
-	            //contentType: "application/json",
-	            //crossDomain: true,
-          		/*xhrFields: {
-            		withCredentials : true
-          		},*/	            
-	            success: function(data) {
-                        var html = "<div class=\"span4\"><div style=\"display: inline-block; \">Progression sur le parcours</div><div class=\"progress progress-striped\" >  <div class=\"bar\" style=\"width: " + data.progress +"%;\">"+ data.progress + "%</div> </div></div>"
-                        displayProgres.html(html);
-                    },
-                    error : function(){
-                        console.log("afficheProgrèsParcours :Get process error");
-                    }
-                });
-                }
+	              	// var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
+
+					displaySequences.html(result);
+
+					$('.eleve_sequence_content').each(function() {
+						afficheSequenceRessources(pseudo, $(this).data('resid'), $(this));
+					});
+
+	           	},
+	            error: function() { 
+	              console.log('afficheAssignedSequence : GET process error ');
+	              //window.location.href = "./index.html";
+	            }
+	          }); /* end of ajax call */
+
+		}; // end of afficheAssignedSequence
 
 
-		var afficheSequenceRessources = function (pseudoEleve, noSeq, displayUnit, seqDetailDisplay) {
+		var afficheSequenceRessources = function (pseudoEleve, noSeq, seqDetailDisplay) {
 
-			//var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
-      var myUrl_Get = "http://localhost:8111/platoatic/g2/1";
+			var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
 
 			console.log("afficheSequenceRessources : " + myUrl_Get);
 
@@ -1231,32 +1092,26 @@ var afficheCompetence = function(displayCompetence) {
 	            dataType: "json",
 	            //contentType: "application/json",
 	            //crossDomain: true,
-          		/*xhrFields: {
+          		xhrFields: {
             		withCredentials : true
-          		},*/	            
+          		},	            
 	            success: function(data) {
 
-	            	var input1 = {
+	            	var input = {
 			    		"data" : data,
-			    		"mode" : ""
-			    	}
-                                var input2 = {
-			    		"data" : data,
-			    		"mode" : "test"
+			    		"mode" : "eleve_detail"
 			    	}
 
-	              	var result1 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input1);
-                        var result2 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input2);
+	              	var result = new EJS({url: 'js/ressources/template_ressources_list.ejs'}).render(input);
+
 	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
-                                            
-                                        displayUnit.html(result1);
-					seqDetailDisplay.html(result2);
+	              	
+					seqDetailDisplay.html(result);
 
 	           	},
 	            error: function() {
 	              console.log('afficheSequenceRessources : GET process error ');
-                      $("#mesExercices").html(myUrl_Get);
-	             /* window.location.href = "./index.html";*/
+	             // window.location.href = "./index.html";
 	            }
 	        }); /* end of ajax call */
 
@@ -1320,11 +1175,11 @@ var afficheCompetence = function(displayCompetence) {
     	$(document).ready(function(){
     		
     		initializePopOverUser();
-                //AfficheProgres();
+
     		afficheInfoEleve();
   			refreshHeight();	
 			refreshHeightSeq();
-/*$("#mesExercices").html("hello world");*/
+
 			$('*').off('touchstart');
 			console.log('page eleve chargée.');
     	}); // end of document ready event handler

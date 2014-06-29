@@ -76,7 +76,7 @@ var Feature_Get3 = function(req, res) {
 
 	var resultat;
 	  
-	connection.query('select p.unitId,u.title,u.url,u.urlThumbnail from parcours p join unit u on p.unitId=u.unitId', function(err, rows) {
+	connection.query('select p.unitId,u.title,u.url,u.urlThumbnail from parcours p join unit u on p.unitId=u.unitId where p.parcoursId=' + req.params.id + ' order by p.order', function(err, rows) {
 		console.log(err);
 
 		var result;

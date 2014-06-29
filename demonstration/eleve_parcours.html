@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mon casier_paul</title>
+    <title>Mon parcours_1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 
     <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -15,20 +15,18 @@
 
 	<link rel="shortcut icon" type="image/x-icon" href="./img/Logo-oatic-web.png" />
 
-	<link href="./css/global.css" rel="stylesheet">
-	<link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="./css/carousel.css" rel="stylesheet">
-    <link href="./css/right_bar.css" rel="stylesheet"/>
-    <link href="./css/projet_s4.css" rel="stylesheet"/>
+	<link href="../css/global.css" rel="stylesheet">
+	<link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/carousel.css" rel="stylesheet">
+    <link href="../css/right_bar.css" rel="stylesheet"/>
+    <link href="../css/projet_s4.css" rel="stylesheet"/>
 <!--     <link href="./css/eleve.css" rel="stylesheet"/>
- -->    <link href="./css/theme_classe.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-
+ -->    <link href="../css/theme_classe.css" rel="stylesheet"/>
 	
 	<!-- <link href="http://mookitek.fr:8111/platoatic/users/Johnny/141/theme.css" rel="stylesheet"/> -->
   </head>
-  <body style="padding-top: 70px; overflow;">
+  <body style="padding-top: 70px; overflow: hidden;">
 
 	<div class="container">
 
@@ -196,7 +194,7 @@
       <div id = 'donneesCompte' >
         <div class="row-fluid">
           <div class="span4" float="left">
-            <img src='./img/User.jpg' width='56px' height='80px'/>
+            <img src='../img/User.jpg' width='56px' height='80px'/>
           </div>
           <div class="span8">
             <div>
@@ -226,7 +224,7 @@
 <!--fin modale de gestion de compte-->
    
 
-    <script src="./lib/jquery.js"></script>
+    <script src="../lib/jquery.js"></script>
 
     <script>
 
@@ -365,179 +363,179 @@ var cacherLoginPopup = function(){
 
 //fonction d'authentification
 
-var authentification = function (){
+// var authentification = function (){
 
 
-    var enterUserEnvironment = function(next, params) {
+//     var enterUserEnvironment = function(next, params) {
 
-            if(next=="null") {
-              //window.location.href = "./signin.php?"+params;
-              window.location.href = "./eleve_paul.html";
-            } else {
-              //window.location.href = "./signin.php?"+params+"&next="+next;
-              window.location.href = "./eleve_paul.html";
-            }
-        }; 
+//             if(next=="null") {
+//               //window.location.href = "./signin.php?"+params;
+//               window.location.href = "./eleve_paul.html";
+//             } else {
+//               //window.location.href = "./signin.php?"+params+"&next="+next;
+//               window.location.href = "./eleve_paul.html";
+//             }
+//         }; 
 
-        var cfgWs = {
-          prefix : 'http://mookitek.fr:8111'
-        }
+//         var cfgWs = {
+//           prefix : 'http://mookitek.fr:8111'
+//         }
 
 
-        var ip = "37.187.46.97";
+//         var ip = "37.187.46.97";
 
          
 
-              //var pseudo = $("input[id=pseudo]").val();
-				var pseudo = "Johnny";
-              //var pwd = $("input[id=pwd]").val();
-			  var pwd = "johnny"
+//               //var pseudo = $("input[id=pseudo]").val();
+// 				var pseudo = "Johnny";
+//               //var pwd = $("input[id=pwd]").val();
+// 			  var pwd = "johnny"
 
 
                  
              
-        var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
+//         var myUrl_Post = cfgWs.prefix+"/platoatic/login"; 
 
        
-        var message = {
-          username : pseudo,
-          password : pwd
-        }; 
+//         var message = {
+//           username : pseudo,
+//           password : pwd
+//         }; 
 
-         $.ajax({
+//          $.ajax({
          
-          url: myUrl_Post,
-          type: "POST",
-          dataType: "json",
-          data: message, //{objectData: message},
-          //contentType: "application/json",
-          cache: false,
-          timeout: 5000,
-          //crossDomain: true,
-          xhrFields: {
-            withCredentials : true
-          },
-          success: function(data) {
+//           url: myUrl_Post,
+//           type: "POST",
+//           dataType: "json",
+//           data: message, //{objectData: message},
+//           //contentType: "application/json",
+//           cache: false,
+//           timeout: 5000,
+//           //crossDomain: true,
+//           xhrFields: {
+//             withCredentials : true
+//           },
+//           success: function(data) {
 
-            var params = null;
-            console.log(data.found);
+//             var params = null;
+//             console.log(data.found);
 
         
-            if (data.found == true) {
+//             if (data.found == true) {
 
-              console.log("Bienvenue � <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
-              params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
+//               console.log("Bienvenue � <strong>" + data.ids.prenom + " " + data.ids.nom + "</strong>.");
+//               params = "&nom=" + data.ids.nom + "&prenom=" + data.ids.prenom + "&pseudo=" + pseudo;
               
-              if (data.ids.type == 2) {
+//               if (data.ids.type == 2) {
                 
-                console.log("Vous �tes enseignant.");
-                params += "&enseignant=true";
-                params += "&profil=" + data.ids.profileId;
-                next = "enseignant.html";
+//                 console.log("Vous �tes enseignant.");
+//                 params += "&enseignant=true";
+//                 params += "&profil=" + data.ids.profileId;
+//                 next = "enseignant.html";
 
-                if (data.infoClasse.length == 1) {
+//                 if (data.infoClasse.length == 1) {
                   
-                  params += "&noClasse="+data.infoClasse[0].noClasse;
-                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
-                  params += "&activated="+data.infoClasse[0].activated;
+//                   params += "&noClasse="+data.infoClasse[0].noClasse;
+//                   params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
+//                   params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
+//                   params += "&activated="+data.infoClasse[0].activated;
 
 
-                enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
+//                 enterUserEnvironment(next, params);
+//                 }
+//                 else if (data.infoClasse.length > 1) {
                   
-                  cacherLoginPopup();
+//                   cacherLoginPopup();
 
-                  $("#modalSelectClasse").modal();
+//                   $("#modalSelectClasse").modal();
 
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
+//                   $('#classList').html(
+//                     new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
+//                   );
+//                   $('#selectClasseBtn').on('click', function(){
 
-                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
-                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
-                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
+//                     params += "&noClasse="+data.infoClasse[$('#classList').val()].noClasse;
+//                     params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
+//                     params += "&pseudoProf="+pseudo; //permet l'affichage des travaux de l'�l�ve.
+//                     params += "&activated="+data.infoClasse[$('#classList').val()].activated;
 
 
-                    enterUserEnvironment(next, params);
+//                     enterUserEnvironment(next, params);
 
-                    $("#modalSelectClasse").hide();
-                  });
+//                     $("#modalSelectClasse").hide();
+//                   });
                   
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
+//                 }
+//                 else {
+//                   console.log("inconsistent class list");
+//                   enterUserEnvironment("null", params);
+//                 }
 
-              } else if (data.ids.type == 1) {
-                params += "&enseignant=false";
-                next = "eleves.html";
+//               } else if (data.ids.type == 1) {
+//                 params += "&enseignant=false";
+//                 next = "eleves.html";
 
-                console.log("--------------------------------------------");
-                console.log(data.infoClasse);
+//                 console.log("--------------------------------------------");
+//                 console.log(data.infoClasse);
 
-                if (data.infoClasse.length == 1) {
+//                 if (data.infoClasse.length == 1) {
 
-                  params += "&noClasse="+data.infoClasse[0].noResp;
-                  params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
-                  params += "&pseudoProf="+data.infoClasse[0].identifiant;
-                  params += "&activated="+data.infoClasse[0].activated;
+//                   params += "&noClasse="+data.infoClasse[0].noResp;
+//                   params += "&libelleClasse="+data.infoClasse[0].libelleClasse;
+//                   params += "&pseudoProf="+data.infoClasse[0].identifiant;
+//                   params += "&activated="+data.infoClasse[0].activated;
 
                   
-                  enterUserEnvironment(next, params);
-                }
-                else if (data.infoClasse.length > 1) {
+//                   enterUserEnvironment(next, params);
+//                 }
+//                 else if (data.infoClasse.length > 1) {
                   
-                  cacherLoginPopup();
-                  $("#modalSelectClasse").modal();
-                  $('#classList').html(
-                    new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
-                  );
-                  $('#selectClasseBtn').on('click', function(){
+//                   cacherLoginPopup();
+//                   $("#modalSelectClasse").modal();
+//                   $('#classList').html(
+//                     new EJS({url : "/js/users/selectClasse.ejs"}).render({'infoClasse' : data.infoClasse})
+//                   );
+//                   $('#selectClasseBtn').on('click', function(){
 
-                    params += "&noClasse="+data.infoClasse[$('#classList').val()].noResp;
-                    params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
-                    params += "&pseudoProf="+data.infoClasse[$('#classList').val()].identifiant;
-                    params += "&activated="+data.infoClasse[$('#classList').val()].activated;
+//                     params += "&noClasse="+data.infoClasse[$('#classList').val()].noResp;
+//                     params += "&libelleClasse="+data.infoClasse[$('#classList').val()].libelleClasse;
+//                     params += "&pseudoProf="+data.infoClasse[$('#classList').val()].identifiant;
+//                     params += "&activated="+data.infoClasse[$('#classList').val()].activated;
 
                    
-                    enterUserEnvironment(next, params);
+//                     enterUserEnvironment(next, params);
 
-                    $("#modalSelectClasse").hide();
-                  });
-                }
-                else {
-                  console.log("inconsistent class list");
-                  enterUserEnvironment("null", params);
-                }
+//                     $("#modalSelectClasse").hide();
+//                   });
+//                 }
+//                 else {
+//                   console.log("inconsistent class list");
+//                   enterUserEnvironment("null", params);
+//                 }
 
-              } else {
-                params += "&enseignant=false";
-              }
+//               } else {
+//                 params += "&enseignant=false";
+//               }
               
-            } else {
+//             } else {
 
-              console.log("Vous n'�tes pas enregistr�s.");
-              window.location.href = "./signin.php";
-            }
+//               console.log("Vous n'�tes pas enregistr�s.");
+//               window.location.href = "./signin.php";
+//             }
 
            
 
-          }, 
+//           }, 
 
-          error: function() {
+//           error: function() {
 
-              console.log('PUT process error during sign-in');
-              window.location = "./signin.php";
-          }
+//               console.log('PUT process error during sign-in');
+//               window.location = "./signin.php";
+//           }
 
-       });
+//        });
 
-}//fin fonction authentification
+// }//fin fonction authentification
 
 var updateSessionUserInfo = function(nom, prenom) {
 
@@ -596,92 +594,68 @@ var updateSessionUserInfo = function(nom, prenom) {
                                         <!--<div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCorrections" href="#collapseExercices">-->
                                         <div class="navbar accordion-heading accordion-toggle" >
                                             <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                <a class="brand">Nom d'unité (a changer)</a>
+                                                <a class="brand">Parcours N°1</a>
 
                                             </div>
                                         </div>
 
                                         <div id="collapseExercices" class="accordion-body collapse in NavMenuInterne" style="overflow-y: auto; overflow-style: move ">
                                             <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                                                <div id="mesExercices">
+                                                <div id="mesUnites">
                                                     <!-- interieur du collapse �l�ves -->
                                                     <div class="accordion" id="accordion_1">
                                                         <div class="accordion-group">
                                                             <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_1">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./Ressources/exercices/exo_1?&exo_id=1">
                                                                     <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        <li class="img_unite">
+                                                                            <img src="../img/wordcloud_sequence.jpg" border="0" alt="blank image">
                                                                         </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test1</div>
-                                                                            <div class="desc">test d'unité_1</div>
+                                                                        <li class="info_unite">
+                                                                            <div class="titre">Test_unite</div>
+                                                                            <!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
                                                                         </li>
                                                                     </ul>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapse_1" class="accordion-body collapse">
-                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_1" class="carousel-inner eleve_sequence_content" data-resid="1" >
-                                                                    </div>
-                                                                </div>
-                                                                <!-- </div> -->	
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="accordion" id="accordion_2">
                                                         <div class="accordion-group">
                                                             <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_2">
+                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" href="./Ressources/exercices/exo_2?&exo_id=2">
                                                                     <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        <li class="img_unite">
+                                                                            <img src="../img/wordcloud_sequence.jpg" border="0" alt="blank image">
                                                                         </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test2</div>
-                                                                            <div class="desc">test d'unité_2</div>
+                                                                        <li class="info_unite">
+                                                                            <div class="titre">Test_unite_2</div>
+                                                                            <!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
                                                                         </li>
                                                                     </ul>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapse_2" class="accordion-body collapse">
-                                                                <!-- <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> -->
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_2" class="carousel-inner eleve_sequence_content" data-resid="2" >
-                                                                    </div>
-                                                                </div>
-                                                                <!-- </div> -->	
-                                                            </div>
+
                                                         </div>
                                                     </div>
 
                                                    <div class="accordion" id="accordion_3">
                                                         <div class="accordion-group">
                                                             <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
+                                                                <div class="accordion-toggle acc_sequence thumbnail" style="background: white; color: gray;">
                                                                     <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
+                                                                        <li class="img_unite">
+                                                                            <img src="../img/wordcloud_sequence.jpg" border="0" alt="blank image" >
                                                                         </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test3</div>
-                                                                            <div class="desc">test d'unité_3</div>
+                                                                        <li class="info_unite">
+                                                                            <div class="titre">Test_unite_non_accessible</div>
+                                                                            <!--<div class="desc"><%=unescape(data.unite[index].description)%></div>-->
                                                                         </li>
                                                                     </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_3" class="accordion-body collapse">
-                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
-                                                                    </div>
                                                                 </div>
-                                                                 </div> 	
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -692,58 +666,10 @@ var updateSessionUserInfo = function(nom, prenom) {
                                 </div>
 
                             </div>
-                            <div class="eleve_test">
-
-                                <div class="accordion item_ens NavDetailMenuInterne" id="accordionTest">
-                                    <div class="accordion-group">
-
-                                        <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionTest" href="#collapseTest">
-                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                                                <a class="brand">Test de l'unité</a>
-                                            </div>
-                                        </div>
-
-                                        <div id="collapseTest" class="accordion-body collapse in NavMenuInterne">
-                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                                                <div id="monTest">
-                                                    <!-- interieur du collapse �l�ves -->
-                                                                                                       <div class="accordion" id="accordion_3">
-                                                        <div class="accordion-group">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle acc_sequence thumbnail" style="background: white;" data-toggle="collapse" data-parent="#accordion_3" href="#collapse_3">
-                                                                    <ul class="inline">
-                                                                        <li class="img_sequence">
-                                                                            <img src="./img/wordcloud_sequence.jpg" border="0" alt="blank image">
-                                                                        </li>
-                                                                        <li class="info_sequence">
-                                                                            <div class="titre">Test3</div>
-                                                                            <div class="desc">test d'unité_3</div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_3" class="accordion-body collapse">
-                                                                 <div id="DetailCarousel_<%=data.ressources[index].id%>" class="carousel slide"> 
-                                                                <div class="NavDetailMenuInterne" style="padding:0px 5px 5px 5px; margin-bottom: 10px;">
-                                                                    <div class="arrow"></div>
-                                                                    <div id="seqDetailCarousel_3" class="carousel-inner eleve_sequence_content" data-resid="3" >
-                                                                    </div>
-                                                                </div>
-                                                                 </div> 	
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                          
                         </div>
-                        <div class="container_eleve">
-                            <div class="eleve_comp" style="height: 250px; overflow: auto;">
+                        <div class="container_eleve" style="overflow: auto; ">
+                            <div class="eleve_comp" style="display:inline-block; height: 250px;">
                             <div class="accordion item_ens NavDetailMenuInterne" id="accordionCompentence">
 				  				<div class="accordion-group">
 
@@ -757,9 +683,30 @@ var updateSessionUserInfo = function(nom, prenom) {
 								      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
 								      	<div id="mesCompetences">
 								      		<!-- interieur du collapse competences -->
-								        	<div class="load">
-						        				<img src="./img/gif-load.GIF" />
-						        			</div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 60%;">60%</div>  
+                                                                                </div>  
+                                                                                </div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 90%;">90%</div>  
+                                                                                </div>  
+                                                                                </div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 10%;">10%</div>  
+                                                                                </div>  
+                                                                                </div>
+                                                                                <div class="span2">
+                                                                                    <div style="display: inline-block; ">Apprendre à compter</div>  
+                                                                                <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+                                                                                    <div class="bar" style="width: 20%;">20%</div>  
+                                                                                </div>  
+                                                                                </div>
 								      	</div>
 								      </div>
 								    </div>
@@ -767,36 +714,28 @@ var updateSessionUserInfo = function(nom, prenom) {
 								</div>
 							</div>
 
-                            </div>	<!-- </div> de class "eleve_comp"-->
-        <div class="eleve_progress">
-          <div class="accordion item_ens NavDetailMenuInterne" id="accordionCompentence">
-                  <div class="accordion-group">
+                            </div>
+                      
+                            <div class="eleve_progress" style="overflow: auto; height: 250px;">
+                                <div class="accordion item_ens NavDetailMenuInterne" id="accordionProgress">
+                                    <div class="accordion-group">
 
-                    <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCompentence" href="#collapseCompentence">
-                    <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
-                      <a class="brand">Progrès parcours</a>
-                    </div>
-                  </div>
+                                        <div class="navbar accordion-heading accordion-toggle" data-toggle="collapse" data-parent="#accordionCompentence" href="#collapseCompentence">
+                                            <div class="navbar-inner" style="font-size: 18px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;">
+                                                <a class="brand">Progrès parcours</a>
+                                            </div>
+                                        </div>
 
-                    <div id="collapseCompetence" class="accordion-body collapse in NavMenuInterne">
-                      <div class="accordion-inner" style="border-top:inherit;padding: 4px">
-                        <div id="mesProgres">
-                          <!-- interieur du collapse competences -->
-                          <!--<div class="load">
-                            <img src="./img/gif-load.GIF">
-                          </div>-->
-
-                        </div>
-                      </div>
-                    </div>
-
-                </div>
-              </div>
-
-        </div>
-
-
-      </div>		<!-- </div> de class "container_eleve"/
+                                        <div id="collapseCompetence" class="accordion-body collapse in NavMenuInterne">
+                                            <div class="accordion-inner" style="border-top:inherit;padding: 4px">
+                                                <div id="mesProgres">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>		<!-- </div>/
 			      </div>
 			    </div>
 			  </div>
@@ -1126,7 +1065,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 			
 
     <!--<script src="./lib/jquery.js"></script>-->
-    <script src="./lib/ejs_production.js"></script>
+    <script src="../lib/ejs_production.js"></script>
 
 	<script>
 
@@ -1140,6 +1079,7 @@ var updateSessionUserInfo = function(nom, prenom) {
 		var ip = "37.187.46.97";
 		var pseudo = "Johnny";
 		var workDone = null;
+    var numParc = 0;
 
 		var activated = "1";
 		var pseudoProf = "rodolphe";
@@ -1149,13 +1089,14 @@ var updateSessionUserInfo = function(nom, prenom) {
 
 			if (activated == '1') {
 
-				afficheSequenceRessources(pseudo, numSeq, $('#mesExercices'), $('#monTest'));
-				afficheCompetence($('#mesCompetences'));
-                                afficheProgressionParcours($('#mesProgres'));
+				afficheParcourUnites(pseudo, numParc, $('#mesUnites'));
+                                afficheCompetence($('#mesCompetences'));
+                                afficheProgressionParcours($('#mesProgres'))
+				
 			}
 			else {
-				$('#mesExercices').html("Votre classe n'est pas activ�e.");
-                                $('#mesCorrections').html("Votre classe n'est pas activ�e.");
+				$('#mesUnites').html("Votre classe n'est pas activ�e.");
+                           
 
 			}
 	       // plus besoin dans l'unité displayCorrectionModal();
@@ -1163,8 +1104,135 @@ var updateSessionUserInfo = function(nom, prenom) {
 		}; // end of afficheInfoEleve
 
 
-var afficheCompetence = function(displayCompetence) {
-                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
+		/*var afficheAssignedSequenceEleve = function(pseudoEleve, pseudoProf, displaySequences, displayTest) {
+
+	        var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		xhrFields: {
+            		withCredentials : true
+          		},	            
+	            success: function(data) {
+	              
+	              	var input = {
+			    		"data" : data,
+			    		"mode" : "eleve_detail"
+			    	}
+
+	              	var result = new EJS({url: 'template_eleve_unité_ressources.ejs'}).render(input);
+                        var result2 = new EJS({url: 'template_eleve_unité_test.ejs'}).render(input);
+
+	              	// var result = new EJS({url: 'template_eleve_sequences.ejs'}).render(data);
+
+					displaySequences.html(result);
+                                        displayTest.html(result2);
+
+	           	},
+	            error: function() { 
+	              console.log('afficheAssignedSequence : GET process error ');
+	             /* window.location.href = "./index.html";*/
+	           /* }
+	          }); /* end of ajax call */
+
+		/*};*/ // end of afficheAssignedSequence
+
+
+		var afficheParcourUnites = function (pseudoEleve, noParc, displayUnit) {
+
+			//var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
+      var myUrl_Get = "http://localhost:8111/platoatic/parcours/1 ";
+
+			console.log("afficheParcourUnites : " + myUrl_Get);
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                        console.log("data.unite.length " + data.unite.length);     
+                        if (data.unite.length >0){
+                            var tableUnite = data.unite;
+                            afficheUniteParWorkdone(tableUnite, displayUnit);
+                            console.log("je rentre dans le if" + tableUnite);
+                        }
+                    },
+	            error: function() {
+	              console.log('afficheSequenceRessources : GET process error ');
+                     // $("#mesExercices").html('myUrl_Get');
+	             /* window.location.href = "./index.html";*/
+	            }
+	        }); /* end of ajax call */
+
+		}; // end of afficheSequenceRessources
+
+                var afficheUniteParWorkdone = function(tableUnite, displayUnit){
+                    var myUrl_Get = "http://localhost:8111/platoatic/workdone/" ;//+ unitId ;
+                    var index=0;
+                    var UniteEnCours=0;
+			console.log("afficheUniteParWorkdone : " + myUrl_Get);
+
+	        $.ajax({
+	            url: myUrl_Get,
+	            type: "GET",
+	            dataType: "json",
+
+	            //contentType: "application/json",
+	            //crossDomain: true,
+          		/*xhrFields: {
+            		withCredentials : true
+          		},*/	            
+	            success: function(data) {
+                    console.log("les données : " + tableUnite);
+                    
+                    //parcours de la tableUnite 
+                    while (index < tableUnite.length && UniteEnCours==0){
+                        var index2=0;
+                        var aEteFait=false;
+                        //parcours de la table workdone pour vérifier l'unite en cours
+                        //  si on trouve une correspondance, on sort de la boucle
+                        while (index2 < data.workDone.length && aEteFait==false){
+                            if (data.workDone[index2].id == tableUnite[index].unitId){
+                                aEteFait=true;
+                            }else{
+                                index2++;
+                            }
+                        }
+                        
+                        // si l'unite n'a pas ete faite, la considere comme unite en cours
+                        if (aEteFait==false){
+                            UniteEnCours=tableUnite[index].unitId;
+                        }else{index++;}
+                    }
+ 
+                    var input={
+                       "data" : tableUnite,
+                       "CurrentUnite" : UniteEnCours
+                    }
+                    
+
+                    var result = new EJS({url :'template_eleve_parcours_dem.ejs'}).render(input);
+                    displayUnit.html(result);
+                    },
+                    error : function(){
+                        console.log('IsUniteDone : GET process error');
+                    }
+                }); //end of Ajax call
+                
+                };
+                
+
+                var afficheCompetence = function(displayCompetence) {
+                    var myUrl_Get = "./parcours_1.json" ;//+ unitId ;
                     
 			console.log("afficheCompetence : " + myUrl_Get);
 
@@ -1183,7 +1251,7 @@ var afficheCompetence = function(displayCompetence) {
                         var input ={
                             "data" : data
                         }
-                        var result = new EJS({url:'template_eleve_parcours_competence.ejs'}).render(input);
+                        var result = new EJS({url:'template_eleve_parcours_competence_dem.ejs'}).render(input);
                         displayCompetence.html(result);
                     },
                     error : function(){
@@ -1193,7 +1261,7 @@ var afficheCompetence = function(displayCompetence) {
                 }
                 
                 var afficheProgressionParcours=function(displayProgres){
-                    var myUrl_Get = "./parcours.json" ;//+ unitId ;
+                    var myUrl_Get = "./parcours_1.json" ;//+ unitId ;
                     
 			console.log("afficheProgresParcours : " + myUrl_Get);
 
@@ -1216,52 +1284,8 @@ var afficheCompetence = function(displayCompetence) {
                     }
                 });
                 }
-
-
-		var afficheSequenceRessources = function (pseudoEleve, noSeq, displayUnit, seqDetailDisplay) {
-
-			//var myUrl_Get = cfgWs.prefix+"/platoatic/ressource/"+pseudoEleve+"/"+noSeq;
-      var myUrl_Get = "http://localhost:8111/platoatic/g2/1";
-
-			console.log("afficheSequenceRessources : " + myUrl_Get);
-
-	        $.ajax({
-	            url: myUrl_Get,
-	            type: "GET",
-	            dataType: "json",
-	            //contentType: "application/json",
-	            //crossDomain: true,
-          		/*xhrFields: {
-            		withCredentials : true
-          		},*/	            
-	            success: function(data) {
-
-	            	var input1 = {
-			    		"data" : data,
-			    		"mode" : ""
-			    	}
-                                var input2 = {
-			    		"data" : data,
-			    		"mode" : "test"
-			    	}
-
-	              	var result1 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input1);
-                        var result2 = new EJS({url: 'template_eleve_unite_test.ejs'}).render(input2);
-	              	// var result = new EJS({url: 'template_eleve_seq_detail.ejs'}).render(data);
-                                            
-                                        displayUnit.html(result1);
-					seqDetailDisplay.html(result2);
-
-	           	},
-	            error: function() {
-	              console.log('afficheSequenceRessources : GET process error ');
-                      $("#mesExercices").html(myUrl_Get);
-	             /* window.location.href = "./index.html";*/
-	            }
-	        }); /* end of ajax call */
-
-		}; // end of afficheSequenceRessources
-
+//               
+                
 		var displayCorrectionModal = function() {
 
 	        retrieveWorkDone(pseudo, pseudoProf, 'TRAVAUX', function(data) {
@@ -1320,25 +1344,25 @@ var afficheCompetence = function(displayCompetence) {
     	$(document).ready(function(){
     		
     		initializePopOverUser();
-                //AfficheProgres();
+
     		afficheInfoEleve();
   			refreshHeight();	
 			refreshHeightSeq();
 /*$("#mesExercices").html("hello world");*/
 			$('*').off('touchstart');
-			console.log('page eleve chargée.');
+			console.log('page eleve charg�e.');
     	}); // end of document ready event handler
 
 	</script>
 
-	<script src="./lib/bootstrap.js"></script>
-	<script src="./lib/holder.js"></script>
-	<script src="./js/correction/correction.js"></script>
+	<script src="../lib/bootstrap.js"></script>
+	<script src="../lib/holder.js"></script>
+	<script src="../js/correction/correction.js"></script>
 	
-	<script src="./js/ressources/definitions.js"></script>
-	<script src="./js/ressources/ressources.js"></script>
-	<script src="./js/dragndrop/dragndrop.js"></script>
-	<script src="./js/users/users.js"></script>
+	<script src="../js/ressources/definitions.js"></script>
+	<script src="../js/ressources/ressources.js"></script>
+	<script src="../js/dragndrop/dragndrop.js"></script>
+	<script src="../js/users/users.js"></script>
 
 
   </body>

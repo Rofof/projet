@@ -1,0 +1,38 @@
+<% if (data.donnees.length >0){
+    var index = 0;
+    var index2 =0;
+    var progComp = new Array();
+    while (data.donnees[index].unitId != data.currentId){
+        if (index==0){
+            for (var i=0;i<data.donnees[index].competencies.length;i++){
+                progComp.push(data.donnees[index].competencies[i].progress);
+                
+            }
+        index++;
+        }else{
+            for (var i=0;i<data.donnees[index].competencies.length;i++){
+             progComp[i]=progComp[i]+data.donnees[index].competencies[i].progress;
+             console.log("progcomp"+data.donnees[index].competencies[i].progress);
+            }
+            index++;
+        }
+}
+
+    while (index2 <data.donnees[0].competencies.length){
+console.log("test comp" + data.donnees[0].competencies.length);
+%>                                                                                
+
+
+
+<div class="span2">
+       <div style="display: inline-block; "><%=data.donnees[0].competencies[index2].name%></div>  
+       <div class="progress progress-striped" style="height: 10px; line-height: 10px">  
+             <div class="bar" style="width: <%=progComp[index2]%>%;"><%=progComp[index2]%>%</div>  
+       </div>  
+</div>
+
+<%
+    index2++;
+    }
+}
+%>
